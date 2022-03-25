@@ -3,26 +3,40 @@ import Navbar from "../Navbar/Navbar";
 import {
   Box,
   Card,
-  CardContent,
   CardMedia,
-  CardActions,
-  Button,
   Container,
-  Typography,
-  Chip,
+  useTheme,
+  Button,
 } from "@mui/material";
 import UsersContext from "../../Context/UsersContext";
 import { borderLight, primary } from "../../Common/Pallete";
+import Tags from "./Tags";
+import TitleBox from "./TitleBox";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../Common/Loading";
 
 function Profiles() {
   const userCtx = useContext(UsersContext);
-  console.log(userCtx.users);
+  // console.log(userCtx.users);
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
+  const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
+  const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
+  const bpMDu = theme.breakpoints.up("md"); //min-width:900px
+  const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
+  const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
+  // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
 
+  const viewProfile = (username) => {
+    console.log(username);
+    navigate(`/users/${username}`);
+  };
   return (
     <div>
       <Navbar />
       {!userCtx.users ? (
-        <p>Loading ...</p>
+        <Loading />
       ) : (
         <Container maxWidth="md" sx={{ paddingTop: "100px" }}>
           {userCtx.users.map((user, index) => (
@@ -30,32 +44,24 @@ function Profiles() {
               sx={{
                 display: "flex",
                 marginBottom: "10px",
+                padding: "5px",
                 boxShadow: "0 0 10px -2px #d1e3fa",
                 border: 1,
                 borderColor: borderLight,
                 borderRadius: "10px",
+                fontFamily: "Gordita",
                 transition: "transform 0.3s ease-in-out",
                 "&:hover": {
-                  transform: "scale3d(1.02, 1.02, 0.5)",
+                  border: "1px solid " + primary,
                   boxShadow: "0 0 15px -2px #D4D9E2",
                   color: primary,
-                  cursor: "pointer",
                 },
               }}
               key={index}
             >
-              <CardMedia
-                component="img"
-                sx={{ width: 151 }}
-                image={user.picture.large}
-                alt="Live from space album cover"
-              />
               <Box
                 sx={{
-                  width: "100%",
                   display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
                   flexDirection: "column",
                 }}
               >
@@ -63,78 +69,75 @@ function Profiles() {
                   sx={{
                     width: "100%",
                     display: "flex",
+                    alignItems: "center",
+                    // backgroundColor: "#f1f1f1",
                     justifyContent: "space-between",
-                    alignItems: "start",
+                    [bpSMd]: { justifyContent: "space-between" },
                   }}
                 >
-                  <CardContent>
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: "16px",
-                          fontWeight: "550",
-                          color: "rgba(0, 0, 0, 0.8)",
-                        }}
-                      >{`${user.name.first}  ${user.name.last}`}</Typography>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ fontSize: "14px" }}
-                        color="text.primary"
-                      >
-                        {user.email}
-                      </Typography>
-                      <Typography
-                        variant="subtitle2"
-                        sx={{ fontSize: "12px" }}
-                        color="text.secondary"
-                      >
-                        {`${user.location.city}, ${user.location.country}`}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                  <CardContent>
-                    <Button
-                      variant="outlined"
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      width: 70,
+                      height: 70,
+                      margin: "10px 0px 10px 20px",
+                      borderRadius: "50%",
+                      border: "2px solid " + primary,
+                      [bpMDd]: {
+                        width: 50,
+                        height: 50,
+                      },
+                    }}
+                    image={user.picture.large}
+                    alt={user.picture.large}
+                  />
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      // backgroundColor: "#fffccc",
+                      margin: "10px",
+                      [bpSMd]: {
+                        justifyContent: "flex-end",
+                      },
+                    }}
+                  >
+                    <Box
                       sx={{
-                        borderRadius: "30px",
-                        border: 2,
-                        fontWeight: "500",
-                        textTransform: "none",
-                        "&:hover": {
-                          border: 2,
+                        [bpSMd]: {
+                          display: "none",
                         },
                       }}
                     >
-                      View Profile
-                    </Button>
-                  </CardContent>
-                </Box>
-                <CardContent>
-                  {[
-                    "#webdesign",
-                    "#COA",
-                    "programming",
-                    "#competitiveprogramming",
-                    "#AI",
-                    "#ML",
-                    "#appdesign",
-                    "#networking",
-                    "#reactjs",
-                    "#flutter",
-                  ].map((tag, index) => {
-                    return (
-                      <Chip
-                        key={index}
+                      <TitleBox user={user} />
+                    </Box>
+                    <Box>
+                      <Button
                         variant="outlined"
-                        color="info"
-                        size="small"
-                        label={tag}
-                        sx={{ margin: "2px" }}
-                      />
-                    );
-                  })}
-                </CardContent>
+                        onClick={() => viewProfile(user.username)}
+                        sx={{
+                          borderRadius: "30px",
+                          border: 2,
+                          fontWeight: "500",
+                          textTransform: "none",
+                          "&:hover": {
+                            border: "2px solid " + primary,
+                            backgroundColor: primary,
+                            color: "white",
+                            boxShadow: "0 2px 12px 2px #D4D9E2",
+                          },
+                        }}
+                      >
+                        View Profile
+                      </Button>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box sx={{ margin: "0px 20px", [bpSMu]: { display: "none" } }}>
+                  <TitleBox user={user} />
+                </Box>
+                <Tags />
               </Box>
             </Card>
           ))}

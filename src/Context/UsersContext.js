@@ -6,9 +6,9 @@ export const UsersContextProvider = (props) => {
   const [users, setusers] = useState(null);
 
   const fetchUsers = async () => {
-    const response = await fetch("https://randomuser.me/api/?results=20");
+    const response = await fetch("http://localhost:5000/users");
     const json = await response.json();
-    setusers([...json.results]);
+    setusers([...json]);
   };
 
   useEffect(() => {
