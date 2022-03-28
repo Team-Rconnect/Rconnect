@@ -1,11 +1,15 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import Heading1 from "../../Common/Heading1";
 import { primary } from "../../Common/Pallete";
+import Subtitle1 from "../../Common/Subtitle1";
+import Subtitle2 from "../../Common/Subtitle2";
 
 function TitleBox(props) {
   return (
     <Box>
-      <Typography
+      <Heading1 text={`${props.user.name.first}  ${props.user.name.last}`} />
+      {/* <Typography
         variant="body1"
         sx={{
           fontSize: "16px",
@@ -16,21 +20,11 @@ function TitleBox(props) {
             cursor: "pointer",
           },
         }}
-      >{`${props.user.name.first}  ${props.user.name.last}`}</Typography>
-      <Typography
-        variant="subtitle1"
-        sx={{ fontSize: "14px" }}
-        color="text.primary"
-      >
-        {props.user.email}
-      </Typography>
-      <Typography
-        variant="subtitle2"
-        sx={{ fontSize: "12px" }}
-        color="text.secondary"
-      >
-        {`${props.user.location.city}, ${props.user.location.country}`}
-      </Typography>
+      >{`${props.user.name.first}  ${props.user.name.last}`}</Typography> */}
+      <Subtitle1 text={props.user.email} />
+      <Subtitle2
+        text={`${props.user.location.city}, ${props.user.location.country}`}
+      />
     </Box>
   );
 }

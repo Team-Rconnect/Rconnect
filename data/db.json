@@ -1,5 +1,6 @@
 {
-    "users":[
+    "users":
+    [
     {
       "gender": "male",
      "name": { "title": "Mr", "first": "Babür", "last": "Akyürek" },
@@ -31,11 +32,9 @@
       "phone": "(353)-477-1649",
       "cell": "(740)-240-9203",
      "id": {"name": "", "value": null },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/17.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/17.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/17.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/17.jpg",
+      
       "nat": "TR"
     },
     {
@@ -66,11 +65,9 @@
       "phone": "56178653",
       "cell": "43467464",
      "id": {"name": "FN", "value": "04088915939" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/25.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/25.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/25.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/25.jpg",
+      
       "nat": "NO"
     },
     {
@@ -104,11 +101,9 @@
       "phone": "075 019 99 62",
       "cell": "077 193 13 98",
      "id": {"name": "AVS", "value": "756.7013.3672.08" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/32.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/32.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/32.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/32.jpg",
+      
       "nat": "CH"
     },
     {
@@ -142,11 +137,9 @@
       "phone": "(265)-399-8897",
       "cell": "(939)-996-2706",
      "id": {"name": "SSN", "value": "812-64-5658" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/34.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/34.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/34.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/women/34.jpg",
+      
       "nat": "US"
     },
     {
@@ -177,11 +170,8 @@
       "phone": "69640695",
       "cell": "28531350",
      "id": {"name": "CPR", "value": "290248-4295" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/92.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/92.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/92.jpg"
-      },
+      "picture": "https://randomuser.me/api/portraits/men/92.jpg",
+      
       "nat": "DK"
     },
     {
@@ -215,11 +205,9 @@
       "phone": "(492)-499-4615",
       "cell": "(745)-373-6501",
      "id": {"name": "BSN", "value": "59878098" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/34.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/34.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/34.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/34.jpg",
+      
       "nat": "NL"
     },
     {
@@ -253,11 +241,9 @@
       "phone": "077 515 02 26",
       "cell": "078 130 16 29",
      "id": {"name": "AVS", "value": "756.3854.2085.35" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/90.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/90.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/90.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/90.jpg",
+      
       "nat": "CH"
     },
     {
@@ -288,16 +274,14 @@
       "phone": "069-21668389",
       "cell": "0924-360-5064",
      "id": {"name": "", "value": null },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/35.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/35.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/35.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/35.jpg",
+      
       "nat": "IR"
     },
     {
       "gender": "male",
-     "name": { "title": "Mr", "first": "Gerhardt", "last": "Hägele" },
+      "name": { "title": "Mr", "first": "Gerhardt", "last": "Hägele" },
       "location": {
         "street": { "number": 8997,"name": "Berliner Straße" },
         "city": "Waldkraiburg",
@@ -323,11 +307,9 @@
       "phone": "0184-5937103",
       "cell": "0176-3017397",
      "id": {"name": "", "value": null },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/83.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/83.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/83.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/men/83.jpg",
+      
       "nat": "DE"
     },
     {
@@ -361,11 +343,9 @@
       "phone": "39042410",
       "cell": "32139216",
      "id": {"name": "CPR", "value": "090151-9446" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/91.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/91.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/91.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/women/91.jpg",
+      
       "nat": "DK"
     },
     {
@@ -396,11 +376,9 @@
       "phone": "0790-6319722",
       "cell": "0176-9655749",
      "id": {"name": "", "value": null },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/47.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/47.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/47.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/women/47.jpg",
+      
       "nat": "DE"
     },
     {
@@ -431,13 +409,540 @@
       "phone": "092-91808947",
       "cell": "0986-936-7176",
      "id": {"name": "", "value": null },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/17.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/17.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/17.jpg"
-      },
+      "picture":
+       "https://randomuser.me/api/portraits/women/17.jpg",
+      
       "nat": "IR"
     }
     
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Learning management system",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://plopdo.com/wp-content/uploads/2019/02/LMS-5-warning-signs-1-1150x642.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Temporary Disposable Email Server",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://tempmail.altmails.com/image/tempmail-logo.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ],
+      "users": [
+        {
+          "id": 8,
+          "firstname": "Kiran ",
+          "lastname": "Siva",
+          "username": "Kiransiva",
+          "password": "kiran",
+          "gender": "Male",
+          "date": "1999-12-28",
+          "email": "kiransiva@gmail.com",
+          "image": "https://i.stack.imgur.com/34AD2.jpg"
+        },
+        {
+          "id": 9,
+          "firstname": "Aravindh",
+          "lastname": "Ippili",
+          "username": "Aravindhippili",
+          "password": "aravindh",
+          "gender": "Male",
+          "date": "1999-12-28",
+          "email": "aravindhippili@gmail.com",
+          "image": "https://i.stack.imgur.com/34AD2.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Analytics System like Google analytics",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/GAnalytics.svg/1200px-GAnalytics.svg.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Mobile Number Validation Application",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/519sUIIH9lL.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Todo list- Trello Boards",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://www.appdegestion.com/app/228_trello/logo/228_trello.jpg",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Multi-client website offering client services",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://assets.website-files.com/5ee2a460548fc31fc05ffd50/61782a2e2e3cd67543ecb403_logo-webex.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Grocery delivery application",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://cdn.fs.brandfolder.com/ywc2mR5aQtWlEWkIu3T3",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Web portal for motor servicing at home",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+      "image": "https://thepetmechanic.com/wp-content/uploads/2019/10/cropped-the-pet-mechanic-logo-transparent-1.png",
+      "tools": [
+        {
+          "id": 1,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description1"
+        },
+        {
+          "id": 2,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description2"
+        },
+        {
+          "id": 3,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description3"
+        },
+        {
+          "id": 4,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description4"
+        },
+        {
+          "id": 5,
+          "title": "Bootstrap",
+          "url": "https://getbootstrap.com/",
+          "description": "description5"
+        },
+        {
+          "id": 6,
+          "title": "Google",
+          "url": "https://www.google.com/",
+          "description": "description6"
+        },
+        {
+          "id": 7,
+          "title": "Youtube",
+          "url": "https://www.youtube.com/",
+          "description": "description7"
+        },
+        {
+          "id": 8,
+          "title": "Stack overflow",
+          "url": "https://stackoverflow.com/",
+          "description": "description8"
+        }
+      ]
+    }
+  ],
+  "education":[
+    {
+      "id":1,
+      "title":"Rajiv Gandhi University of Knowledge and technologies, Srikakulam",
+      "degree":"BTech",
+      "field":"Computer science",
+      "start_date":"2018",
+      "end_date":"2022"
+    },
+    {
+      "id":2,
+      "title":"Rajiv Gandhi University of Knowledge and technologies, Srikakulam",
+      "degree":"Pre University Course",
+      "field":"",
+      "start_date":"2016",
+      "end_date":"2018"
+    },
+    {
+      "id":3,
+      "title":"G.M.C.H School, Eluru",
+      "degree":"10th Standard",
+      "field":"",
+      "start_date":"2015",
+      "end_date":"2016"
+    }
+  ],
+  "experience":[
+    {
+      "id":1,
+      "title":"Trainee Software engineer",
+      "company":"Amazon",
+      "imageURL":"https://pngimg.com/uploads/amazon/amazon_PNG5.png",
+      "position":"Full-time",
+      "start_date":"Jan 2021",
+      "end_date":"Jan 2022"
+    },
+    {
+      "id":2,
+      "title":"Software Development engineer",
+      "company":"Infosys",
+      "imageURL":"https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1415386231/utypaslbyxwfuwhfdzxd.png",
+      "position":"Part-time",
+      "start_date":"April 2021",
+      "end_date":"June 2021"
+    },
+    {
+      "id":3,
+      "title":"Data Scientist - Intern",
+      "company":"Wipro",
+      "imageURL":"https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+      "position":"Internship",
+      "start_date":"Aug 2020",
+      "end_date":"Sep 2020"
+    }
   ]
 }

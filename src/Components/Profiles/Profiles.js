@@ -7,10 +7,10 @@ import {
   Container,
   useTheme,
   Button,
+  Chip,
 } from "@mui/material";
 import UsersContext from "../../Context/UsersContext";
-import { borderLight, primary } from "../../Common/Pallete";
-import Tags from "./Tags";
+import { borderDark, borderLight, primary } from "../../Common/Pallete";
 import TitleBox from "./TitleBox";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Common/Loading";
@@ -88,8 +88,8 @@ function Profiles() {
                         height: 50,
                       },
                     }}
-                    image={user.picture.large}
-                    alt={user.picture.large}
+                    image={user.picture}
+                    alt={user.picture}
                   />
                   <Box
                     sx={{
@@ -137,7 +137,43 @@ function Profiles() {
                 <Box sx={{ margin: "0px 20px", [bpSMu]: { display: "none" } }}>
                   <TitleBox user={user} />
                 </Box>
-                <Tags />
+                <Box sx={{ margin: "10px 15px 15px 15px" }}>
+                  {[
+                    "#webdesign",
+                    "#COA",
+                    "#programming",
+                    "#competitiveprogramming",
+                    "#AI",
+                    "#ML",
+                    "#appdesign",
+                    "#network",
+                    "#reactjs",
+                    "#flutter",
+                    "#ML",
+                    "#appdesign",
+                    "#networking",
+                    "#reactjs",
+                    "#flutter",
+                  ].map((tag, index) => {
+                    return (
+                      <Chip
+                        key={index}
+                        size="small"
+                        label={tag}
+                        sx={{
+                          margin: "4px",
+                          cursor: "pointer",
+                          backgroundColor: "white",
+                          border: "1px solid " + borderDark,
+                          "&:hover": {
+                            backgroundColor: primary,
+                            color: "white",
+                          },
+                        }}
+                      />
+                    );
+                  })}
+                </Box>
               </Box>
             </Card>
           ))}
