@@ -15,10 +15,25 @@
 }
 
 body {
-  background-color: var(--bg-terinary);
+  background-color: var(--bg-secondary);
   /* font-family: "Gordita", sans-serif !important; */
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
+} */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #d4d9e2;
 }

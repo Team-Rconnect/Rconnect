@@ -11,6 +11,7 @@ function Heading2(props) {
         fontWeight: "550",
         textTransform: "capitalize",
         color: "rgba(0, 0, 0, 0.8)",
+        margin: "0px",
         marginRight: "10px",
       }}
     >

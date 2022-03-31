@@ -5,7 +5,7 @@ function TextButton(props) {
   return (
     <Button
       variant="text"
-      sx={{ fontWeight: "600", textTransform: "none", marginTop: "10px" }}
+      sx={{ fontWeight: "600", textTransform: "none" }}
       size="small"
       onClick={props.onClick}
     >
