@@ -137,8 +137,8 @@ function Filters() {
   return (
     <Box
       sx={{
-        width: 450,
-        height: "80vh",
+        width: 350,
+        maxHeight: "80vh",
         borderRadius: "15px",
         backgroundColor: "#fff",
         padding: "15px",

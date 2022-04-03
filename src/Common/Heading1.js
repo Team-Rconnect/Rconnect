@@ -5,12 +5,10 @@ function Heading1(props) {
   return (
     <Typography
       // gutterBottom
-      variant="body1"
+      variant="h1"
       sx={{
         fontSize: "18px",
-        fontWeight: "550",
         textTransform: "capitalize",
-        color: "rgba(0, 0, 0, 0.8)",
         marginRight: "10px",
       }}
     >

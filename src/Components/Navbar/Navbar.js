@@ -7,14 +7,16 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { bgSecondary, borderLight } from "../../Common/Pallete";
 
 function Navbar() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
         width: `calc(100% - 20px)`,
-        height: "40px",
+        height: "5vh",
         marginRight: "5px",
         display: "flex",
         justifyContent: "space-between",
@@ -22,8 +24,6 @@ function Navbar() {
         padding: "10px",
         borderColor: borderLight,
         backgroundColor: "white",
-        position: "fixed",
-        zIndex: 2,
       }}
     >
       <h2>Rconnect</h2>
@@ -36,6 +36,7 @@ function Navbar() {
         }}
       >
         <TextField
+          fullWidth
           InputProps={{
             disableUnderline: true,
             placeholder: "Search...",
@@ -50,7 +51,9 @@ function Navbar() {
           variant="standard"
         />
       </Box>
-      <Button variant="contained">Login</Button>
+      <Button variant="contained" onClick={() => navigate("/login")}>
+        Login
+      </Button>
     </Box>
   );
 }
