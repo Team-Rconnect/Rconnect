@@ -43,8 +43,9 @@ function Profiles() {
         <Container
           sx={{
             display: "flex",
-            height: "88vh",
+            height: `calc(100vh - 12vh)`,
             marginTop: "20px",
+            [bpSMd]: { height: "100%" },
           }}
         >
           <Box>
@@ -55,6 +56,7 @@ function Profiles() {
               padding: "0px 0px 10px 0px",
               overflow: "scroll",
               overflowX: "hidden",
+              [bpSMd]: { overflow: "hidden" },
             }}
           >
             {userCtx.users.map((user, index) => (
