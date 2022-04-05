@@ -1,0 +1,14 @@
+{
+    "2022" : {
+        "data": ["CSE", "ECE", "Mech", "Civil", "Chem", "MME"],
+        "series": [50, 20, 30, 10, 5, 2]
+    },
+    "2021" : {
+        "data": ["CSE", "ECE", "Mech", "Civil", "Chem", "MME"],
+        "series": [50, 20, 30, 10, 5, 2]
+    },
+    "2020" : {
+        "data": ["CSE", "ECE", "Mech", "Civil", "Chem", "MME"],
+        "series": [50, 20, 30, 10, 5, 2]
+    }
+}
