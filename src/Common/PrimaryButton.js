@@ -6,7 +6,7 @@ function PrimaryButton(props) {
     <Button
       variant="contained"
       disableElevation
-      sx={{ textTransform: "none", marginRight: "5px" }}
+      sx={{ marginRight: "5px" }}
       size="small"
     >
       {props.text}

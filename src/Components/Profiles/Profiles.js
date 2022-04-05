@@ -20,8 +20,8 @@ import Filters from "../Filters/Filters";
 function Profiles() {
   const userCtx = useContext(UsersContext);
   // console.log(userCtx.users);
-  const theme = useTheme();
   const navigate = useNavigate();
+  const theme = useTheme();
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
   const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
@@ -40,9 +40,25 @@ function Profiles() {
       {!userCtx.users ? (
         <Loading />
       ) : (
-        <Container sx={{ paddingTop: "100px", display: "flex" }}>
-          <Filters />
-          <Container>
+        <Container
+          sx={{
+            display: "flex",
+            height: `calc(100vh - 12vh)`,
+            marginTop: "20px",
+            [bpSMd]: { height: "100%" },
+          }}
+        >
+          <Box>
+            <Filters />
+          </Box>
+          <Container
+            sx={{
+              padding: "0px 0px 10px 0px",
+              overflow: "scroll",
+              overflowX: "hidden",
+              [bpSMd]: { overflow: "hidden" },
+            }}
+          >
             {userCtx.users.map((user, index) => (
               <Card
                 sx={{
@@ -58,7 +74,6 @@ function Profiles() {
                   "&:hover": {
                     border: "1px solid " + primary,
                     boxShadow: "0 0 15px -2px #D4D9E2",
-                    color: primary,
                   },
                 }}
                 key={index}
@@ -171,6 +186,8 @@ function Profiles() {
                           label={tag}
                           sx={{
                             margin: "4px",
+                            fontSize: "14px",
+                            letterSpacing: 0.5,
                             cursor: "pointer",
                             backgroundColor: "white",
                             border: "1px solid " + borderDark,

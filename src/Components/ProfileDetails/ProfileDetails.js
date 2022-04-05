@@ -94,7 +94,7 @@ function ProfileDetails() {
       {!user ? (
         <Loading />
       ) : (
-        <Container maxWidth="md" sx={{ paddingTop: "100px" }}>
+        <Container maxWidth="md" sx={{ marginTop: "40px" }}>
           {/* banner */}
           <Card sx={{ marginBottom: "15px" }}>
             <CardMedia
@@ -200,6 +200,8 @@ function ProfileDetails() {
                     sx={{
                       margin: "5px",
                       cursor: "pointer",
+                      fontSize: "14px",
+                      letterSpacing: 0.5,
                       backgroundColor: "white",
                       border: "1px solid " + borderDark,
                       "&:hover": {

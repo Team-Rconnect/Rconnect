@@ -3,11 +3,7 @@ import React from "react";
 
 function Subtitle2(props) {
   return (
-    <Typography
-      variant="subtitle2"
-      color="text.secondary"
-      sx={{ fontSize: "12px" }}
-    >
+    <Typography variant="subtitle2" color="text.secondary">
       {props.text}
     </Typography>
   );

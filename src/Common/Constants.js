@@ -1,3 +1,4 @@
+import { createTheme } from "@mui/material";
 import { bgSecondary, primary } from "./Pallete";
 
 export const colourStyles = {
@@ -46,3 +47,75 @@ export const colourStyles = {
     },
   }),
 };
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: primary,
+    },
+    secondary: {
+      main: "#ffa500",
+    },
+  },
+  typography: {
+    subtitle1: {
+      fontSize: "14px",
+      letterSpacing: 0.5,
+      fontWeight: "500",
+    },
+    subtitle2: {
+      fontSize: "14px",
+    },
+    body1: {
+      fontSize: "16px",
+      letterSpacing: 0.4,
+    },
+    h1: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      letterSpacing: 0.5,
+    },
+  },
+  components: {
+    FormControlLabel: {
+      root: {
+        fontWeight: "400",
+        color: "#ff0000",
+      },
+    },
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "text" },
+          style: {
+            fontWeight: "600",
+            letterSpacing: 0.7,
+            fontSize: "14px",
+            textTransform: "none",
+          },
+        },
+        {
+          props: { variant: "contained" },
+          style: {
+            textTransform: "none",
+            fontSize: "15px",
+            letterSpacing: 0.5,
+          },
+        },
+        {
+          props: { variant: "outlined" },
+          style: {
+            textTransform: "none",
+            fontSize: "15px",
+            letterSpacing: 0.5,
+          },
+        },
+      ],
+    },
+    MuiChip: {
+      styles: {
+        fontSize: "20px",
+      },
+    },
+  },
+});

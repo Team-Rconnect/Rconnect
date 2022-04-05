@@ -6,7 +6,7 @@ function Subtitle3(props) {
     <Typography
       variant="subtitle2"
       color="text.primary"
-      sx={{ fontSize: "12px", fontWeight: "600" }}
+      sx={{ fontSize: "14px", fontWeight: "500", letterSpacing: 0.5 }}
     >
       {props.text}
     </Typography>
