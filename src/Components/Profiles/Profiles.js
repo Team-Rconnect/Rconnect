@@ -147,7 +147,7 @@ function Profiles() {
                               boxShadow: "0 2px 12px 2px #D4D9E2",
                             },
                             [bpSMd]: {
-                              fontSize: "10px",
+                              fontSize: "14px",
                             },
                           }}
                         >

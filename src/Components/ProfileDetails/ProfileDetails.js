@@ -107,56 +107,58 @@ function ProfileDetails() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                padding: "15px 20px",
               }}
             >
               <Box
                 sx={{
                   width: "100%",
                   display: "flex",
-                  alignItems: "center",
-                  // backgroundColor: "#f1f1f1",
-                  justifyContent: "space-between",
-                  [bpSMd]: { justifyContent: "space-between" },
+                  flexDirection: "column",
+                  // padding: "10px 20px",
                 }}
               >
-                <CardMedia
-                  component="img"
-                  sx={{
-                    width: 100,
-                    height: 100,
-                    margin: "10px 0px 10px 20px",
-                    borderRadius: "50%",
-                    border: "2px solid " + primary,
-                  }}
-                  image={user.picture}
-                  alt={user.picture}
-                />
-
                 <Box
                   sx={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    // backgroundColor: "#fffccc",
-                    margin: "15px 20px",
+                    position: "relative",
+                    height: 60,
+                    [bpSMd]: { height: 35 },
                   }}
                 >
-                  <Heading1 text={`${user.name?.first}  ${user.name?.last} `} />
-                  <Subtitle1
-                    text={
-                      "Freelance UX/UI designer, 80+ projects in web design, mobile apps (ios & android) and creative projects. Open to offers"
-                    }
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      width: 100,
+                      height: 100,
+                      // margin: "10px 0px 10px 20px",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: -60,
+                      left: 0,
+                      border: "2px solid " + primary,
+                      [bpSMd]: { width: 80, height: 80 },
+                    }}
+                    image={user.picture}
+                    alt={user.picture}
                   />
-                  <Box sx={{ display: "flex", margin: "10px 0px" }}>
-                    <PrimaryButton text={"Contact Info"} />
-                    <Button
-                      variant="outlined"
-                      sx={{ textTransform: "none" }}
-                      size="small"
-                    >
-                      1,043 Connections
-                    </Button>
-                  </Box>
+                </Box>
+
+                <Heading1 text={`${user.name?.first}  ${user.name?.last} `} />
+                <Box sx={{ height: "5px" }}></Box>
+                <Subtitle1
+                  text={
+                    "Freelance UX/UI designer, 80+ projects in web design, mobile apps (ios & android) and creative projects. Open to offers"
+                  }
+                />
+                <Box sx={{ display: "flex", margin: "10px 0px" }}>
+                  <PrimaryButton text={"Contact Info"} />
+                  {/* <Button
+                    variant="outlined"
+                    sx={{ textTransform: "none" }}
+                    size="small"
+                  >
+                    1,043 Connections
+                  </Button> */}
                 </Box>
               </Box>
             </Box>
@@ -164,6 +166,7 @@ function ProfileDetails() {
           {/* about */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
             <Heading1 text={"About"} />
+            <Box sx={{ height: "5px" }}></Box>
             <Subtitle1
               text={
                 "I'm more experienced in eCommerce web projects and mobile banking apps, but also like to work with creative projects, such as landing pages or unsual corporate websites"
@@ -217,6 +220,7 @@ function ProfileDetails() {
           {/* experience */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
             <Heading1 text={"Experience"} />
+
             {experiences &&
               experiences.map((experience, index) => {
                 return (
@@ -236,6 +240,7 @@ function ProfileDetails() {
                           width: 50,
                           height: 50,
                           objectFit: "contain",
+                          [bpSMd]: { width: 30, height: 30 },
                         }}
                         image={experience.imageURL}
                         alt={experience.imageURL}
@@ -251,9 +256,11 @@ function ProfileDetails() {
                       }}
                     >
                       <Heading2 text={experience.title} />
+                      <Box sx={{ height: "4px" }}></Box>
                       <Subtitle1
                         text={`${experience.company} - ${experience.position}`}
                       />
+                      <Box sx={{ height: "4px" }}></Box>
                       <Subtitle2
                         text={`${experience.start_date} - ${experience.end_date}`}
                       />
@@ -286,6 +293,7 @@ function ProfileDetails() {
                           width: 50,
                           height: 50,
                           borderRadius: "50%",
+                          [bpSMd]: { width: 30, height: 30 },
                         }}
                         image={educationIcon}
                         alt={educationIcon}
@@ -298,14 +306,17 @@ function ProfileDetails() {
                         flexDirection: "column",
                         // backgroundColor: "#fffccc",
                         margin: "0px 20px",
+                        [bpSMd]: { margin: "0px 10px" },
                       }}
                     >
                       <Heading2 text={education.title} />
+                      <Box sx={{ height: "4px" }}></Box>
                       <Subtitle1
                         text={`${education.degree} ${education.field && "-"} ${
                           education.field
                         }`}
                       />
+                      <Box sx={{ height: "4px" }}></Box>
                       <Subtitle2
                         text={`${education.start_date} - ${education.end_date}`}
                       />
@@ -338,6 +349,7 @@ function ProfileDetails() {
                           width: 50,
                           height: 50,
                           borderRadius: "50%",
+                          [bpSMd]: { width: 30, height: 30 },
                         }}
                         image={projectIcon}
                         alt={projectIcon}
@@ -350,10 +362,13 @@ function ProfileDetails() {
                         flexDirection: "column",
                         // backgroundColor: "#fffccc",
                         margin: "0px 20px",
+                        [bpSMd]: { margin: "0px 10px" },
                       }}
                     >
                       <Heading2 text={project.title} />
+                      <Box sx={{ height: "5px" }}></Box>
                       <Subtitle1 text={project.description} />
+                      <Box sx={{ height: "5px" }}></Box>
                       <Subtitle2 text={"Jun 2016 - Present"} />
                       <Box sx={{ display: "flex", marginBottom: "10px" }}>
                         <TextButton text={"View project"} />
