@@ -119,3 +119,27 @@ export const theme = createTheme({
     },
   },
 });
+
+export const companies = [
+  { id: 1, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 2, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 3, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 4, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 5,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+  { id: 6, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 7, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 8, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 9,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+  { id: 10, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 11, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 12,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+];
