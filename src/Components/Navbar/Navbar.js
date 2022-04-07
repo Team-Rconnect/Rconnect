@@ -14,7 +14,9 @@ import {
   alpha,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/system";
 import PropTypes from "prop-types";
+import logo from "../../Assets/logowhitesm.png";
 import { bgSecondary, borderLight, primary } from "../../Common/Pallete";
 import { theme } from "../../Common/Constants";
 
@@ -43,7 +45,9 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 function Navbar(props) {
+  const theme = useTheme();
   const navigate = useNavigate();
+  const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   return (
     <HideOnScroll {...props}>
       <AppBar position="sticky">
@@ -55,16 +59,30 @@ function Navbar(props) {
             height: "5vh",
           }}
         >
-          <Typography
-            // gutterBottom
-            variant="h1"
+          <Box
             sx={{
-              fontWeight: "600",
-              letterSpacing: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              // backgroundColor: "#fff000",
             }}
           >
-            RConnect
-          </Typography>
+            <Box>
+              <img src={logo} alt={"logo"} width="35px" />
+            </Box>
+            <Typography
+              // gutterBottom
+              variant="h1"
+              sx={{
+                fontWeight: "600",
+                letterSpacing: 1,
+                marginBottom: "5px",
+                [bpSMd]: { display: "none" },
+              }}
+            >
+              RConnect
+            </Typography>
+          </Box>
           <Box
             sx={{
               backgroundColor: alpha(theme.palette.common.black, 0.14),

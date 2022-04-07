@@ -8,17 +8,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { bgSecondary, primary } from "../../Common/Pallete";
 import login from "../../Assets/login.png";
-import dotswhite from "../../Assets/dotswhite.png";
+import logoblue from "../../Assets/logobluesm.png";
 import dotsb from "../../Assets/dotsb.png";
 import dotscross from "../../Assets/dotscross.png";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { useTheme } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
+
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
   const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
@@ -99,6 +104,7 @@ function Login() {
             >
               <img src={dotscross} alt={"dotswhite"} width="400px" />
             </Box>
+
             <img src={login} alt={"login_image"} width="90%" />
             <Box
               sx={{
@@ -117,24 +123,38 @@ function Login() {
             sx={{
               flex: 1,
               padding: "40px",
+
               [bpSMd]: { padding: "20px" },
             }}
           >
-            <Typography
-              // gutterBottom
-              variant="body1"
+            <Box
               sx={{
-                fontSize: "18px",
-                fontWeight: "600",
-                textTransform: "capitalize",
-                letterSpacing: 0.7,
-                color: primary,
-                marginRight: "10px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              Rconnect
-            </Typography>
-            <Box sx={{ height: "40px", [bpSMd]: { height: "30px" } }}></Box>
+              <Typography
+                // gutterBottom
+                variant="body1"
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  letterSpacing: 0.7,
+                  color: primary,
+                  marginRight: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/")}
+              >
+                {"< Home"}
+              </Typography>
+              <Box>
+                <img src={logoblue} alt={"logoblue"} width="50px" />
+              </Box>
+            </Box>
+            <Box sx={{ height: "25px", [bpSMd]: { height: "30px" } }}></Box>
             <Typography
               variant="h1"
               sx={{
@@ -159,7 +179,7 @@ function Login() {
             >
               Log in with your data that you entered during your registration
             </Typography>
-            <Box sx={{ height: "60px", [bpSMd]: { height: "30px" } }}></Box>
+            <Box sx={{ height: "40px", [bpSMd]: { height: "30px" } }}></Box>
             <Typography
               variant="subtitle2"
               //   color="#fff"
@@ -207,6 +227,7 @@ function Login() {
             >
               <TextField
                 fullWidth
+                type={showPass ? "text" : "password"}
                 InputProps={{
                   style: {
                     // color: "#fff",
@@ -216,14 +237,24 @@ function Login() {
                   placeholder: "Enter password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton>
-                        <VisibilityOutlinedIcon
-                          sx={
-                            {
-                              // color: "#ccc"
+                      <IconButton onClick={() => setShowPass(!showPass)}>
+                        {showPass ? (
+                          <VisibilityOutlinedIcon
+                            sx={
+                              {
+                                // color: "#ccc"
+                              }
                             }
-                          }
-                        />
+                          />
+                        ) : (
+                          <VisibilityOffOutlinedIcon
+                            sx={
+                              {
+                                // color: "#ccc"
+                              }
+                            }
+                          />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   ),
