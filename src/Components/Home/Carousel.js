@@ -52,23 +52,11 @@ function Carousel() {
     },
   ];
   return (
-    <Box sx={{ height: "90vh" }}>
+    <Box>
       <Slider {...settings}>
         {data.map((el) => (
-          <Box
-            key={el.id}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="fit-content"
-              image={el.url}
-              alt="green iguana"
-            />
+          <Box sx={{ height: "100vh" }} key={el.id}>
+            <CardMedia component="img" image={el.url} alt="green iguana" />
           </Box>
         ))}
       </Slider>

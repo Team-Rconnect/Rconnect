@@ -22,6 +22,8 @@ import Piechart from "./Piechart";
 import Carousel from "./Carousel";
 import Counts from "./Counts";
 import CompaniesList from "./CompaniesList";
+import Statistics from "./Statistics";
+import { AddBoxSharp } from "@mui/icons-material";
 function Home() {
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
@@ -38,43 +40,16 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      {navbar && <Navbar />}
+    <Box sx={{ width: `calc(100vw - 5px)` }}>
       <Carousel />
 
       <Counts />
       <CompaniesList />
 
-      <Box sx={{ paddingTop: "15px", marginBottom: "50px" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={7}>
-            <Paper>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: "18px",
-                  fontWeight: "550",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "5px",
-                }}
-              >
-                Placed students per year
-              </Typography>
-              <Barchart />
-            </Paper>
-          </Grid>
-          <Grid item xs={5}>
-            <Paper>
-              <Piechart />
-            </Paper>
-          </Grid>
-        </Grid>
-      </Box>
+      <Statistics />
 
       <Footer />
-    </div>
+    </Box>
   );
 }
 

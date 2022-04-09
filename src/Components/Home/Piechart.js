@@ -45,12 +45,7 @@ function Piechart() {
 
     option && myChart.setOption(option);
   }, []);
-  return (
-    <div
-      id="piechart"
-      style={{ width: "100%", height: "319px", padding: "8px" }}
-    ></div>
-  );
+  return <div id="piechart" style={{ width: "100%", height: "325px" }}></div>;
 }
 
 export default Piechart;

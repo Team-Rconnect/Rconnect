@@ -5,12 +5,15 @@
     align-items: center;
     justify-content: center;
     z-index: 999;
+    
 }
 .slick-next::before,.slick-prev::before{
 display:none;
 }
 .slick-prev{
   left:0;
+  
+  
 background: #fcfcfc;
 border-radius: 0 5px 5px 0;
 &:hover{
@@ -21,6 +24,8 @@ border-radius: 0 5px 5px 0;
 }
 .slick-next{
   right:0;
+
+
   background: #fcfcfc;
   border-radius: 5px 0 0 5px;
   &:hover{
