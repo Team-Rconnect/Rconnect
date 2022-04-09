@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Search } from "@mui/icons-material";
 import {
   Box,
@@ -19,6 +19,7 @@ import PropTypes from "prop-types";
 import logo from "../../Assets/logowhitesm.png";
 import { bgSecondary, borderLight, primary } from "../../Common/Pallete";
 import { theme } from "../../Common/Constants";
+import AuthContext from "../../Context/AuthContext";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -48,6 +49,17 @@ function Navbar(props) {
   const theme = useTheme();
   const navigate = useNavigate();
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
+  const authCtx = useContext(AuthContext);
+
+  const handleClick = () => {
+    if (authCtx.isLoggedIn) {
+      authCtx.onLogout();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <HideOnScroll {...props}>
       <AppBar position="sticky">
@@ -120,15 +132,18 @@ function Navbar(props) {
             sx={{
               // backgroundColor: "#fff",
               color: "#fff",
+              borderRadius: "20px",
+              paddingLeft: "35px",
+              paddingRight: "35px",
               borderColor: alpha(theme.palette.common.black, 0.14),
               "&:hover": {
                 backgroundColor: "#fff",
                 color: primary,
               },
             }}
-            onClick={() => navigate("/login")}
+            onClick={handleClick}
           >
-            Login
+            {authCtx.isLoggedIn ? "Logout" : "Login"}
           </Button>
         </Toolbar>
       </AppBar>

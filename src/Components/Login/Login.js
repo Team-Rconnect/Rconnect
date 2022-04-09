@@ -5,10 +5,11 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { bgSecondary, primary } from "../../Common/Pallete";
 import login from "../../Assets/login.png";
 import logoblue from "../../Assets/logobluesm.png";
@@ -19,17 +20,75 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { useTheme } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../Context/AuthContext";
+import ErrorAlert from "../../Common/ErrorAlert";
+
 function Login() {
   const theme = useTheme();
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
+  const initialValues = { email: "", password: "" };
+  const [formValues, setformValues] = useState(initialValues);
+  const [formErrors, setformErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [errorText, setErrorText] = useState(false);
+
+  const authCtx = useContext(AuthContext);
 
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
-  const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
-  const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
-  const bpMDu = theme.breakpoints.up("md"); //min-width:900px
   const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
-  const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
+
+  const [snackopen, setsnackOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setsnackOpen(false);
+  };
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setformValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setformErrors(handleValidation(formValues));
+    console.log(handleValidation(formValues));
+    if (Object.values(handleValidation(formValues)).length !== 0) {
+      setErrorText(Object.values(handleValidation(formValues))[0]);
+      setsnackOpen(true);
+    } else {
+      setIsSubmit(true);
+      authCtx.onLogin(formValues.email);
+      navigate(`/users/${authCtx.loggedUser.username}`);
+    }
+  };
+
+  const handleValidation = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    return errors;
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      // navigate("/changepassword");
+    }
+  }, [formErrors]);
+
   return (
     <Box
       height="100vh"
@@ -62,8 +121,6 @@ function Login() {
           height: 400,
           borderRadius: "50%",
           backgroundColor: primary,
-
-          //   zIndex: "1",
         }}
       ></Box>
       <Container maxWidth="md" sx={{ zIndex: 2 }}>
@@ -79,6 +136,7 @@ function Login() {
             [bpSMd]: { boxShadow: "0 0 10px -6px #000" },
           }}
         >
+          {/* left */}
           <Box
             sx={{
               flex: 1,
@@ -119,11 +177,11 @@ function Login() {
               <img src={dotsb} alt={"dotswhite"} width="200px" />
             </Box>
           </Box>
+          {/* right */}
           <Box
             sx={{
               flex: 1,
               padding: "40px",
-
               [bpSMd]: { padding: "20px" },
             }}
           >
@@ -198,7 +256,6 @@ function Login() {
               <TextField
                 InputProps={{
                   style: {
-                    // color: "#fff",
                     letterSpacing: 0.6,
                   },
                   disableUnderline: true,
@@ -206,6 +263,9 @@ function Login() {
                 }}
                 fullWidth
                 variant="standard"
+                name="email"
+                value={formValues.email}
+                onChange={handleChanges}
               />
             </Box>
             <Box sx={{ height: "10px" }}></Box>
@@ -228,6 +288,9 @@ function Login() {
               <TextField
                 fullWidth
                 type={showPass ? "text" : "password"}
+                onChange={handleChanges}
+                value={formValues.password}
+                name="password"
                 InputProps={{
                   style: {
                     // color: "#fff",
@@ -239,21 +302,9 @@ function Login() {
                     <InputAdornment position="end">
                       <IconButton onClick={() => setShowPass(!showPass)}>
                         {showPass ? (
-                          <VisibilityOutlinedIcon
-                            sx={
-                              {
-                                // color: "#ccc"
-                              }
-                            }
-                          />
+                          <VisibilityOutlinedIcon />
                         ) : (
-                          <VisibilityOffOutlinedIcon
-                            sx={
-                              {
-                                // color: "#ccc"
-                              }
-                            }
-                          />
+                          <VisibilityOffOutlinedIcon />
                         )}
                       </IconButton>
                     </InputAdornment>
@@ -283,16 +334,7 @@ function Login() {
               <Button
                 variant="contained"
                 fullWidth={true}
-                // disableElevation
-                sx={{
-                  //   backgroundColor: "#fff",
-                  //   color: primary,
-                  //   fontWeight: "600",
-                  "&:hover": {
-                    // backgroundColor: "#fff",
-                    // disableElevation: "true",
-                  },
-                }}
+                onClick={handleSubmit}
               >
                 Login
               </Button>
@@ -300,6 +342,11 @@ function Login() {
           </Box>
         </Box>
       </Container>
+      <ErrorAlert
+        snackopen={snackopen}
+        handleClose={handleClose}
+        text={errorText}
+      />
     </Box>
   );
 }
