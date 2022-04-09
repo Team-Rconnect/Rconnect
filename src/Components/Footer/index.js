@@ -17,13 +17,13 @@ export default function Footer() {
         alignItems: "center",
         padding: "10px",
         borderColor: borderLight,
-        backgroundColor: "white",
+        // backgroundColor: "white",
         position: "relative",
         bottom: "0",
       }}
     >
       <Typography variant="body1">RConnect</Typography>
-      <Typography variant="body1">copyright@2022</Typography>
+      <Typography variant="body1">Copyright@2022</Typography>
       <Stack spacing={2} direction="row">
         <InstagramIcon />
         <FacebookIcon />

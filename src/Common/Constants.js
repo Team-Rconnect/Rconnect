@@ -1,6 +1,10 @@
 import { createTheme } from "@mui/material";
 import { bgSecondary, primary } from "./Pallete";
-
+import BadgeIcon from "@mui/icons-material/Badge";
+import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
+import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import PercentOutlinedIcon from "@mui/icons-material/PercentOutlined";
 export const colourStyles = {
   control: (styles) => ({ ...styles, backgroundColor: "white" }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -153,5 +157,45 @@ export const companies = [
   {
     id: 18,
     url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+  { id: 19, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 20, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 21,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+  { id: 22, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 23,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+];
+
+export const placements = [
+  {
+    id: 1,
+    color: "#227694",
+    title: "Students placed",
+    icon: <BadgeIcon sx={{ margin: "0px", color: "#fff", fontSize: "40px" }} />,
+  },
+  {
+    id: 2,
+    color: "#6D49FF",
+    title: "Companies recruited",
+    icon: (
+      <CorporateFareOutlinedIcon
+        sx={{ margin: "0px", color: "#fff", fontSize: "40px" }}
+      />
+    ),
+  },
+  {
+    id: 3,
+    color: "#62BA27",
+    title: "Placement percentage",
+    icon: (
+      <HowToRegOutlinedIcon
+        sx={{ margin: "0px", color: "#fff", fontSize: "40px" }}
+      />
+    ),
   },
 ];

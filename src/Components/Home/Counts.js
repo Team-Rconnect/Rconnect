@@ -5,6 +5,11 @@ import SchoolIcon from "@mui/icons-material/School";
 import CountUp from "react-countup";
 import DomainIcon from "@mui/icons-material/Domain";
 import PersonIcon from "@mui/icons-material/Person";
+import HeadingLG from "../../Common/HeadingLG";
+import { placements } from "../../Common/Constants";
+import Heading1 from "../../Common/Heading1";
+import SubtitleLG from "../../Common/SubtitleLG.js";
+import { primary } from "../../Common/Pallete";
 
 function Counts() {
   return (
@@ -15,128 +20,76 @@ function Counts() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightgray",
+        padding: "20px 0px",
+        backgroundColor: "white",
       }}
     >
-      <Heading2 text={"student placed statistics"} />
-      <Stack
-        direction="row"
-        spacing={5}
+      <HeadingLG text="placements" />
+      {/* <Typography variant="body1">Some dummy text</Typography> */}
+      <Box
         sx={{
-          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          // backgroundColor: "#fffccc",
-          margin: "15px 0px",
+          flexWrap: "wrap",
+          margin: "40px 0px",
         }}
       >
-        <Paper
-          sx={{
-            width: "170px",
-            height: "130px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{
-              width: "fit-content",
-            }}
-          >
-            <PersonIcon />
-            <Box sx={{ width: "50px" }}>
-              <Typography
+        {placements &&
+          placements.map((placement) => {
+            return (
+              <Box
                 sx={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  color: "#00acff",
+                  padding: "20px",
+                  margin: "10px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // opacity: 0.2,
+                  borderRadius: "4px",
+                  width: "250px",
+                  height: "250px",
+                  border: "1px solid #f1f1f1",
+                  transition: "all 0.4s ease-in-out",
+                  // boxShadow: "0 0 5px -2px #d1e3fa",
+                  "&:hover": {
+                    // transform: "scale(1.02)",
+                    opacity: 1,
+                    backgroundColor: "#fff",
+                    boxShadow: "0 0 10px -2px #d1e3fa",
+                  },
                 }}
               >
-                1000+
-              </Typography>
-            </Box>
-          </Stack>
-        </Paper>
-        <Paper
-          sx={{
-            width: "170px",
-            height: "130px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{
-              width: "fit-content",
-            }}
-          >
-            <DomainIcon />
-            <Box sx={{ width: "50px" }}>
-              <CountUp start={0} end={1000} duration={10} />
-            </Box>
-          </Stack>
-        </Paper>
-        <Paper
-          sx={{
-            width: "170px",
-            height: "130px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{
-              width: "fit-content",
-            }}
-          >
-            <SchoolIcon />
-            <Box sx={{ width: "50px" }}>
-              <CountUp start={0} end={1000} duration={10} />
-            </Box>
-          </Stack>
-        </Paper>
-        <Paper
-          sx={{
-            width: "170px",
-            height: "130px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{
-              width: "fit-content",
-            }}
-          >
-            <SchoolIcon />
-            <Box sx={{ width: "50px" }}>
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  color: "#00acff",
-                }}
-              >
-                100%
-              </Typography>
-            </Box>
-          </Stack>
-        </Paper>
-      </Stack>
-      <Typography variant="body1">Some dummy text</Typography>
+                <Box
+                  sx={{
+                    padding: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: `${placement.color}`,
+                    borderRadius: "50%",
+                  }}
+                >
+                  {placement.icon}
+                </Box>
+
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "30px",
+                    color: `${placement.color}`,
+                    margin: "30px 0px 0px 0px",
+                  }}
+                >
+                  <CountUp start={0} end={1000} duration={1} />
+                  {placement.title === "Placement percentage" ? "%" : "+"}
+                </Typography>
+                <SubtitleLG text={placement.title} />
+              </Box>
+            );
+          })}
+      </Box>
     </Box>
   );
 }

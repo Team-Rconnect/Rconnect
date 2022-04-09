@@ -40,7 +40,7 @@ function Home() {
   }, []);
 
   return (
-    <Box sx={{ width: `calc(100vw - 5px)` }}>
+    <Box>
       <Carousel />
 
       <Counts />
