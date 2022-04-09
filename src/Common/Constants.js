@@ -142,4 +142,16 @@ export const companies = [
     id: 12,
     url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
   },
+  { id: 13, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 14, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 15,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
+  { id: 16, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  { id: 17, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },
+  {
+    id: 18,
+    url: "https://profoundedutech.com/blog/wp-content/uploads/2020/11/Wipro_Logo_New.png",
+  },
 ];

@@ -4,7 +4,7 @@ import { companies } from "../../Common/Constants";
 import Heading1 from "../../Common/Heading1";
 
 function CompaniesList() {
-  const [companyViewCount, setCompanyViewCount] = useState(3);
+  const [companyViewCount, setCompanyViewCount] = useState(9);
   const handleCompanies = () => {
     let c =
       companies.length - companyViewCount < 3 &&
@@ -22,7 +22,7 @@ function CompaniesList() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "white",
+        backgroundColor: "orange",
       }}
     >
       <Typography
@@ -32,25 +32,29 @@ function CompaniesList() {
         {" "}
         CompaniesList
       </Typography>
-      <Box
-        sx={{
-          width: "50%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          // backgroundColor: "#fffccc",
-        }}
-      >
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+      <Box sx={{ backgroundColor: "green", width: "90%" }}>
+        <Box
+          sx={
+            {
+              // width: "50%",
+              // display: "flex",
+              // alignItems: "center",
+              // justifyContent: "center",
+              // backgroundColor: "red",
+            }
+          }
         >
-          {companies &&
-            companies.slice(0, companyViewCount).map((company, index) => {
-              return (
-                <>
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+          <Box
+            sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+            // container
+            // spacing={{ xs: 2, md: 3 }}
+            // columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            {companies &&
+              companies.slice(0, companyViewCount).map((company, index) => {
+                return (
+                  <>
+                    {/* <Grid item xs={2} sm={4} md={4} key={index}>
                     <Paper
                       sx={{
                         width: "110px",
@@ -69,11 +73,34 @@ function CompaniesList() {
                         sx={{ margin: "0 !important" }}
                       />
                     </Paper>
-                  </Grid>
-                </>
-              );
-            })}
-        </Grid>
+                  </Grid> */}
+                    <Box
+                      sx={{
+                        padding: "20px",
+                        margin: "10px",
+                        backgroundColor: "yellow",
+                        width: "90px",
+                        height: "90px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      <img
+                        src={company.url}
+                        height="70px"
+                        width="70px"
+                        alt="company"
+                      />
+                      <Typography variant="subtitle2">Company</Typography>
+                    </Box>
+                  </>
+                );
+              })}
+          </Box>
+        </Box>
       </Box>
       {companyViewCount < companies.length && (
         <Button variant="outlined" onClick={handleCompanies}>
