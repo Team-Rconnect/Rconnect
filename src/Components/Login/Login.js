@@ -63,7 +63,7 @@ function Login() {
     } else {
       setIsSubmit(true);
       authCtx.onLogin(formValues.email);
-      navigate(`/users/${authCtx.loggedUser.username}`);
+      // navigate(`/users/${authCtx.loggedUser.username}`);
     }
   };
 

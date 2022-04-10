@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../Navbar/Navbar";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./styles.scss";
-import Heading2 from "../../Common/Heading2";
 
-import {
-  Paper,
-  Button,
-  Stack,
-  Box,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
-
+import { Box } from "@mui/material";
 import Footer from "../Footer";
-import Barchart from "./Barchart";
-import Piechart from "./Piechart";
-
 import Carousel from "./Carousel";
 import Counts from "./Counts";
 import CompaniesList from "./CompaniesList";
 import Statistics from "./Statistics";
-import { AddBoxSharp } from "@mui/icons-material";
+import HomeNavbar from "./HomeNavbar";
+import CarouselMatter from "./CarouselMatter";
+
 function Home() {
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
@@ -41,13 +29,14 @@ function Home() {
 
   return (
     <Box>
-      <Carousel />
-
+      <Box sx={{ position: "relative" }}>
+        <HomeNavbar />
+        <CarouselMatter />
+        <Carousel />
+      </Box>
       <Counts />
       <CompaniesList />
-
       <Statistics />
-
       <Footer />
     </Box>
   );
