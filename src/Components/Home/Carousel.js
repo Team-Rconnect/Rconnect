@@ -19,7 +19,7 @@ const PrevArrow = (props) => {
         alignItems: "center",
         width: "50px",
         height: "50px",
-        backgroundColor: "rgba(0, 0, 0,0.5)",
+        backgroundColor: "rgba(0, 0, 0,0.15)",
       }}
     >
       <ArrowBackIosNewIcon
@@ -45,7 +45,7 @@ const NextArrow = (props) => {
         alignItems: "center",
         width: "50px",
         height: "50px",
-        backgroundColor: "rgba(0, 0, 0,0.5)",
+        backgroundColor: "rgba(0, 0, 0,0.15)",
       }}
     >
       <ArrowForwardIosIcon

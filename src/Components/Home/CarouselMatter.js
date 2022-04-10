@@ -30,7 +30,7 @@ function CarouselMatter() {
           alignItems: "center",
           height: "100%",
           padding: "0px 100px",
-          backgroundColor: "rgba(23, 110, 222,0.8)",
+          backgroundColor: "rgba(23, 110, 222,0.75)",
           //   backgroundColor: "rgba(0, 0, 0,0.85)",
         }}
       >
