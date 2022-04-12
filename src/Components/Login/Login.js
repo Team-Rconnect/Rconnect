@@ -66,6 +66,9 @@ function Login() {
       // navigate(`/users/${authCtx.loggedUser.username}`);
     }
   };
+  const handleForgot = (e) => {
+    navigate("/Forgotpassword");
+  };
 
   const handleValidation = (values) => {
     const errors = {};
@@ -324,6 +327,7 @@ function Login() {
                   fontWeight: "600",
                   cursor: "pointer",
                 }}
+                onClick={handleForgot}
               >
                 Forgot Password?
               </Typography>

@@ -13,20 +13,6 @@ import HomeNavbar from "./HomeNavbar";
 import CarouselMatter from "./CarouselMatter";
 
 function Home() {
-  const [navbar, setNavbar] = useState(false);
-  useEffect(() => {
-    const changeBackground = () => {
-      if (window.scrollY >= 90) {
-        setNavbar(true);
-      } else {
-        setNavbar(true);
-      }
-    };
-    window.addEventListener("scroll", changeBackground);
-
-    return;
-  }, []);
-
   return (
     <Box>
       <Box sx={{ position: "relative" }}>

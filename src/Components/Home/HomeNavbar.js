@@ -9,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import Navbar from "../Navbar/Navbar";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import { primary } from "../../Common/Pallete";
@@ -29,6 +29,19 @@ function HomeNavbar() {
       navigate("/login");
     }
   };
+  const [navbar, setNavbar] = useState(false);
+  useEffect(() => {
+    const changeBackground = () => {
+      if (window.scrollY >= 68) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
+      }
+    };
+    window.addEventListener("scroll", changeBackground);
+
+    return;
+  }, []);
   return (
     <Box
       sx={{
@@ -37,7 +50,9 @@ function HomeNavbar() {
         left: "0px",
         zIndex: "2",
         width: "100%",
+        transition: "all ease 0.5s",
       }}
+      className={`${navbar && "stickynavbar"}`}
     >
       <AppBar position="sticky" elevation={0} color="transparent">
         <Toolbar

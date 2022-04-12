@@ -59,6 +59,9 @@ function Navbar(props) {
       navigate("/login");
     }
   };
+  const handleHome = () => {
+    navigate("/");
+  };
 
   return (
     <HideOnScroll {...props}>
@@ -90,7 +93,9 @@ function Navbar(props) {
                 letterSpacing: 1,
                 marginBottom: "5px",
                 [bpSMd]: { display: "none" },
+                cursor: "pointer",
               }}
+              onClick={handleHome}
             >
               RConnect
             </Typography>

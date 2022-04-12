@@ -82,8 +82,18 @@ function Counts() {
                     margin: "30px 0px 0px 0px",
                   }}
                 >
-                  <CountUp start={0} end={1000} duration={1} />
-                  {placement.title === "Placement percentage" ? "%" : "+"}
+                  {placement.title === "Students placed" ? (
+                    <>
+                      {" "}
+                      <CountUp start={0} end={1000} duration={1} />
+                      {placement.title === "Placement percentage" ? "%" : "+"}
+                    </>
+                  ) : (
+                    <>
+                      <CountUp start={0} end={100} duration={1} />
+                      {placement.title === "Placement percentage" ? "%" : "+"}
+                    </>
+                  )}
                 </Typography>
                 <SubtitleLG text={placement.title} />
               </Box>
