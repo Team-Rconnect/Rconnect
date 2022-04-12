@@ -93,7 +93,7 @@ function Navbar(props) {
                 letterSpacing: 1,
                 marginBottom: "5px",
                 [bpSMd]: { display: "none" },
-                cursor: "pointer  ",
+                cursor: "pointer",
               }}
               onClick={handleHome}
             >
