@@ -41,7 +41,7 @@ function Counts() {
               <Box
                 sx={{
                   padding: "20px",
-                  margin: "10px 20px",
+                  margin: "10px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",

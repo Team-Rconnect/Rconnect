@@ -1,43 +1,51 @@
-.slick-arrow.slick-next , .slick-arrow.slick-prev{
-    width:47px;
-    height:104px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    
+.slick-arrow.slick-next,
+.slick-arrow.slick-prev {
+  width: 47px;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
 }
-.slick-next::before,.slick-prev::before{
-display:none;
+
+.slick-next::before,
+.slick-prev::before {
+  display: none;
 }
-.slick-prev{
-  left:0;
-  
-  
-background: #fcfcfc;
-border-radius: 0 5px 5px 0;
-&:hover{
+
+.slick-prev {
+  left: 0;
+
+
   background: #fcfcfc;
-}
+  border-radius: 0 5px 5px 0;
+
+  &:hover {
+    background: #fcfcfc;
+  }
 
 
 }
-.slick-next{
-  right:0;
+
+.slick-next {
+  right: 0;
 
 
   background: #fcfcfc;
   border-radius: 5px 0 0 5px;
-  &:hover{
+
+  &:hover {
     background: #fcfcfc;
   }
-  
+
 
 }
 
-.stickynavbar{
+.stickynavbar {
   position: fixed !important;
-  top: 0; 
-  left:0;
+  top: 0;
+  left: 0;
   background: #176ede;
+  transition: "all 0.6s ease-in-out",
 }

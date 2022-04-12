@@ -3,12 +3,10 @@ import {
   AppBar,
   Box,
   Button,
-  TextField,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
-import Navbar from "../Navbar/Navbar";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
@@ -32,7 +30,8 @@ function HomeNavbar() {
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     const changeBackground = () => {
-      if (window.scrollY >= 68) {
+      console.log(window.scrollY);
+      if (window.scrollY > 0) {
         setNavbar(true);
       } else {
         setNavbar(false);
@@ -50,11 +49,11 @@ function HomeNavbar() {
         left: "0px",
         zIndex: "2",
         width: "100%",
-        transition: "all ease 0.5s",
+        transition: "all 0.6s ease-in-out",
       }}
       className={`${navbar && "stickynavbar"}`}
     >
-      <AppBar position="sticky" elevation={0} color="transparent">
+      <AppBar position="sticky" elevation={navbar ? 3 : 0} color="transparent">
         <Toolbar
           disableGutters="true"
           sx={{
@@ -62,7 +61,9 @@ function HomeNavbar() {
             justifyContent: "space-between",
             alignItems: "center",
             height: "5vh",
-            padding: "10px 40px",
+            transition: "all 0.6s ease-in-out",
+            // padding: "10px 40px",
+            padding: `${navbar ?"4px 40px": "10px 40px"}`,
             // backgroundColor: "rgba(0, 0, 0,0.1)",
           }}
         >
