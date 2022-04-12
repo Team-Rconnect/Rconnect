@@ -59,7 +59,7 @@ function CompaniesList() {
                       // opacity: 0.2,
                       border: "1px solid #f1f1f1",
                       transition: "all 0.4s ease-in-out",
-                      boxShadow: "0 0 5px -2px #d1e3fa",
+                      boxShadow: "0 0 10px -2px #d1e3fa",
                       "&:hover": {
                         transform: "scale(1.02)",
                         opacity: 1,

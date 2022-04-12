@@ -1,6 +1,7 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import HeadingLG from "../../Common/HeadingLG";
+import { grey } from "../../Common/Pallete";
 import Barchart from "./Barchart";
 import Piechart from "./Piechart";
 
@@ -39,7 +40,7 @@ function Statistics() {
             justifyContent: "center",
             flexDirection: "column",
             padding: "25px 10px",
-            border: "1px solid #f1f1f1",
+            border: "1px solid "+grey,
           }}
         >
           <Typography
@@ -63,7 +64,7 @@ function Statistics() {
             borderRadius: "4px",
             margin: "0px 20px",
             padding: "25px 10px",
-            border: "1px solid #f1f1f1",
+            border: "1px solid "+grey,
           }}
         >
           <Piechart />
