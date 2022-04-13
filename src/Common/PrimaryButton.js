@@ -8,6 +8,7 @@ function PrimaryButton(props) {
       disableElevation
       sx={{ marginRight: "5px" }}
       size="small"
+      onClick={props.onClick}
     >
       {props.text}
     </Button>

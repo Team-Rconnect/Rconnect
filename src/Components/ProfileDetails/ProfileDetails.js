@@ -24,6 +24,8 @@ import Heading2 from "../../Common/Heading2";
 import TextIconButton from "../../Common/TextIconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import EditIconBtn from "../../Common/EditIconBtn";
+import ProfileAbout from "./ProfileAbout";
 
 function ProfileDetails() {
   const [user, setUser] = useState({});
@@ -31,6 +33,7 @@ function ProfileDetails() {
   const [educations, setEducations] = useState([]);
   const [experiences, setExperiences] = useState([]);
   const [projectsViewCount, setProjectsViewCount] = useState(3);
+  const [isProfile, setIsProfile] = useState(true);
 
   const location = useLocation();
   const currentPath = location.pathname.split("/")[2];
@@ -79,6 +82,19 @@ function ProfileDetails() {
         : projectsViewCount + 3;
     setProjectsViewCount(c > projects.length ? 3 : c);
     console.log(c);
+  };
+
+  const editSkills = () => {
+    alert("Skills edit");
+  };
+  const editExperience = () => {
+    alert("Experience edit");
+  };
+  const editEducation = () => {
+    alert("Education edit");
+  };
+  const editProjects = () => {
+    alert("Projects edit");
   };
 
   useEffect(() => {
@@ -164,19 +180,19 @@ function ProfileDetails() {
             </Box>
           </Card>
           {/* about */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"About"} />
-            <Box sx={{ height: "5px" }}></Box>
-            <Subtitle1
-              text={
-                "I'm more experienced in eCommerce web projects and mobile banking apps, but also like to work with creative projects, such as landing pages or unsual corporate websites"
-              }
-            />
-            <TextButton text={"SEE MORE"} />
-          </Card>
+          <ProfileAbout />
           {/* skills */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Skills"} />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Heading1 text={"Skills"} />
+              {isProfile && <EditIconBtn onClick={editSkills} />}
+            </Box>
             <Box sx={{ margin: "15px 0px" }}>
               {[
                 "#webdesign",
@@ -219,8 +235,16 @@ function ProfileDetails() {
           </Card>
           {/* experience */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Experience"} />
-
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Heading1 text={"Experience"} />
+              {isProfile && <EditIconBtn onClick={editExperience} />}
+            </Box>
             {experiences &&
               experiences.map((experience, index) => {
                 return (
@@ -273,7 +297,16 @@ function ProfileDetails() {
           </Card>
           {/* education */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Education"} />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Heading1 text={"Education"} />
+              {isProfile && <EditIconBtn onClick={editEducation} />}
+            </Box>
             {educations &&
               educations.map((education, index) => {
                 return (
@@ -329,7 +362,16 @@ function ProfileDetails() {
           </Card>
           {/* projects */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Projects"} />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Heading1 text={"Education"} />
+              {isProfile && <EditIconBtn onClick={editEducation} />}
+            </Box>
             {projects &&
               projects.slice(0, projectsViewCount).map((project, index) => {
                 return (
