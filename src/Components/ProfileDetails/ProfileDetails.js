@@ -24,14 +24,13 @@ import Heading2 from "../../Common/Heading2";
 import TextIconButton from "../../Common/TextIconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIconBtn from "../../Common/EditIconBtn";
 import ProfileAbout from "./ProfileAbout";
+import ProfileExperience from "./ProfileExperience/ProfileExperience";
 
 function ProfileDetails() {
   const [user, setUser] = useState({});
   const [projects, setProjects] = useState([]);
   const [educations, setEducations] = useState([]);
-  const [experiences, setExperiences] = useState([]);
   const [projectsViewCount, setProjectsViewCount] = useState(3);
   const [isProfile, setIsProfile] = useState(true);
 
@@ -67,12 +66,6 @@ function ProfileDetails() {
     setEducations([...json]);
   };
 
-  const fetchExperiences = async () => {
-    const response = await fetch(`http://localhost:5000/experience`);
-    const json = await response.json();
-    setExperiences([...json]);
-  };
-
   const viewProjectsMore = () => {
     console.log(projects.length);
     let c =
@@ -87,9 +80,7 @@ function ProfileDetails() {
   const editSkills = () => {
     alert("Skills edit");
   };
-  const editExperience = () => {
-    alert("Experience edit");
-  };
+
   const editEducation = () => {
     alert("Education edit");
   };
@@ -101,7 +92,6 @@ function ProfileDetails() {
     fetchUser(currentPath);
     fetchProjects();
     fetchEducations();
-    fetchExperiences();
   }, [currentPath]);
 
   return (
@@ -191,7 +181,7 @@ function ProfileDetails() {
               }}
             >
               <Heading1 text={"Skills"} />
-              {isProfile && <EditIconBtn onClick={editSkills} />}
+              {/* {isProfile && <EditIconBtn onClick={editSkills} />} */}
             </Box>
             <Box sx={{ margin: "15px 0px" }}>
               {[
@@ -234,67 +224,7 @@ function ProfileDetails() {
             </Box>
           </Card>
           {/* experience */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Heading1 text={"Experience"} />
-              {isProfile && <EditIconBtn onClick={editExperience} />}
-            </Box>
-            {experiences &&
-              experiences.map((experience, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={experience.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          objectFit: "contain",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={experience.imageURL}
-                        alt={experience.imageURL}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                      }}
-                    >
-                      <Heading2 text={experience.title} />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle1
-                        text={`${experience.company} - ${experience.position}`}
-                      />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle2
-                        text={`${experience.start_date} - ${experience.end_date}`}
-                      />
-                      <Box sx={{ marginBottom: "10px" }}></Box>
-                      {index !== experiences.length - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-          </Card>
+          <ProfileExperience />
           {/* education */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
             <Box
@@ -305,7 +235,7 @@ function ProfileDetails() {
               }}
             >
               <Heading1 text={"Education"} />
-              {isProfile && <EditIconBtn onClick={editEducation} />}
+              {/* {isProfile && <EditIconBtn onClick={editEducation} />} */}
             </Box>
             {educations &&
               educations.map((education, index) => {
@@ -370,7 +300,7 @@ function ProfileDetails() {
               }}
             >
               <Heading1 text={"Education"} />
-              {isProfile && <EditIconBtn onClick={editEducation} />}
+              {/* {isProfile && <EditIconBtn onClick={editEducation} />} */}
             </Box>
             {projects &&
               projects.slice(0, projectsViewCount).map((project, index) => {
