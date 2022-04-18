@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import {
   Autocomplete,
   Box,
@@ -7,7 +8,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   Divider,
   FormControlLabel,
   IconButton,
@@ -15,41 +15,38 @@ import {
   Select,
   TextField,
   useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import BootstrapDialogTitle from "../../../Common/BootstrapDialogTitle";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import AddIcon from "@mui/icons-material/Add";
 import Heading1 from "../../../Common/Heading1";
 import Heading2 from "../../../Common/Heading2";
-import PrimaryButton from "../../../Common/PrimaryButton";
 import Subtitle1 from "../../../Common/Subtitle1";
 import Subtitle2 from "../../../Common/Subtitle2";
-import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import educationIcon from "../../../Assets/education.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import BootstrapDialogTitle from "../../../Common/BootstrapDialogTitle";
 import { countries, top100Films } from "../../../Common/Constants";
+import PrimaryButton from "../../../Common/PrimaryButton";
+import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import AddIcon from "@mui/icons-material/Add";
 
-function ProfileExperience() {
+function ProfileEducation() {
   const initialValues = {
-    title: "",
-    employment_type: "Please select",
-    company_name: "",
-    location: "",
+    college_name: "",
+    degree: "",
+    field_of_study: "",
     start_month: "Month",
     end_month: "Month",
     start_year: "Year",
     end_year: "Year",
-    currently_working: false,
-    industry: "",
+    grade: "",
     description: "",
   };
   const [formValues, setformValues] = useState(initialValues);
-  const [experiences, setExperiences] = useState([]);
+  const [educations, setEducations] = useState([]);
   const [isProfile, setIsProfile] = useState(true);
-  // const [isExperienceDetails, setIsExperienceDetails] = useState(false);
   const [open, setOpen] = useState(false);
-  const [experienceTitle, setExperienceTitle] = useState("");
+  const [educationTitle, setEducationTitle] = useState("");
   const [years, setYears] = useState(["Year"]);
   const [descLen, setDescLen] = useState(0);
 
@@ -58,12 +55,12 @@ function ProfileExperience() {
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
+  const bpSMd = theme.breakpoints.down("sm");
 
-  const fetchExperiences = async () => {
-    const response = await fetch(`http://localhost:5000/experience`);
+  const fetchEducations = async () => {
+    const response = await fetch(`http://localhost:5000/education`);
     const json = await response.json();
-    setExperiences([...json]);
+    setEducations([...json]);
   };
 
   const handleChanges = (e) => {
@@ -75,19 +72,19 @@ function ProfileExperience() {
     }
   };
 
-  const openExperiences = () => {
+  const openEducations = () => {
     console.log(location.pathname);
-    navigate(`${location.pathname}/details/experience`);
+    navigate(`${location.pathname}/details/education`);
   };
 
-  const addExperience = () => {
+  const addEducation = () => {
     setOpen(true);
-    setExperienceTitle("Add Experience");
+    setEducationTitle("Add Education");
   };
 
-  const editExperience = () => {
+  const editEducation = () => {
     setOpen(true);
-    setExperienceTitle("Edit Experience");
+    setEducationTitle("Edit Education");
   };
 
   const yearsFn = () => {
@@ -99,7 +96,7 @@ function ProfileExperience() {
 
   useEffect(() => {
     yearsFn();
-    fetchExperiences();
+    fetchEducations();
   }, []);
 
   return (
@@ -113,7 +110,7 @@ function ProfileExperience() {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            {isProfile && location.pathname.includes("experience") && (
+            {isProfile && location.pathname.includes("education") && (
               <>
                 <IconButton onClick={() => navigate(-1)}>
                   <KeyboardBackspaceIcon />
@@ -121,29 +118,29 @@ function ProfileExperience() {
                 <Box sx={{ width: "10px" }}></Box>
               </>
             )}
-            <Heading1 text={"Experience"} />
+            <Heading1 text={"Education"} />
           </Box>
           {isProfile && (
             <Box>
-              {isProfile && !location.pathname.includes("experience") ? (
+              {isProfile && !location.pathname.includes("education") ? (
                 <>
-                  <IconButton onClick={addExperience}>
+                  <IconButton onClick={addEducation}>
                     <AddIcon />
                   </IconButton>
-                  <IconButton onClick={openExperiences}>
+                  <IconButton onClick={openEducations}>
                     <ModeEditOutlinedIcon />
                   </IconButton>
                 </>
               ) : (
-                <IconButton onClick={addExperience}>
+                <IconButton onClick={addEducation}>
                   <AddIcon />
                 </IconButton>
               )}
             </Box>
           )}
         </Box>
-        {experiences &&
-          experiences.map((experience, index) => {
+        {educations &&
+          educations.map((education, index) => {
             return (
               <Box
                 sx={{
@@ -152,7 +149,7 @@ function ProfileExperience() {
                   marginTop: "20px",
                   justifyContent: "space-between",
                 }}
-                key={experience.id}
+                key={index}
               >
                 <Box>
                   <CardMedia
@@ -160,11 +157,11 @@ function ProfileExperience() {
                     sx={{
                       width: 50,
                       height: 50,
-                      objectFit: "contain",
+                      borderRadius: "50%",
                       [bpSMd]: { width: 30, height: 30 },
                     }}
-                    image={experience.imageURL}
-                    alt={experience.imageURL}
+                    image={educationIcon}
+                    alt={educationIcon}
                   />
                 </Box>
                 <Box
@@ -174,23 +171,26 @@ function ProfileExperience() {
                     flexDirection: "column",
                     // backgroundColor: "#fffccc",
                     margin: "0px 20px",
+                    [bpSMd]: { margin: "0px 10px" },
                   }}
                 >
-                  <Heading2 text={experience.title} />
+                  <Heading2 text={education.title} />
                   <Box sx={{ height: "4px" }}></Box>
                   <Subtitle1
-                    text={`${experience.company} - ${experience.position}`}
+                    text={`${education.degree} ${education.field && "-"} ${
+                      education.field
+                    }`}
                   />
                   <Box sx={{ height: "4px" }}></Box>
                   <Subtitle2
-                    text={`${experience.start_date} - ${experience.end_date}`}
+                    text={`${education.start_date} - ${education.end_date}`}
                   />
                   <Box sx={{ marginBottom: "10px" }}></Box>
-                  {index !== experiences.length - 1 && <Divider />}
+                  {index !== educations.length - 1 && <Divider />}
                 </Box>
-                {isProfile && location.pathname.includes("experience") && (
+                {isProfile && location.pathname.includes("education") && (
                   <Box>
-                    <IconButton onClick={editExperience}>
+                    <IconButton onClick={editEducation}>
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -199,7 +199,6 @@ function ProfileExperience() {
             );
           })}
       </Card>
-      {/* <Box sx={{ height: "20px" }}></Box> */}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -211,42 +210,13 @@ function ProfileExperience() {
         aria-describedby="description"
       >
         <BootstrapDialogTitle id="title" onClose={() => setOpen(false)}>
-          {experienceTitle}
+          {educationTitle}
         </BootstrapDialogTitle>
         <DialogContent dividers={true}>
           <Subtitle2 text="*Indicates required" />
-          {/* title */}
+          {/* School name */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Title*" />
-          </Box>
-          <TextField
-            size="small"
-            fullWidth
-            inputProps={{ maxLength: 300 }}
-            value={formValues.title}
-            name="title"
-            onChange={handleChanges}
-            placeholder="Ex: Full stack developer"
-          />
-          {/* employement type */}
-          <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Employement type" />
-          </Box>
-          <Select
-            fullWidth
-            size="small"
-            name="employment_type"
-            value={formValues.employment_type}
-            onChange={handleChanges}
-          >
-            <MenuItem value="Please select">Please select</MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-          {/* company name */}
-          <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Company name*" />
+            <Subtitle1 text="School/College*" />
           </Box>
           <Autocomplete
             options={countries}
@@ -274,7 +244,7 @@ function ProfileExperience() {
               <TextField
                 {...params}
                 // label="Choose a country"
-                placeholder="Ex: Google"
+                placeholder="Ex: IIIT Srikakulam"
                 inputProps={{
                   ...params.inputProps,
                   autoComplete: "new-password", // disable autocomplete and autofill
@@ -282,27 +252,33 @@ function ProfileExperience() {
               />
             )}
           />
-          {/* location */}
+          {/* Degree */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Location" />
+            <Subtitle1 text="Degree" />
           </Box>
           <Autocomplete
-            id="free-solo-demo"
             freeSolo
             autoHighlight
             size="small"
             options={top100Films.map((option) => option.title)}
             renderInput={(params) => (
-              <TextField {...params} placeholder="Ex: Hyderabad" />
+              <TextField {...params} placeholder="Ex: Bachelor's" />
             )}
           />
-          {/* currently working */}
+          {/* field of study */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="I'm currently working here"
-            />
+            <Subtitle1 text="Field of study" />
           </Box>
+          <Autocomplete
+            freeSolo
+            autoHighlight
+            size="small"
+            options={top100Films.map((option) => option.title)}
+            renderInput={(params) => (
+              <TextField {...params} placeholder="Ex: Business" />
+            )}
+          />
+
           {/* Start date */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <Subtitle1 text="Start date*" />
@@ -405,6 +381,19 @@ function ProfileExperience() {
               })}
             </Select>
           </Box>
+          {/* Grade */}
+          <Box sx={{ margin: "15px 0px 5px 0px" }}>
+            <Subtitle1 text="Grade" />
+          </Box>
+          <TextField
+            size="small"
+            fullWidth
+            inputProps={{ maxLength: 300 }}
+            value={formValues.grade}
+            name="grade"
+            onChange={handleChanges}
+            placeholder="Ex: 8.5"
+          />
           {/* Description */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <Subtitle1 text="Description" />
@@ -430,4 +419,4 @@ function ProfileExperience() {
   );
 }
 
-export default ProfileExperience;
+export default ProfileEducation;

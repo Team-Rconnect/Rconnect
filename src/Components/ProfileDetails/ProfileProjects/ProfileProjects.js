@@ -7,7 +7,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   Divider,
   FormControlLabel,
   IconButton,
@@ -18,38 +17,39 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import BootstrapDialogTitle from "../../../Common/BootstrapDialogTitle";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import AddIcon from "@mui/icons-material/Add";
 import Heading1 from "../../../Common/Heading1";
 import Heading2 from "../../../Common/Heading2";
-import PrimaryButton from "../../../Common/PrimaryButton";
 import Subtitle1 from "../../../Common/Subtitle1";
 import Subtitle2 from "../../../Common/Subtitle2";
+import TextButton from "../../../Common/TextButton";
+import projectIcon from "../../../Assets/project_icon.png";
+import TextIconButton from "../../../Common/TextIconButton";
+import { useLocation, useNavigate } from "react-router-dom";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
-import { countries, top100Films } from "../../../Common/Constants";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import PrimaryButton from "../../../Common/PrimaryButton";
+import BootstrapDialogTitle from "../../../Common/BootstrapDialogTitle";
 
-function ProfileExperience() {
+function ProfileProjects() {
   const initialValues = {
-    title: "",
-    employment_type: "Please select",
-    company_name: "",
-    location: "",
+    project_name: "",
+    project_url: "",
     start_month: "Month",
     end_month: "Month",
     start_year: "Year",
     end_year: "Year",
     currently_working: false,
-    industry: "",
     description: "",
   };
   const [formValues, setformValues] = useState(initialValues);
-  const [experiences, setExperiences] = useState([]);
   const [isProfile, setIsProfile] = useState(true);
-  // const [isExperienceDetails, setIsExperienceDetails] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [projectsViewCount, setProjectsViewCount] = useState(3);
   const [open, setOpen] = useState(false);
-  const [experienceTitle, setExperienceTitle] = useState("");
+  const [projectTitle, setProjectTitle] = useState("");
   const [years, setYears] = useState(["Year"]);
   const [descLen, setDescLen] = useState(0);
 
@@ -58,12 +58,12 @@ function ProfileExperience() {
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
+  const bpSMd = theme.breakpoints.down("sm");
 
-  const fetchExperiences = async () => {
-    const response = await fetch(`http://localhost:5000/experience`);
+  const fetchProjects = async () => {
+    const response = await fetch(`http://localhost:5000/projects`);
     const json = await response.json();
-    setExperiences([...json]);
+    setProjects([...json]);
   };
 
   const handleChanges = (e) => {
@@ -75,19 +75,19 @@ function ProfileExperience() {
     }
   };
 
-  const openExperiences = () => {
+  const openProjects = () => {
     console.log(location.pathname);
-    navigate(`${location.pathname}/details/experience`);
+    navigate(`${location.pathname}/details/projects`);
   };
 
-  const addExperience = () => {
+  const addProject = () => {
     setOpen(true);
-    setExperienceTitle("Add Experience");
+    setProjectTitle("Add Project");
   };
 
-  const editExperience = () => {
+  const editProject = () => {
     setOpen(true);
-    setExperienceTitle("Edit Experience");
+    setProjectTitle("Edit Project");
   };
 
   const yearsFn = () => {
@@ -97,9 +97,20 @@ function ProfileExperience() {
     }
   };
 
+  const viewProjectsMore = () => {
+    console.log(projects.length);
+    let c =
+      projects.length - projectsViewCount < 3 &&
+      projects.length !== projectsViewCount
+        ? projectsViewCount + (projects.length - projectsViewCount)
+        : projectsViewCount + 3;
+    setProjectsViewCount(c > projects.length ? 3 : c);
+    console.log(c);
+  };
+
   useEffect(() => {
     yearsFn();
-    fetchExperiences();
+    fetchProjects();
   }, []);
 
   return (
@@ -113,7 +124,7 @@ function ProfileExperience() {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            {isProfile && location.pathname.includes("experience") && (
+            {isProfile && location.pathname.includes("projects") && (
               <>
                 <IconButton onClick={() => navigate(-1)}>
                   <KeyboardBackspaceIcon />
@@ -121,29 +132,29 @@ function ProfileExperience() {
                 <Box sx={{ width: "10px" }}></Box>
               </>
             )}
-            <Heading1 text={"Experience"} />
+            <Heading1 text={"Projects"} />
           </Box>
           {isProfile && (
             <Box>
-              {isProfile && !location.pathname.includes("experience") ? (
+              {isProfile && !location.pathname.includes("projects") ? (
                 <>
-                  <IconButton onClick={addExperience}>
+                  <IconButton onClick={addProject}>
                     <AddIcon />
                   </IconButton>
-                  <IconButton onClick={openExperiences}>
+                  <IconButton onClick={openProjects}>
                     <ModeEditOutlinedIcon />
                   </IconButton>
                 </>
               ) : (
-                <IconButton onClick={addExperience}>
+                <IconButton onClick={addProject}>
                   <AddIcon />
                 </IconButton>
               )}
             </Box>
           )}
         </Box>
-        {experiences &&
-          experiences.map((experience, index) => {
+        {projects &&
+          projects.slice(0, projectsViewCount).map((project, index) => {
             return (
               <Box
                 sx={{
@@ -152,7 +163,7 @@ function ProfileExperience() {
                   marginTop: "20px",
                   justifyContent: "space-between",
                 }}
-                key={experience.id}
+                key={project.id}
               >
                 <Box>
                   <CardMedia
@@ -160,11 +171,11 @@ function ProfileExperience() {
                     sx={{
                       width: 50,
                       height: 50,
-                      objectFit: "contain",
+                      borderRadius: "50%",
                       [bpSMd]: { width: 30, height: 30 },
                     }}
-                    image={experience.imageURL}
-                    alt={experience.imageURL}
+                    image={projectIcon}
+                    alt={projectIcon}
                   />
                 </Box>
                 <Box
@@ -174,23 +185,22 @@ function ProfileExperience() {
                     flexDirection: "column",
                     // backgroundColor: "#fffccc",
                     margin: "0px 20px",
+                    [bpSMd]: { margin: "0px 10px" },
                   }}
                 >
-                  <Heading2 text={experience.title} />
-                  <Box sx={{ height: "4px" }}></Box>
-                  <Subtitle1
-                    text={`${experience.company} - ${experience.position}`}
-                  />
-                  <Box sx={{ height: "4px" }}></Box>
-                  <Subtitle2
-                    text={`${experience.start_date} - ${experience.end_date}`}
-                  />
-                  <Box sx={{ marginBottom: "10px" }}></Box>
-                  {index !== experiences.length - 1 && <Divider />}
+                  <Heading2 text={project.title} />
+                  <Box sx={{ height: "5px" }}></Box>
+                  <Subtitle1 text={project.description} />
+                  <Box sx={{ height: "5px" }}></Box>
+                  <Subtitle2 text={"Jun 2016 - Present"} />
+                  <Box sx={{ display: "flex", marginBottom: "10px" }}>
+                    <TextButton text={"View project"} />
+                  </Box>
+                  {index !== projectsViewCount - 1 && <Divider />}
                 </Box>
-                {isProfile && location.pathname.includes("experience") && (
+                {isProfile && location.pathname.includes("projects") && (
                   <Box>
-                    <IconButton onClick={editExperience}>
+                    <IconButton onClick={editProject}>
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -198,8 +208,18 @@ function ProfileExperience() {
               </Box>
             );
           })}
+        <TextIconButton
+          text={projectsViewCount >= projects.length ? "SEE LESS" : "SEE MORE"}
+          onClick={viewProjectsMore}
+          endIcon={
+            projectsViewCount >= projects.length ? (
+              <KeyboardArrowUpIcon size={20} />
+            ) : (
+              <KeyboardArrowDownIcon fontSize="large" />
+            )
+          }
+        />
       </Card>
-      {/* <Box sx={{ height: "20px" }}></Box> */}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -211,96 +231,27 @@ function ProfileExperience() {
         aria-describedby="description"
       >
         <BootstrapDialogTitle id="title" onClose={() => setOpen(false)}>
-          {experienceTitle}
+          {projectTitle}
         </BootstrapDialogTitle>
         <DialogContent dividers={true}>
           <Subtitle2 text="*Indicates required" />
           {/* title */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Title*" />
+            <Subtitle1 text="Project name*" />
           </Box>
           <TextField
             size="small"
             fullWidth
             inputProps={{ maxLength: 300 }}
-            value={formValues.title}
-            name="title"
+            value={formValues.project_name}
+            name="project_name"
             onChange={handleChanges}
-            placeholder="Ex: Full stack developer"
-          />
-          {/* employement type */}
-          <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Employement type" />
-          </Box>
-          <Select
-            fullWidth
-            size="small"
-            name="employment_type"
-            value={formValues.employment_type}
-            onChange={handleChanges}
-          >
-            <MenuItem value="Please select">Please select</MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-          {/* company name */}
-          <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Company name*" />
-          </Box>
-          <Autocomplete
-            options={countries}
-            autoHighlight
-            freeSolo
-            size="small"
-            getOptionLabel={(option) => option.label}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                <img
-                  loading="lazy"
-                  width="20"
-                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                  alt=""
-                />
-                {option.label} ({option.code}) +{option.phone}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                // label="Choose a country"
-                placeholder="Ex: Google"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: "new-password", // disable autocomplete and autofill
-                }}
-              />
-            )}
-          />
-          {/* location */}
-          <Box sx={{ margin: "15px 0px 5px 0px" }}>
-            <Subtitle1 text="Location" />
-          </Box>
-          <Autocomplete
-            id="free-solo-demo"
-            freeSolo
-            autoHighlight
-            size="small"
-            options={top100Films.map((option) => option.title)}
-            renderInput={(params) => (
-              <TextField {...params} placeholder="Ex: Hyderabad" />
-            )}
           />
           {/* currently working */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <FormControlLabel
               control={<Checkbox />}
-              label="I'm currently working here"
+              label="I'm currently working on this project"
             />
           </Box>
           {/* Start date */}
@@ -405,6 +356,18 @@ function ProfileExperience() {
               })}
             </Select>
           </Box>
+          {/* url */}
+          <Box sx={{ margin: "15px 0px 5px 0px" }}>
+            <Subtitle1 text="Project URL" />
+          </Box>
+          <TextField
+            size="small"
+            fullWidth
+            inputProps={{ maxLength: 300 }}
+            value={formValues.project_url}
+            name="project_url"
+            onChange={handleChanges}
+          />
           {/* Description */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <Subtitle1 text="Description" />
@@ -430,4 +393,4 @@ function ProfileExperience() {
   );
 }
 
-export default ProfileExperience;
+export default ProfileProjects;

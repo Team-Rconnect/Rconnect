@@ -1,17 +1,17 @@
 import { Container } from "@mui/material";
 import React from "react";
 import Navbar from "../../Navbar/Navbar";
-import ProfileExperience from "./ProfileExperience";
+import ProfileEducation from "./ProfileEducation";
 
-function DetailsExperiences() {
+function DetailsEducations() {
   return (
     <div>
       <Navbar />
       <Container maxWidth="md" sx={{ marginTop: "40px" }}>
-        <ProfileExperience />
+        <ProfileEducation />
       </Container>
     </div>
   );
 }
 
-export default DetailsExperiences;
+export default DetailsEducations;

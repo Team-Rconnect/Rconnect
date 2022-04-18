@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Chip,
-  Container,
-  Divider,
-  useTheme,
-} from "@mui/material";
+import { Box, Card, CardMedia, Chip, Container, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Heading1 from "../../Common/Heading1";
@@ -15,25 +6,14 @@ import Loading from "../../Common/Loading";
 import { borderDark, primary } from "../../Common/Pallete";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Subtitle1 from "../../Common/Subtitle1";
-import Subtitle2 from "../../Common/Subtitle2";
-import TextButton from "../../Common/TextButton";
 import Navbar from "../Navbar/Navbar";
-import projectIcon from "../../Assets/project_icon.png";
-import educationIcon from "../../Assets/education.png";
-import Heading2 from "../../Common/Heading2";
-import TextIconButton from "../../Common/TextIconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience/ProfileExperience";
+import ProfileEducation from "./ProfileEducation/ProfileEducation";
+import ProfileProjects from "./ProfileProjects/ProfileProjects";
 
 function ProfileDetails() {
   const [user, setUser] = useState({});
-  const [projects, setProjects] = useState([]);
-  const [educations, setEducations] = useState([]);
-  const [projectsViewCount, setProjectsViewCount] = useState(3);
-  const [isProfile, setIsProfile] = useState(true);
-
   const location = useLocation();
   const currentPath = location.pathname.split("/")[2];
 
@@ -54,44 +34,8 @@ function ProfileDetails() {
     setUser({ ...json[0] });
   };
 
-  const fetchProjects = async () => {
-    const response = await fetch(`http://localhost:5000/projects`);
-    const json = await response.json();
-    setProjects([...json]);
-  };
-
-  const fetchEducations = async () => {
-    const response = await fetch(`http://localhost:5000/education`);
-    const json = await response.json();
-    setEducations([...json]);
-  };
-
-  const viewProjectsMore = () => {
-    console.log(projects.length);
-    let c =
-      projects.length - projectsViewCount < 3 &&
-      projects.length !== projectsViewCount
-        ? projectsViewCount + (projects.length - projectsViewCount)
-        : projectsViewCount + 3;
-    setProjectsViewCount(c > projects.length ? 3 : c);
-    console.log(c);
-  };
-
-  const editSkills = () => {
-    alert("Skills edit");
-  };
-
-  const editEducation = () => {
-    alert("Education edit");
-  };
-  const editProjects = () => {
-    alert("Projects edit");
-  };
-
   useEffect(() => {
     fetchUser(currentPath);
-    fetchProjects();
-    fetchEducations();
   }, [currentPath]);
 
   return (
@@ -226,144 +170,9 @@ function ProfileDetails() {
           {/* experience */}
           <ProfileExperience />
           {/* education */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Heading1 text={"Education"} />
-              {/* {isProfile && <EditIconBtn onClick={editEducation} />} */}
-            </Box>
-            {educations &&
-              educations.map((education, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={education.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          borderRadius: "50%",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={educationIcon}
-                        alt={educationIcon}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                        [bpSMd]: { margin: "0px 10px" },
-                      }}
-                    >
-                      <Heading2 text={education.title} />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle1
-                        text={`${education.degree} ${education.field && "-"} ${
-                          education.field
-                        }`}
-                      />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle2
-                        text={`${education.start_date} - ${education.end_date}`}
-                      />
-                      <Box sx={{ marginBottom: "10px" }}></Box>
-                      {index !== educations.length - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-          </Card>
+          <ProfileEducation />
           {/* projects */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Heading1 text={"Education"} />
-              {/* {isProfile && <EditIconBtn onClick={editEducation} />} */}
-            </Box>
-            {projects &&
-              projects.slice(0, projectsViewCount).map((project, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={project.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          borderRadius: "50%",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={projectIcon}
-                        alt={projectIcon}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                        [bpSMd]: { margin: "0px 10px" },
-                      }}
-                    >
-                      <Heading2 text={project.title} />
-                      <Box sx={{ height: "5px" }}></Box>
-                      <Subtitle1 text={project.description} />
-                      <Box sx={{ height: "5px" }}></Box>
-                      <Subtitle2 text={"Jun 2016 - Present"} />
-                      <Box sx={{ display: "flex", marginBottom: "10px" }}>
-                        <TextButton text={"View project"} />
-                      </Box>
-                      {index !== projectsViewCount - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-            <TextIconButton
-              text={
-                projectsViewCount >= projects.length ? "SEE LESS" : "SEE MORE"
-              }
-              onClick={viewProjectsMore}
-              endIcon={
-                projectsViewCount >= projects.length ? (
-                  <KeyboardArrowUpIcon size={20} />
-                ) : (
-                  <KeyboardArrowDownIcon fontSize="large" />
-                )
-              }
-            />
-          </Card>
+          <ProfileProjects />
         </Container>
       )}
     </div>

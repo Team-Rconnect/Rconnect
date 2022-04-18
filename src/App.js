@@ -8,6 +8,8 @@ import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import Profiles from "./Components/Profiles/Profiles";
 import Forgotpassword from "./Components/Forgotpassword/Forgotpassword";
 import DetailsExperiences from "./Components/ProfileDetails/ProfileExperience/DetailsExperiences";
+import DetailsEducations from "./Components/ProfileDetails/ProfileEducation/DetailsEducations";
+import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/DetailsProjects";
 
 function App() {
   return (
@@ -20,6 +22,16 @@ function App() {
         <Route
           path="/users/:id/details/experience"
           element={<DetailsExperiences />}
+        />
+        ;
+        <Route
+          path="/users/:id/details/education"
+          element={<DetailsEducations />}
+        />
+        ;
+        <Route
+          path="/users/:id/details/projects"
+          element={<DetailsProjects />}
         />
         ;
         <Route path="/Forgotpassword" element={<Forgotpassword />} />;
