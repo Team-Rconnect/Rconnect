@@ -26,7 +26,7 @@ function HomeNavbar() {
   const authCtx = useContext(AuthContext);
   const [userPresent, setUserPresent] = useState(false);
   const userIn = authCtx.isLoggedIn;
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Groups", "Logout"];
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -53,6 +53,9 @@ function HomeNavbar() {
   const handleOption = (setting) => {
     if (setting === "Logout") {
       handleClick();
+    }
+    if (setting === "Groups") {
+      navigate(`/users/${localStorage.getItem("userId")}/groups`);
     }
     if (setting === "Profile") {
       navigate(`/users/${userProfile}`);
