@@ -62,8 +62,8 @@ function Login() {
       setsnackOpen(true);
     } else {
       setIsSubmit(true);
-      authCtx.onLogin(formValues.email);
-      // navigate(`/users/${authCtx.loggedUser.username}`);
+      authCtx.onLogin(formValues.email, formValues.password);
+      navigate(`/`);
     }
   };
   const handleForgot = (e) => {

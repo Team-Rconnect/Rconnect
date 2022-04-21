@@ -1,9 +1,15 @@
 import {
   alpha,
   AppBar,
+  Avatar,
   Box,
   Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  TextField,
   Toolbar,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -18,15 +24,46 @@ function HomeNavbar() {
   const navigate = useNavigate();
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   const authCtx = useContext(AuthContext);
+  const [userPresent, setUserPresent] = useState(false);
+  const userIn = authCtx.isLoggedIn;
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const userProfile = localStorage.getItem("userId");
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleClick = () => {
-    if (authCtx.isLoggedIn) {
+    if (userPresent) {
       authCtx.onLogout();
       navigate("/");
     } else {
       navigate("/login");
     }
+    console.log(authCtx.isLoggedIn, "handle clik userpresent");
   };
+
+  const handleOption = (setting) => {
+    if (setting === "Logout") {
+      handleClick();
+    }
+    if (setting === "Profile") {
+      navigate(`/users/${userProfile}`);
+    }
+    console.log(setting, "settingf options");
+  };
+
+  useEffect(() => {
+    userIn === true && setUserPresent(true);
+    console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
+  }, [userIn]);
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     const changeBackground = () => {
@@ -63,7 +100,7 @@ function HomeNavbar() {
             height: "5vh",
             transition: "all 0.6s ease-in-out",
             // padding: "10px 40px",
-            padding: `${navbar ?"4px 40px": "10px 40px"}`,
+            padding: `${navbar ? "4px 40px" : "10px 40px"}`,
             // backgroundColor: "rgba(0, 0, 0,0.1)",
           }}
         >
@@ -92,25 +129,63 @@ function HomeNavbar() {
               RConnect
             </Typography>
           </Box>
-          <Button
-            variant="outlined"
-            // disableElevation
-            sx={{
-              // backgroundColor: "#fff",
-              color: "#fff",
-              borderRadius: "20px",
-              paddingLeft: "35px",
-              paddingRight: "35px",
-              borderColor: alpha(theme.palette.common.black, 0.14),
-              "&:hover": {
-                backgroundColor: "#fff",
-                color: primary,
-              },
-            }}
-            onClick={handleClick}
-          >
-            Login
-          </Button>
+
+          {userPresent ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography
+                      textAlign="center"
+                      onClick={() => handleOption(setting)}
+                    >
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          ) : (
+            <Button
+              variant="outlined"
+              // disableElevation
+              sx={{
+                // backgroundColor: "#fff",
+                color: "#fff",
+                borderRadius: "20px",
+                paddingLeft: "35px",
+                paddingRight: "35px",
+                borderColor: alpha(theme.palette.common.black, 0.14),
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  color: primary,
+                },
+              }}
+              onClick={handleClick}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

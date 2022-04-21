@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import Slider from "react-slick";
 
 const PrevArrow = (props) => {
-  console.log(props);
+  // console.log(props);
   const { className, style, onClick } = props;
   return (
     <div

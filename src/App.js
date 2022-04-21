@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./Components/Home/Home";
 import { theme } from "./Common/Constants";
@@ -11,12 +11,24 @@ import DetailsExperiences from "./Components/ProfileDetails/ProfileExperience/De
 import DetailsEducations from "./Components/ProfileDetails/ProfileEducation/DetailsEducations";
 import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/DetailsProjects";
 import ImagePick from "./Common/ImagePick";
+import { useContext } from "react";
+import AuthContext from "./Context/AuthContext";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  const userPresent = localStorage.getItem("isLoggedIn");
+  // console.log(userPresent, "userpresent");
+
+  // console.log(authCtx.isLoggedIn, "///////////////////");
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<Home />} />;
+        <Route path="/" element={<Navigate to="/home" />} />
+        {/* <Route
+          path="/home"
+          element={!authCtx.isLoggedIn ? <Navigate to="/" /> : <Home />}
+        /> */}
+        <Route path="/home" element={<Home />} />;
         <Route path="/users" element={<Profiles />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/users/:id" element={<ProfileDetails />} />;
