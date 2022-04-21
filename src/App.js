@@ -7,12 +7,12 @@ import Login from "./Components/Login/Login";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import Profiles from "./Components/Profiles/Profiles";
 import Forgotpassword from "./Components/Forgotpassword/Forgotpassword";
+import { useContext } from "react";
+import AuthContext from "./Context/AuthContext";
 import DetailsExperiences from "./Components/ProfileDetails/ProfileExperience/DetailsExperiences";
 import DetailsEducations from "./Components/ProfileDetails/ProfileEducation/DetailsEducations";
 import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/DetailsProjects";
 import ImagePick from "./Common/ImagePick";
-import { useContext } from "react";
-import AuthContext from "./Context/AuthContext";
 
 function App() {
   const authCtx = useContext(AuthContext);
