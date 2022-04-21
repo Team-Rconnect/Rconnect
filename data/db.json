@@ -944,6 +944,44 @@
       "start_date":"Aug 2020",
       "end_date":"Sep 2020"
     }
+  ],"groups":[
+    {
+      "id": 1,
+      "name":"Interns 2021 sklm"
+    },
+    {
+      "id": 2,
+      "name":"Interns 2022"
+    },
+    {
+      "id": 3,
+      "name":"Competetive programming sklm"
+    },
+    {
+      "id": 4,
+      "name":"Competetive programming nuz"
+    },
+    {
+      "id": 5,
+      "name":"Competetive programming rk valley"
+    },
+    {
+      "id": 6,
+      "name":"Data Structures and algorithms"
+    },
+    {
+      "id": 7,
+      "name":"Machine Learning"
+    },{
+      "id": 8,
+      "name":"Reasoning and aptitude"
+    },{
+      "id": 9,
+      "name":"Python"
+    },{
+      "id": 10,
+      "name":"React Developers"
+    }
   ]
 
   

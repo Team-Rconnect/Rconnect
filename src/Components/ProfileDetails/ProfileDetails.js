@@ -11,6 +11,10 @@ import {
   Slider,
   Button,
   useMediaQuery,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import "../../Common/ImagePick.css";
 import Cropper from "react-easy-crop";
@@ -53,6 +57,8 @@ function ProfileDetails() {
   const [croppedArea, setCroppedArea] = React.useState(null);
   const [crop, setCrop] = React.useState({ x: 0, y: 0 });
   const [zoom, setZoom] = React.useState(1);
+  const [groups, setGroups] = useState([]);
+  const [searchGroup, setSearchGroup] = useState("");
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -83,6 +89,13 @@ function ProfileDetails() {
     setUser({ ...json[0] });
   };
 
+  const fetchGroups = async () => {
+    const response = await fetch(`http://localhost:5000/groups`);
+    const data = await response.json();
+    console.log(data, "data from db.json");
+    setGroups(data);
+  };
+
   const openImage = () => {
     setOpen(true);
     setImage(user.picture);
@@ -90,6 +103,7 @@ function ProfileDetails() {
 
   useEffect(() => {
     fetchUser(currentPath);
+    fetchGroups();
   }, []);
 
   return (
@@ -307,47 +321,49 @@ function ProfileDetails() {
         </BootstrapDialogTitle>
         {/* <DialogTitle id="title">Edit About</DialogTitle> */}
         <DialogContent dividers={true}>
-          <div className="container">
-            <div className="container-cropper">
-              {image ? (
-                <>
-                  <div className="cropper">
-                    <Cropper
-                      image={image}
-                      crop={crop}
-                      zoom={zoom}
-                      aspect={1}
-                      objectFit="contain"
-                      cropShape="round"
-                      onCropChange={setCrop}
-                      onZoomChange={setZoom}
-                      onCropComplete={onCropComplete}
-                    />
-                  </div>
-                </>
-              ) : null}
-            </div>
-          </div>
+          <TextField
+            placeholder="Search..."
+            value={searchGroup}
+            fullWidth={true}
+            size="small"
+            onChange={(e) => setSearchGroup(e.target.value)}
+          />
+
+          {groups
+            .filter((group) => {
+              if (searchGroup === "") {
+                return group;
+              } else if (
+                group.name.toLowerCase().includes(searchGroup.toLowerCase())
+              ) {
+                return group;
+              }
+            })
+            .map((val, key) => {
+              return (
+                <List
+                  sx={{
+                    width: "100%",
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  <ListItem
+                    alignItems="flex-start"
+                    sx={{
+                      "&:hover": {
+                        border: "1px solid " + primary,
+                        // boxShadow: "0 0 15px -2px #D4D9E2",
+                        boxSizzing: "border-box",
+                      },
+                    }}
+                  >
+                    <ListItemText primary={val.name} />
+                  </ListItem>
+                </List>
+              );
+            })}
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
-          <input
-            type="file"
-            accept="image/*"
-            ref={inputRef}
-            onChange={onSelectFile}
-            style={{ display: "none" }}
-          />
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            onClick={triggerFileSelectPopup}
-          >
-            Change
-          </Button>
-          {/* <Button variant="contained" color="secondary">
-            Download
-          </Button> */}
           <PrimaryButton text="Save" onClick={onDownload} />
         </DialogActions>
       </Dialog>
