@@ -9,7 +9,7 @@ import HeadingLG from "../../Common/HeadingLG";
 import { placements } from "../../Common/Constants";
 import Heading1 from "../../Common/Heading1";
 import SubtitleLG from "../../Common/SubtitleLG.js";
-import { primary } from "../../Common/Pallete";
+import { bgSecondary, bgTerinary, borderDark, borderLight, grey, primary } from "../../Common/Pallete";
 
 function Counts() {
   return (
@@ -41,7 +41,7 @@ function Counts() {
               <Box
                 sx={{
                   padding: "20px",
-                  margin: "10px 20px",
+                  margin: "10px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
@@ -50,7 +50,7 @@ function Counts() {
                   borderRadius: "4px",
                   width: "250px",
                   height: "250px",
-                  border: "1px solid #f1f1f1",
+                  border: "1px solid "+grey,
                   transition: "all 0.4s ease-in-out",
                   // boxShadow: "0 0 5px -2px #d1e3fa",
                   "&:hover": {

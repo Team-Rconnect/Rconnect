@@ -1,13 +1,19 @@
 import {
   Box,
-  Button,
   Card,
   CardMedia,
   Chip,
   Container,
-  Divider,
   useTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Slider,
+  Button,
+  useMediaQuery,
 } from "@mui/material";
+import "../../Common/ImagePick.css";
+import Cropper from "react-easy-crop";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Heading1 from "../../Common/Heading1";
@@ -15,33 +21,58 @@ import Loading from "../../Common/Loading";
 import { borderDark, primary } from "../../Common/Pallete";
 import PrimaryButton from "../../Common/PrimaryButton";
 import Subtitle1 from "../../Common/Subtitle1";
-import Subtitle2 from "../../Common/Subtitle2";
-import TextButton from "../../Common/TextButton";
 import Navbar from "../Navbar/Navbar";
-import projectIcon from "../../Assets/project_icon.png";
-import educationIcon from "../../Assets/education.png";
-import Heading2 from "../../Common/Heading2";
-import TextIconButton from "../../Common/TextIconButton";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ProfileAbout from "./ProfileAbout";
+import BootstrapDialogTitle from "../../Common/BootstrapDialogTitle";
+import ProfileExperience from "./ProfileExperience/ProfileExperience";
+import ProfileEducation from "./ProfileEducation/ProfileEducation";
+import ProfileProjects from "./ProfileProjects/ProfileProjects";
+import { generateDownload } from "../../Common/cropImage";
 
 function ProfileDetails() {
   const [user, setUser] = useState({});
-  const [projects, setProjects] = useState([]);
-  const [educations, setEducations] = useState([]);
-  const [experiences, setExperiences] = useState([]);
-  const [projectsViewCount, setProjectsViewCount] = useState(3);
-
+  const [open, setOpen] = useState(false);
+  const [openAddTo, setOpenAddTo] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname.split("/")[2];
 
   const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   // const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
   // const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
   // const bpMDu = theme.breakpoints.up("md"); //min-width:900px
   // const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
   // const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
+
+  const inputRef = React.useRef();
+
+  const triggerFileSelectPopup = () => inputRef.current.click();
+
+  const [image, setImage] = React.useState(null);
+  const [croppedArea, setCroppedArea] = React.useState(null);
+  const [crop, setCrop] = React.useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = React.useState(1);
+
+  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+    setCroppedArea(croppedAreaPixels);
+  };
+
+  const onSelectFile = (event) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.addEventListener("load", () => {
+        setImage(reader.result);
+      });
+    }
+  };
+
+  const onDownload = () => {
+    setImage(image);
+    setOpen(false);
+    generateDownload(image, croppedArea);
+  };
 
   const fetchUser = async (username) => {
     console.log(username);
@@ -52,41 +83,14 @@ function ProfileDetails() {
     setUser({ ...json[0] });
   };
 
-  const fetchProjects = async () => {
-    const response = await fetch(`http://localhost:5000/projects`);
-    const json = await response.json();
-    setProjects([...json]);
-  };
-
-  const fetchEducations = async () => {
-    const response = await fetch(`http://localhost:5000/education`);
-    const json = await response.json();
-    setEducations([...json]);
-  };
-
-  const fetchExperiences = async () => {
-    const response = await fetch(`http://localhost:5000/experience`);
-    const json = await response.json();
-    setExperiences([...json]);
-  };
-
-  const viewProjectsMore = () => {
-    console.log(projects.length);
-    let c =
-      projects.length - projectsViewCount < 3 &&
-      projects.length !== projectsViewCount
-        ? projectsViewCount + (projects.length - projectsViewCount)
-        : projectsViewCount + 3;
-    setProjectsViewCount(c > projects.length ? 3 : c);
-    console.log(c);
+  const openImage = () => {
+    setOpen(true);
+    setImage(user.picture);
   };
 
   useEffect(() => {
     fetchUser(currentPath);
-    fetchProjects();
-    fetchEducations();
-    fetchExperiences();
-  }, [currentPath]);
+  }, []);
 
   return (
     <div>
@@ -138,8 +142,9 @@ function ProfileDetails() {
                       border: "2px solid " + primary,
                       [bpSMd]: { width: 80, height: 80 },
                     }}
-                    image={user.picture}
+                    image={image ? image : user.picture}
                     alt={user.picture}
+                    onClick={openImage}
                   />
                 </Box>
 
@@ -152,31 +157,32 @@ function ProfileDetails() {
                 />
                 <Box sx={{ display: "flex", margin: "10px 0px" }}>
                   <PrimaryButton text={"Contact Info"} />
-                  {/* <Button
+                  <Button
                     variant="outlined"
                     sx={{ textTransform: "none" }}
                     size="small"
+                    onClick={() => setOpenAddTo(true)}
                   >
-                    1,043 Connections
-                  </Button> */}
+                    Add to
+                  </Button>
                 </Box>
               </Box>
             </Box>
           </Card>
           {/* about */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"About"} />
-            <Box sx={{ height: "5px" }}></Box>
-            <Subtitle1
-              text={
-                "I'm more experienced in eCommerce web projects and mobile banking apps, but also like to work with creative projects, such as landing pages or unsual corporate websites"
-              }
-            />
-            <TextButton text={"SEE MORE"} />
-          </Card>
+          <ProfileAbout />
           {/* skills */}
           <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Skills"} />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Heading1 text={"Skills"} />
+              {/* {isProfile && <EditIconBtn onClick={editSkills} />} */}
+            </Box>
             <Box sx={{ margin: "15px 0px" }}>
               {[
                 "#webdesign",
@@ -218,182 +224,133 @@ function ProfileDetails() {
             </Box>
           </Card>
           {/* experience */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Experience"} />
-
-            {experiences &&
-              experiences.map((experience, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={experience.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          objectFit: "contain",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={experience.imageURL}
-                        alt={experience.imageURL}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                      }}
-                    >
-                      <Heading2 text={experience.title} />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle1
-                        text={`${experience.company} - ${experience.position}`}
-                      />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle2
-                        text={`${experience.start_date} - ${experience.end_date}`}
-                      />
-                      <Box sx={{ marginBottom: "10px" }}></Box>
-                      {index !== experiences.length - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-          </Card>
+          <ProfileExperience />
           {/* education */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Education"} />
-            {educations &&
-              educations.map((education, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={education.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          borderRadius: "50%",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={educationIcon}
-                        alt={educationIcon}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                        [bpSMd]: { margin: "0px 10px" },
-                      }}
-                    >
-                      <Heading2 text={education.title} />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle1
-                        text={`${education.degree} ${education.field && "-"} ${
-                          education.field
-                        }`}
-                      />
-                      <Box sx={{ height: "4px" }}></Box>
-                      <Subtitle2
-                        text={`${education.start_date} - ${education.end_date}`}
-                      />
-                      <Box sx={{ marginBottom: "10px" }}></Box>
-                      {index !== educations.length - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-          </Card>
+          <ProfileEducation />
           {/* projects */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Heading1 text={"Projects"} />
-            {projects &&
-              projects.slice(0, projectsViewCount).map((project, index) => {
-                return (
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      marginTop: "20px",
-                      justifyContent: "space-between",
-                    }}
-                    key={project.id}
-                  >
-                    <Box>
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          borderRadius: "50%",
-                          [bpSMd]: { width: 30, height: 30 },
-                        }}
-                        image={projectIcon}
-                        alt={projectIcon}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // backgroundColor: "#fffccc",
-                        margin: "0px 20px",
-                        [bpSMd]: { margin: "0px 10px" },
-                      }}
-                    >
-                      <Heading2 text={project.title} />
-                      <Box sx={{ height: "5px" }}></Box>
-                      <Subtitle1 text={project.description} />
-                      <Box sx={{ height: "5px" }}></Box>
-                      <Subtitle2 text={"Jun 2016 - Present"} />
-                      <Box sx={{ display: "flex", marginBottom: "10px" }}>
-                        <TextButton text={"View project"} />
-                      </Box>
-                      {index !== projectsViewCount - 1 && <Divider />}
-                    </Box>
-                  </Box>
-                );
-              })}
-            <TextIconButton
-              text={
-                projectsViewCount >= projects.length ? "SEE LESS" : "SEE MORE"
-              }
-              onClick={viewProjectsMore}
-              endIcon={
-                projectsViewCount >= projects.length ? (
-                  <KeyboardArrowUpIcon size={20} />
-                ) : (
-                  <KeyboardArrowDownIcon fontSize="large" />
-                )
-              }
-            />
-          </Card>
+          <ProfileProjects />
         </Container>
       )}
+      {/* profile pic dialog */}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        scroll={"paper"}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth="sm"
+        aria-labelledby="title"
+        aria-describedby="description"
+      >
+        <BootstrapDialogTitle id="title" onClose={() => setOpen(false)}>
+          Edit Image
+        </BootstrapDialogTitle>
+        {/* <DialogTitle id="title">Edit About</DialogTitle> */}
+        <DialogContent dividers={true}>
+          <div className="container">
+            <div className="container-cropper">
+              {image ? (
+                <>
+                  <div className="cropper">
+                    <Cropper
+                      image={image}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      objectFit="contain"
+                      cropShape="round"
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions sx={{ margin: "8px" }}>
+          <input
+            type="file"
+            accept="image/*"
+            ref={inputRef}
+            onChange={onSelectFile}
+            style={{ display: "none" }}
+          />
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={triggerFileSelectPopup}
+          >
+            Change
+          </Button>
+          {/* <Button variant="contained" color="secondary">
+            Download
+          </Button> */}
+          <PrimaryButton text="Save" onClick={onDownload} />
+        </DialogActions>
+      </Dialog>
+      {/* add to dialog */}
+      <Dialog
+        open={openAddTo}
+        onClose={() => setOpenAddTo(false)}
+        scroll={"paper"}
+        fullScreen={fullScreen}
+        fullWidth={true}
+        maxWidth="sm"
+        aria-labelledby="title"
+        aria-describedby="description"
+      >
+        <BootstrapDialogTitle id="title" onClose={() => setOpenAddTo(false)}>
+          Add to group
+        </BootstrapDialogTitle>
+        {/* <DialogTitle id="title">Edit About</DialogTitle> */}
+        <DialogContent dividers={true}>
+          <div className="container">
+            <div className="container-cropper">
+              {image ? (
+                <>
+                  <div className="cropper">
+                    <Cropper
+                      image={image}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      objectFit="contain"
+                      cropShape="round"
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions sx={{ margin: "8px" }}>
+          <input
+            type="file"
+            accept="image/*"
+            ref={inputRef}
+            onChange={onSelectFile}
+            style={{ display: "none" }}
+          />
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={triggerFileSelectPopup}
+          >
+            Change
+          </Button>
+          {/* <Button variant="contained" color="secondary">
+            Download
+          </Button> */}
+          <PrimaryButton text="Save" onClick={onDownload} />
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

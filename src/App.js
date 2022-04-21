@@ -9,6 +9,10 @@ import Profiles from "./Components/Profiles/Profiles";
 import Forgotpassword from "./Components/Forgotpassword/Forgotpassword";
 import { useContext } from "react";
 import AuthContext from "./Context/AuthContext";
+import DetailsExperiences from "./Components/ProfileDetails/ProfileExperience/DetailsExperiences";
+import DetailsEducations from "./Components/ProfileDetails/ProfileEducation/DetailsEducations";
+import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/DetailsProjects";
+import ImagePick from "./Common/ImagePick";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -28,7 +32,23 @@ function App() {
         <Route path="/users" element={<Profiles />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/users/:id" element={<ProfileDetails />} />;
+        <Route
+          path="/users/:id/details/experience"
+          element={<DetailsExperiences />}
+        />
+        ;
+        <Route
+          path="/users/:id/details/education"
+          element={<DetailsEducations />}
+        />
+        ;
+        <Route
+          path="/users/:id/details/projects"
+          element={<DetailsProjects />}
+        />
+        ;
         <Route path="/Forgotpassword" element={<Forgotpassword />} />;
+        <Route path="/img" element={<ImagePick />} />;
       </Routes>
     </ThemeProvider>
   );

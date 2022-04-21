@@ -262,7 +262,7 @@ function Login() {
                     letterSpacing: 0.6,
                   },
                   disableUnderline: true,
-                  placeholder: "e.g: s160097@rguktsklm.ac.in ",
+                  placeholder: "e.g: s160123@rguktsklm.ac.in ",
                 }}
                 fullWidth
                 variant="standard"

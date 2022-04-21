@@ -3,9 +3,6 @@ import {
   Button,
   Container,
   Divider,
-  IconButton,
-  InputAdornment,
-  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,10 +11,10 @@ import { bgSecondary, primary } from "../../Common/Pallete";
 import login from "../../Assets/login.png";
 import logoblue from "../../Assets/logobluesm.png";
 import dotsb from "../../Assets/dotsb.png";
+import thinkman from "../../Assets/thinkman.png";
+import forgotstudent from "../../Assets/thinkman.png";
+import boyphone from "../../Assets/boyphone.png";
 import dotscross from "../../Assets/dotscross.png";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { useTheme } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
@@ -31,7 +28,6 @@ function Forgotpassword() {
   const [formValues, setformValues] = useState(initialValues);
   const [formErrors, setformErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [open, setOpen] = useState(false);
   const [errorText, setErrorText] = useState(false);
 
   const authCtx = useContext(AuthContext);
@@ -75,11 +71,6 @@ function Forgotpassword() {
     } else if (!regex.test(values.email)) {
       errors.email = "This is not a valid email format!";
     }
-    // if (!values.password) {
-    //   errors.password = "Password is required";
-    // } else if (values.password.length < 4) {
-    //   errors.password = "Password must be more than 4 characters";
-    // }
     return errors;
   };
 
@@ -142,9 +133,11 @@ function Forgotpassword() {
               flex: 1,
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              // alignItems: "center",
+              alignItems: "end",
               position: "relative",
-              padding: "20px",
+              // padding: "20px",
+              padding: "0px 20px",
               overflow: "hidden",
               backgroundColor: primary,
               [bpSMd]: { display: "none" },
@@ -162,15 +155,16 @@ function Forgotpassword() {
             >
               <img src={dotscross} alt={"dotswhite"} width="400px" />
             </Box>
-
-            <img src={login} alt={"login_image"} width="90%" />
+            <img src={thinkman} alt={"forgot_image"} width="70%" style={{zIndex:1000}}/>
+            {/* <img src={boyphone} alt={"forgot_image"} width="80%" style={{marginLeft:"30px"}} /> */}
             <Box
               sx={{
                 overflow: "hidden",
                 position: "absolute",
-                bottom: -70,
+                bottom: -100,
                 left: -10,
                 opacity: 0.5,
+                zIndex: 0,
                 filter: "invert(100%)",
               }}
             >
@@ -232,11 +226,10 @@ function Forgotpassword() {
               sx={{
                 letterSpacing: 0.6,
                 // color: "#bad5f8"
-                opacity: 0.5,
                 [bpSMd]: { fontSize: "14px" },
               }}
             >
-              Enter your email to reset your password
+              Enter your email that you entered during your registration
             </Typography>
             <Box sx={{ height: "40px", [bpSMd]: { height: "30px" } }}></Box>
             <Typography
@@ -244,7 +237,7 @@ function Forgotpassword() {
               //   color="#fff"
               sx={{ margin: "10px 0px", letterSpacing: 0.6 }}
             >
-              Email
+              Registered Email
             </Typography>
             <Box
               sx={{
@@ -260,7 +253,7 @@ function Forgotpassword() {
                     letterSpacing: 0.6,
                   },
                   disableUnderline: true,
-                  placeholder: "e.g: s160097@rguktsklm.ac.in ",
+                  placeholder: "e.g: s160123@rguktsklm.ac.in ",
                 }}
                 fullWidth
                 variant="standard"
@@ -269,98 +262,31 @@ function Forgotpassword() {
                 onChange={handleChanges}
               />
             </Box>
-            <Box sx={{ height: "10px" }}></Box>
-            {/* <Typography
-              variant="subtitle2"
-              //   color="#fff"
-              sx={{ margin: "10px 0px", letterSpacing: 0.6 }}
-            >
-              Password
-            </Typography> */}
-            {/* <Box
-              sx={{
-                bgcolor: "rgba(0, 0, 0, 0.1)",
-                padding: "10px",
-                borderRadius: "2px",
-                [bpSMd]: { padding: "5px 10px" },
-                // width: "100%",
-              }}
-            >
-              <TextField
-                fullWidth
-                type={showPass ? "text" : "password"}
-                onChange={handleChanges}
-                value={formValues.password}
-                name="password"
-                InputProps={{
-                  style: {
-                    // color: "#fff",
-                    letterSpacing: 0.6,
-                  },
-                  disableUnderline: true,
-                  placeholder: "Enter password",
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => setShowPass(!showPass)}>
-                        {showPass ? (
-                          <VisibilityOutlinedIcon />
-                        ) : (
-                          <VisibilityOffOutlinedIcon />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="standard"
-              />
-            </Box> */}
-            {/* <Box sx={{ display: "flex", justifyContent: "end" }}>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  margin: "15px 0px",
-                  letterSpacing: 0.7,
-                  color: primary,
-                  fontSize: "13px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                }}
-              >
-                Forgot Password?
-              </Typography>
-            </Box> */}
-
+            <Box sx={{ height: "20px" }}></Box>
             <Divider sx={{ margin: "15px 0px" }} />
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ margin: "20px 10px 10px 0px" }}>
-                <Button
-                  variant="contained"
-                  // fullWidth={true}
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Box>
-              <Box sx={{ margin: "20px 0px 10px 10px" }}>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    " &:hover": {
-                      background: primary,
-                      color: "white",
-                    },
-                  }}
-                  onClick={() => navigate("/login")}
-                >
-                  Cancel
-                </Button>
-              </Box>
+            <Box sx={{ margin: "10px 0px" }}>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </Box>
+            <Box sx={{ margin: "10px 0px" }}>
+              <Button
+                variant="outlined"
+                fullWidth={true}
+                sx={{
+                  " &:hover": {
+                    background: primary,
+                    color: "white",
+                  },
+                }}
+                onClick={() => navigate("/login")}
+              >
+                Cancel
+              </Button>
             </Box>
           </Box>
         </Box>
