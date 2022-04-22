@@ -14,6 +14,7 @@ import DetailsEducations from "./Components/ProfileDetails/ProfileEducation/Deta
 import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/DetailsProjects";
 import ImagePick from "./Common/ImagePick";
 import Groups from "./Components/Groups/Groups";
+import GroupDashboard from "./Components/Groups/GroupDashboard";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -51,6 +52,7 @@ function App() {
         <Route path="/Forgotpassword" element={<Forgotpassword />} />;
         <Route path="/img" element={<ImagePick />} />;
         <Route path="/users/:id/groups" element={<Groups />} />;
+        <Route path="/users/:id/groups/:id" element={<GroupDashboard />} />;
       </Routes>
     </ThemeProvider>
   );

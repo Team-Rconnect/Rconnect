@@ -944,7 +944,8 @@
       "start_date":"Aug 2020",
       "end_date":"Sep 2020"
     }
-  ],"groups":[
+  ],
+  "groups":[
     {
       "id": 1,
       "name":"Interns 2021 sklm"

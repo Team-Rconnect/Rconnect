@@ -82,7 +82,7 @@ function Navbar(props) {
     if (setting === "Profile") {
       navigate(`/users/${userProfile}`);
     }
-    console.log(setting, "settingf options");
+    // console.log(setting, "settingf options");
   };
 
   const handleClick = () => {
@@ -98,7 +98,7 @@ function Navbar(props) {
   };
   useEffect(() => {
     userIn === true && setUserPresent(true);
-    console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
+    // console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
   }, [userIn]);
 
   return (

@@ -65,12 +65,11 @@ function HomeNavbar() {
 
   useEffect(() => {
     userIn === true && setUserPresent(true);
-    console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
+    // console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
   }, [userIn]);
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     const changeBackground = () => {
-      console.log(window.scrollY);
       if (window.scrollY > 0) {
         setNavbar(true);
       } else {

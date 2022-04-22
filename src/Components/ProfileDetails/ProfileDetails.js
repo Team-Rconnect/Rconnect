@@ -81,7 +81,7 @@ function ProfileDetails() {
   };
 
   const fetchUser = async (username) => {
-    console.log(username);
+    // console.log(username);
     const response = await fetch(
       `http://localhost:5000/users/?username=${username}`
     );
@@ -92,7 +92,7 @@ function ProfileDetails() {
   const fetchGroups = async () => {
     const response = await fetch(`http://localhost:5000/groups`);
     const data = await response.json();
-    console.log(data, "data from db.json");
+    // console.log(data, "data from db.json");
     setGroups(data);
   };
 

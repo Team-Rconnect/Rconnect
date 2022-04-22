@@ -68,7 +68,7 @@ function ProfileProjects() {
 
   const handleChanges = (e) => {
     const { name, value } = e.target;
-    console.log(value);
+    // console.log(value);
     setformValues({ ...formValues, [name]: value });
     if (name === "description") {
       setDescLen(value.length);
