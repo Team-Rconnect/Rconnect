@@ -100,7 +100,7 @@ function ProfileProjects() {
           startDate: formValues.start_month + "," + formValues.start_year,
           endDate: formValues.end_month + "," + formValues.end_year,
           isWorking: "",
-          description: "",
+          description: formValues.description,
         }),
       };
       const response = await fetch(
@@ -120,6 +120,7 @@ function ProfileProjects() {
   const addProject = async () => {
     setOpen(true);
     setProjectTitle("Add Project");
+    setformValues(initialValues);
   };
 
   const editProject = (id) => {
@@ -245,7 +246,9 @@ function ProfileProjects() {
                   <Box sx={{ height: "5px" }}></Box>
                   <Subtitle1 text={project.description} />
                   <Box sx={{ height: "5px" }}></Box>
-                  <Subtitle2 text={"Jun 2016 - Present"} />
+                  <Subtitle2
+                    text={`${project.startDate} - ${project.endDate}`}
+                  />
                   <Box sx={{ display: "flex", marginBottom: "10px" }}>
                     <TextButton text={"View project"} />
                   </Box>
