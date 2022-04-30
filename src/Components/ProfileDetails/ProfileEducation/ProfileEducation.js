@@ -32,9 +32,9 @@ import AddIcon from "@mui/icons-material/Add";
 
 function ProfileEducation() {
   const initialValues = {
-    college_name: "",
+    college: "",
     degree: "",
-    field_of_study: "",
+    fieldOfStudy: "",
     start_month: "Month",
     end_month: "Month",
     start_year: "Year",
@@ -52,15 +52,18 @@ function ProfileEducation() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const userId = location.pathname.split("/")[2];
+  console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchEducations = async () => {
-    const response = await fetch(`http://localhost:5000/education`);
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
-    setEducations([...json]);
+    console.log(json.education);
+    setEducations([...json.education]);
   };
 
   const handleChanges = (e) => {
@@ -77,14 +80,52 @@ function ProfileEducation() {
     navigate(`${location.pathname}/details/education`);
   };
 
+  const handleSave = async (e) => {
+    if (
+      formValues.college !== "" &&
+      formValues.start_month !== "" &&
+      formValues.start_year !== "" &&
+      formValues.end_month !== "" &&
+      formValues.end_year
+    ) {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          college: formValues.college,
+          degree: formValues.degree,
+          startDate: formValues.start_month + "," + formValues.start_year,
+          endDate: formValues.end_month + "," + formValues.end_year,
+          fieldOfStudy: formValues.fieldOfStudy,
+          grade: formValues.grade,
+          description: formValues.description,
+        }),
+      };
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/education`,
+        requestOptions
+      );
+      const json = await response.json();
+      console.log(json);
+      if (json.status) {
+        e.preventDefault();
+        setOpen(false);
+        fetchEducations();
+      }
+    }
+  };
+
   const addEducation = () => {
     setOpen(true);
     setEducationTitle("Add Education");
+    setformValues(initialValues);
   };
 
-  const editEducation = () => {
+  const editEducation = (id) => {
     setOpen(true);
+    console.log(id);
     setEducationTitle("Edit Education");
+    fetchEducation(id);
   };
 
   const yearsFn = () => {
@@ -92,6 +133,24 @@ function ProfileEducation() {
     for (let index = yr; index >= yr - 100; index--) {
       years.push(index);
     }
+  };
+
+  const fetchEducation = (id) => {
+    const selectedEducation = educations.filter(
+      (education) => (education._id = id)
+    );
+    console.log(selectedEducation[0]);
+    setformValues({
+      college: selectedEducation[0].college,
+      degree: selectedEducation[0].degree,
+      start_month: selectedEducation[0].startDate.split(",")[0],
+      end_month: selectedEducation[0].endDate.split(",")[0],
+      start_year: selectedEducation[0].startDate.split(",")[1],
+      end_year: selectedEducation[0].endDate.split(",")[1],
+      grade: selectedEducation[0].grade,
+      description: selectedEducation[0].description,
+      fieldOfStudy: selectedEducation[0].fieldOfStudy,
+    });
   };
 
   useEffect(() => {
@@ -174,23 +233,21 @@ function ProfileEducation() {
                     [bpSMd]: { margin: "0px 10px" },
                   }}
                 >
-                  <Heading2 text={education.title} />
+                  <Heading2 text={education.college} />
                   <Box sx={{ height: "4px" }}></Box>
                   <Subtitle1
-                    text={`${education.degree} ${education.field && "-"} ${
-                      education.field
-                    }`}
+                    text={`${education.degree} ${education.fieldOfStudy}`}
                   />
                   <Box sx={{ height: "4px" }}></Box>
                   <Subtitle2
-                    text={`${education.start_date} - ${education.end_date}`}
+                    text={`${education.startDate} - ${education.endDate}`}
                   />
                   <Box sx={{ marginBottom: "10px" }}></Box>
                   {index !== educations.length - 1 && <Divider />}
                 </Box>
                 {isProfile && location.pathname.includes("education") && (
                   <Box>
-                    <IconButton onClick={editEducation}>
+                    <IconButton onClick={() => editEducation(education._id)}>
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -219,36 +276,45 @@ function ProfileEducation() {
             <Subtitle1 text="School/College*" />
           </Box>
           <Autocomplete
-            options={countries}
-            autoHighlight
             freeSolo
+            autoHighlight
             size="small"
-            getOptionLabel={(option) => option.label}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                <img
-                  loading="lazy"
-                  width="20"
-                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                  alt=""
-                />
-                {option.label} ({option.code}) +{option.phone}
-              </Box>
-            )}
+            // value={countries.filter(
+            //   (country) => (country.label = formValues.college)
+            // )}
+            value={formValues.college || ""}
+            name="college"
+            onChange={(e, val) => {
+              console.log(val);
+              formValues.college = val;
+            }}
+            // getOptionLabel={(option) => option.title || "ss"}
+            // renderOption={(props, option) => (
+            //   <Box
+            //     component="li"
+            //     sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            //     {...props}
+            //   >
+            //     <img
+            //       loading="lazy"
+            //       width="20"
+            //       src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+            //       srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+            //       alt=""
+            //     />
+            //     {option.label}({option.code}) +{option.phone}
+            //   </Box>
+            // )}
+            options={countries.map((option) => option.label)}
             renderInput={(params) => (
               <TextField
                 {...params}
                 // label="Choose a country"
                 placeholder="Ex: IIIT Srikakulam"
-                inputProps={{
-                  ...params.inputProps,
-                  autoComplete: "new-password", // disable autocomplete and autofill
-                }}
+                // inputProps={{
+                //   ...params.inputProps,
+                //   autoComplete: "new-password", // disable autocomplete and autofill
+                // }}
               />
             )}
           />
@@ -260,6 +326,12 @@ function ProfileEducation() {
             freeSolo
             autoHighlight
             size="small"
+            value={formValues.degree || ""}
+            name="degree"
+            onChange={(e, val) => {
+              console.log(val);
+              formValues.degree = val;
+            }}
             options={top100Films.map((option) => option.title)}
             renderInput={(params) => (
               <TextField {...params} placeholder="Ex: Bachelor's" />
@@ -273,6 +345,12 @@ function ProfileEducation() {
             freeSolo
             autoHighlight
             size="small"
+            value={formValues.fieldOfStudy || ""}
+            name="fieldOfStudy"
+            onChange={(e, val) => {
+              console.log(val);
+              formValues.fieldOfStudy = val;
+            }}
             options={top100Films.map((option) => option.title)}
             renderInput={(params) => (
               <TextField {...params} placeholder="Ex: Business" />
@@ -412,7 +490,7 @@ function ProfileEducation() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
-          <PrimaryButton text="Save" />
+          <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>
     </div>

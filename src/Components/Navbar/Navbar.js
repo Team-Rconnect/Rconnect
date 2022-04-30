@@ -58,7 +58,7 @@ function Navbar(props) {
   const userIn = authCtx.isLoggedIn;
 
   // const userPresent = localStorage.getItem("isLoggedIn");
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Groups", "Logout"];
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -76,10 +76,13 @@ function Navbar(props) {
     if (setting === "Logout") {
       handleClick();
     }
+    if (setting === "Groups") {
+      navigate(`/users/${localStorage.getItem("userId")}/groups`);
+    }
     if (setting === "Profile") {
       navigate(`/users/${userProfile}`);
     }
-    console.log(setting, "settingf options");
+    // console.log(setting, "settingf options");
   };
 
   const handleClick = () => {
@@ -95,7 +98,7 @@ function Navbar(props) {
   };
   useEffect(() => {
     userIn === true && setUserPresent(true);
-    console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
+    // console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
   }, [userIn]);
 
   return (

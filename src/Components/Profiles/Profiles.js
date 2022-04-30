@@ -8,7 +8,7 @@ import {
   useTheme,
   Button,
   Chip,
-  CardContent,
+  // CardContent,
 } from "@mui/material";
 import UsersContext from "../../Context/UsersContext";
 import { borderDark, borderLight, primary } from "../../Common/Pallete";
@@ -16,6 +16,7 @@ import TitleBox from "./TitleBox";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Common/Loading";
 import Filters from "../Filters/Filters";
+import ProfileIcon from "../../Assets/profile.png";
 
 function Profiles() {
   const userCtx = useContext(UsersContext);
@@ -25,9 +26,9 @@ function Profiles() {
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
   const bpSMu = theme.breakpoints.up("sm"); //min-width:600px
   const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
-  const bpMDu = theme.breakpoints.up("md"); //min-width:900px
-  const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
-  const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
+  // const bpMDu = theme.breakpoints.up("md"); //min-width:900px
+  // const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
+  // const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
   // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
 
   const viewProfile = (username) => {
@@ -107,8 +108,8 @@ function Profiles() {
                           height: 50,
                         },
                       }}
-                      image={user.picture}
-                      alt={user.picture}
+                      image={user.picture || ProfileIcon}
+                      alt={user.picture || ProfileIcon}
                     />
                     <Box
                       sx={{
@@ -134,7 +135,7 @@ function Profiles() {
                       <Box>
                         <Button
                           variant="outlined"
-                          onClick={() => viewProfile(user.username)}
+                          onClick={() => viewProfile(user._id)}
                           sx={{
                             borderRadius: "30px",
                             border: 2,

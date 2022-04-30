@@ -27,21 +27,21 @@ import Heading2 from "../../../Common/Heading2";
 import PrimaryButton from "../../../Common/PrimaryButton";
 import Subtitle1 from "../../../Common/Subtitle1";
 import Subtitle2 from "../../../Common/Subtitle2";
+import experienceIcon from "../../../Assets/experience.png";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import { countries, top100Films } from "../../../Common/Constants";
 
 function ProfileExperience() {
   const initialValues = {
     title: "",
-    employment_type: "Please select",
-    company_name: "",
+    employementType: "Please select",
+    companyName: "",
     location: "",
     start_month: "Month",
     end_month: "Month",
     start_year: "Year",
     end_year: "Year",
-    currently_working: false,
-    industry: "",
+    isWorking: false,
     description: "",
   };
   const [formValues, setformValues] = useState(initialValues);
@@ -55,15 +55,18 @@ function ProfileExperience() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const userId = location.pathname.split("/")[2];
+  console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
 
   const fetchExperiences = async () => {
-    const response = await fetch(`http://localhost:5000/experience`);
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
-    setExperiences([...json]);
+    console.log(json.experience);
+    setExperiences([...json.experience]);
   };
 
   const handleChanges = (e) => {
@@ -80,14 +83,53 @@ function ProfileExperience() {
     navigate(`${location.pathname}/details/experience`);
   };
 
+  const handleSave = async (e) => {
+    if (
+      formValues.title !== "" &&
+      formValues.companyName !== "" &&
+      formValues.start_month !== "" &&
+      formValues.start_year !== "" &&
+      formValues.end_month !== "" &&
+      formValues.end_year
+    ) {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: formValues.title,
+          employementType: formValues.employementType,
+          companyName: formValues.companyName,
+          location: formValues.location,
+          startDate: formValues.start_month + "," + formValues.start_year,
+          endDate: formValues.end_month + "," + formValues.end_year,
+          isWorking: false,
+          description: formValues.description,
+        }),
+      };
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/experience`,
+        requestOptions
+      );
+      const json = await response.json();
+      console.log(json);
+      if (json.status === 200) {
+        e.preventDefault();
+        alert(json.message);
+        setOpen(false);
+      }
+    }
+  };
+
   const addExperience = () => {
     setOpen(true);
     setExperienceTitle("Add Experience");
+    setformValues(initialValues);
   };
 
-  const editExperience = () => {
+  const editExperience = (id) => {
     setOpen(true);
     setExperienceTitle("Edit Experience");
+    fetchExperience(id);
   };
 
   const yearsFn = () => {
@@ -95,6 +137,25 @@ function ProfileExperience() {
     for (let index = yr; index >= yr - 100; index--) {
       years.push(index);
     }
+  };
+
+  const fetchExperience = (id) => {
+    const selectedExperience = experiences.filter(
+      (project) => (project._id = id)
+    );
+    console.log(selectedExperience[0]);
+    setformValues({
+      title: selectedExperience[0].title,
+      employementType: selectedExperience[0].employementType,
+      companyName: selectedExperience[0].companyName,
+      location: selectedExperience[0].location,
+      start_month: selectedExperience[0].startDate.split(",")[0],
+      end_month: selectedExperience[0].endDate.split(",")[0],
+      start_year: selectedExperience[0].startDate.split(",")[1],
+      end_year: selectedExperience[0].endDate.split(",")[1],
+      isWorking: selectedExperience[0].isWorking,
+      description: selectedExperience[0].description,
+    });
   };
 
   useEffect(() => {
@@ -163,8 +224,8 @@ function ProfileExperience() {
                       objectFit: "contain",
                       [bpSMd]: { width: 30, height: 30 },
                     }}
-                    image={experience.imageURL}
-                    alt={experience.imageURL}
+                    image={experienceIcon}
+                    alt={experienceIcon}
                   />
                 </Box>
                 <Box
@@ -178,12 +239,10 @@ function ProfileExperience() {
                 >
                   <Heading2 text={experience.title} />
                   <Box sx={{ height: "4px" }}></Box>
-                  <Subtitle1
-                    text={`${experience.company} - ${experience.position}`}
-                  />
+                  <Subtitle1 text={`${experience.companyName}`} />
                   <Box sx={{ height: "4px" }}></Box>
                   <Subtitle2
-                    text={`${experience.start_date} - ${experience.end_date}`}
+                    text={`${experience.startDate} - ${experience.endDate}`}
                   />
                   <Box sx={{ marginBottom: "10px" }}></Box>
                   {index !== experiences.length - 1 && <Divider />}
@@ -235,8 +294,8 @@ function ProfileExperience() {
           <Select
             fullWidth
             size="small"
-            name="employment_type"
-            value={formValues.employment_type}
+            name="employementType"
+            value={formValues.employementType}
             onChange={handleChanges}
           >
             <MenuItem value="Please select">Please select</MenuItem>
@@ -248,7 +307,7 @@ function ProfileExperience() {
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <Subtitle1 text="Company name*" />
           </Box>
-          <Autocomplete
+          {/* <Autocomplete
             options={countries}
             autoHighlight
             freeSolo
@@ -281,16 +340,30 @@ function ProfileExperience() {
                 }}
               />
             )}
+          /> */}
+          <TextField
+            size="small"
+            fullWidth
+            inputProps={{ maxLength: 300 }}
+            value={formValues.companyName}
+            name="companyName"
+            onChange={handleChanges}
+            placeholder="Ex: Google"
           />
           {/* location */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>
             <Subtitle1 text="Location" />
           </Box>
           <Autocomplete
-            id="free-solo-demo"
             freeSolo
             autoHighlight
             size="small"
+            value={formValues.location || ""}
+            name="location"
+            onChange={(e, val) => {
+              console.log(val);
+              formValues.location = val;
+            }}
             options={top100Films.map((option) => option.title)}
             renderInput={(params) => (
               <TextField {...params} placeholder="Ex: Hyderabad" />
@@ -423,7 +496,7 @@ function ProfileExperience() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
-          <PrimaryButton text="Save" />
+          <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>
     </div>

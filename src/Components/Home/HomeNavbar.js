@@ -26,7 +26,7 @@ function HomeNavbar() {
   const authCtx = useContext(AuthContext);
   const [userPresent, setUserPresent] = useState(false);
   const userIn = authCtx.isLoggedIn;
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Groups", "Logout"];
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -54,6 +54,9 @@ function HomeNavbar() {
     if (setting === "Logout") {
       handleClick();
     }
+    if (setting === "Groups") {
+      navigate(`/users/${localStorage.getItem("userId")}/groups`);
+    }
     if (setting === "Profile") {
       navigate(`/users/${userProfile}`);
     }
@@ -62,12 +65,11 @@ function HomeNavbar() {
 
   useEffect(() => {
     userIn === true && setUserPresent(true);
-    console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
+    // console.log(authCtx.isLoggedIn, "in useeffect userpresernt", userIn);
   }, [userIn]);
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     const changeBackground = () => {
-      console.log(window.scrollY);
       if (window.scrollY > 0) {
         setNavbar(true);
       } else {
