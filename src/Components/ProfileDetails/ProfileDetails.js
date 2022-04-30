@@ -15,6 +15,9 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemButton,
+  ListItemIcon,
+  Checkbox,
 } from "@mui/material";
 import "../../Common/ImagePick.css";
 import Cropper from "react-easy-crop";
@@ -60,6 +63,7 @@ function ProfileDetails() {
   const [zoom, setZoom] = React.useState(1);
   const [groups, setGroups] = useState([]);
   const [searchGroup, setSearchGroup] = useState("");
+  const [checked, setChecked] = useState([]);
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -105,6 +109,21 @@ function ProfileDetails() {
     fetchUser(currentPath);
     fetchGroups();
   }, []);
+
+  //checkbox handling of addto
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+    console.log(checked, "chck array");
+  };
 
   return (
     <div>
@@ -346,20 +365,46 @@ function ProfileDetails() {
                 <List
                   sx={{
                     width: "100%",
-                    bgcolor: "background.paper",
+                    // bgcolor: "background.paper",
+                    "&:hover": {},
                   }}
                 >
                   <ListItem
                     alignItems="flex-start"
+                    // size="small"
+                    dense
                     sx={{
+                      padding: "0 !important",
                       "&:hover": {
                         border: "1px solid " + primary,
                         // boxShadow: "0 0 15px -2px #D4D9E2",
                         boxSizzing: "border-box",
+                        background: "none",
                       },
                     }}
                   >
-                    <ListItemText primary={val.name} />
+                    <ListItemButton
+                      role={undefined}
+                      onClick={handleToggle(val)}
+                      dense
+                      sx={{
+                        "&:hover": {
+                          // background: "none",
+                        },
+                      }}
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(val) !== -1}
+                          tabIndex={-1}
+                          disableRipple
+                          // inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      {/* <ListItemText id={labelId} primary={`Line item ${value + 1}`} /> */}
+                      <ListItemText primary={val.name} />
+                    </ListItemButton>
                   </ListItem>
                 </List>
               );
