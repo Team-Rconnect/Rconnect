@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  Button,
   Card,
   CardMedia,
   Checkbox,
@@ -109,9 +110,8 @@ function ProfileProjects() {
       );
       const json = await response.json();
       console.log(json);
-      if (json.status === 200) {
+      if (json.status === true) {
         e.preventDefault();
-        alert(json.message);
         setOpen(false);
       }
     }
@@ -161,6 +161,8 @@ function ProfileProjects() {
       description: selectedProject[0].description,
     });
   };
+
+  const handleDelete = () => {};
 
   useEffect(() => {
     yearsFn();
@@ -252,7 +254,7 @@ function ProfileProjects() {
                   <Box sx={{ display: "flex", marginBottom: "10px" }}>
                     <TextButton text={"View project"} />
                   </Box>
-                  {index !== projectsViewCount - 1 && projects.length !== 1 && (
+                  {index !== projectsViewCount - 1 && projects.length !== 3 && (
                     <Divider />
                   )}
                 </Box>
@@ -448,6 +450,14 @@ function ProfileProjects() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={handleDelete}
+          >
+            Delete Project
+          </Button>
           <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>
