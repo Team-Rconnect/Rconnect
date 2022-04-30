@@ -27,6 +27,7 @@ import PrimaryButton from "../../Common/PrimaryButton";
 import Subtitle1 from "../../Common/Subtitle1";
 import Navbar from "../Navbar/Navbar";
 import ProfileAbout from "./ProfileAbout";
+import ProfileIcon from "../../Assets/profile.png";
 import BootstrapDialogTitle from "../../Common/BootstrapDialogTitle";
 import ProfileExperience from "./ProfileExperience/ProfileExperience";
 import ProfileEducation from "./ProfileEducation/ProfileEducation";
@@ -80,13 +81,12 @@ function ProfileDetails() {
     generateDownload(image, croppedArea);
   };
 
-  const fetchUser = async (username) => {
-    // console.log(username);
-    const response = await fetch(
-      `http://localhost:5000/users/?username=${username}`
-    );
+  const fetchUser = async (userId) => {
+    // console.log(userId);
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
-    setUser({ ...json[0] });
+    console.log(json);
+    setUser({ ...json });
   };
 
   const fetchGroups = async () => {
@@ -98,7 +98,7 @@ function ProfileDetails() {
 
   const openImage = () => {
     setOpen(true);
-    setImage(user.picture);
+    setImage(user.picture || ProfileIcon);
   };
 
   useEffect(() => {
@@ -156,13 +156,15 @@ function ProfileDetails() {
                       border: "2px solid " + primary,
                       [bpSMd]: { width: 80, height: 80 },
                     }}
-                    image={image ? image : user.picture}
+                    image={image ? image : user.picture || ProfileIcon}
                     alt={user.picture}
                     onClick={openImage}
                   />
                 </Box>
 
-                <Heading1 text={`${user.name?.first}  ${user.name?.last} `} />
+                <Heading1
+                  text={`${user.firstName || "-"}  ${user.lastName || "-"}`}
+                />
                 <Box sx={{ height: "5px" }}></Box>
                 <Subtitle1
                   text={

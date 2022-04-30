@@ -35,13 +35,13 @@ import BootstrapDialogTitle from "../../../Common/BootstrapDialogTitle";
 
 function ProfileProjects() {
   const initialValues = {
-    project_name: "",
-    project_url: "",
+    projectName: "",
+    projectUrl: "",
     start_month: "Month",
     end_month: "Month",
     start_year: "Year",
     end_year: "Year",
-    currently_working: false,
+    isWorking: false,
     description: "",
   };
   const [formValues, setformValues] = useState(initialValues);
@@ -55,15 +55,18 @@ function ProfileProjects() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const userId = location.pathname.split("/")[2];
+  console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchProjects = async () => {
-    const response = await fetch(`http://localhost:5000/projects`);
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
-    setProjects([...json]);
+    console.log(json.projects);
+    setProjects([...json.projects]);
   };
 
   const handleChanges = (e) => {
@@ -80,14 +83,49 @@ function ProfileProjects() {
     navigate(`${location.pathname}/details/projects`);
   };
 
-  const addProject = () => {
+  const handleSave = async (e) => {
+    if (
+      formValues.projectName !== "" &&
+      formValues.start_month !== "" &&
+      formValues.start_year !== "" &&
+      formValues.end_month !== "" &&
+      formValues.end_year
+    ) {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectName: formValues.projectName,
+          projectUrl: formValues.projectUrl,
+          startDate: formValues.start_month + "," + formValues.start_year,
+          endDate: formValues.end_month + "," + formValues.end_year,
+          isWorking: "",
+          description: "",
+        }),
+      };
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/projects`,
+        requestOptions
+      );
+      const json = await response.json();
+      console.log(json);
+      if (json.status === 200) {
+        e.preventDefault();
+        alert(json.message);
+        setOpen(false);
+      }
+    }
+  };
+
+  const addProject = async () => {
     setOpen(true);
     setProjectTitle("Add Project");
   };
 
-  const editProject = () => {
+  const editProject = (id) => {
     setOpen(true);
     setProjectTitle("Edit Project");
+    fetchProject(id);
   };
 
   const yearsFn = () => {
@@ -106,6 +144,21 @@ function ProfileProjects() {
         : projectsViewCount + 3;
     setProjectsViewCount(c > projects.length ? 3 : c);
     console.log(c);
+  };
+
+  const fetchProject = (id) => {
+    const selectedProject = projects.filter((project) => (project._id = id));
+    console.log(selectedProject[0]);
+    setformValues({
+      projectName: selectedProject[0].projectName,
+      projectUrl: selectedProject[0].projectUrl,
+      start_month: selectedProject[0].startDate.split(",")[0],
+      end_month: selectedProject[0].endDate.split(",")[0],
+      start_year: selectedProject[0].startDate.split(",")[1],
+      end_year: selectedProject[0].endDate.split(",")[1],
+      isWorking: selectedProject[0].isWorking,
+      description: selectedProject[0].description,
+    });
   };
 
   useEffect(() => {
@@ -188,7 +241,7 @@ function ProfileProjects() {
                     [bpSMd]: { margin: "0px 10px" },
                   }}
                 >
-                  <Heading2 text={project.title} />
+                  <Heading2 text={project.projectName} />
                   <Box sx={{ height: "5px" }}></Box>
                   <Subtitle1 text={project.description} />
                   <Box sx={{ height: "5px" }}></Box>
@@ -196,11 +249,13 @@ function ProfileProjects() {
                   <Box sx={{ display: "flex", marginBottom: "10px" }}>
                     <TextButton text={"View project"} />
                   </Box>
-                  {index !== projectsViewCount - 1 && <Divider />}
+                  {index !== projectsViewCount - 1 && projects.length !== 1 && (
+                    <Divider />
+                  )}
                 </Box>
                 {isProfile && location.pathname.includes("projects") && (
                   <Box>
-                    <IconButton onClick={editProject}>
+                    <IconButton onClick={() => editProject(project._id)}>
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -208,17 +263,21 @@ function ProfileProjects() {
               </Box>
             );
           })}
-        <TextIconButton
-          text={projectsViewCount >= projects.length ? "SEE LESS" : "SEE MORE"}
-          onClick={viewProjectsMore}
-          endIcon={
-            projectsViewCount >= projects.length ? (
-              <KeyboardArrowUpIcon size={20} />
-            ) : (
-              <KeyboardArrowDownIcon fontSize="large" />
-            )
-          }
-        />
+        {projects.length > 1 && (
+          <TextIconButton
+            text={
+              projectsViewCount >= projects.length ? "SEE LESS" : "SEE MORE"
+            }
+            onClick={viewProjectsMore}
+            endIcon={
+              projectsViewCount >= projects.length ? (
+                <KeyboardArrowUpIcon size={20} />
+              ) : (
+                <KeyboardArrowDownIcon fontSize="large" />
+              )
+            }
+          />
+        )}
       </Card>
       <Dialog
         open={open}
@@ -243,8 +302,8 @@ function ProfileProjects() {
             size="small"
             fullWidth
             inputProps={{ maxLength: 300 }}
-            value={formValues.project_name}
-            name="project_name"
+            value={formValues.projectName}
+            name="projectName"
             onChange={handleChanges}
           />
           {/* currently working */}
@@ -364,8 +423,8 @@ function ProfileProjects() {
             size="small"
             fullWidth
             inputProps={{ maxLength: 300 }}
-            value={formValues.project_url}
-            name="project_url"
+            value={formValues.projectUrl}
+            name="projectUrl"
             onChange={handleChanges}
           />
           {/* Description */}
@@ -386,7 +445,7 @@ function ProfileProjects() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
-          <PrimaryButton text="Save" />
+          <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>
     </div>

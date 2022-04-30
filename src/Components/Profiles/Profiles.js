@@ -16,6 +16,7 @@ import TitleBox from "./TitleBox";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Common/Loading";
 import Filters from "../Filters/Filters";
+import ProfileIcon from "../../Assets/profile.png";
 
 function Profiles() {
   const userCtx = useContext(UsersContext);
@@ -107,8 +108,8 @@ function Profiles() {
                           height: 50,
                         },
                       }}
-                      image={user.picture}
-                      alt={user.picture}
+                      image={user.picture || ProfileIcon}
+                      alt={user.picture || ProfileIcon}
                     />
                     <Box
                       sx={{
@@ -134,7 +135,7 @@ function Profiles() {
                       <Box>
                         <Button
                           variant="outlined"
-                          onClick={() => viewProfile(user.username)}
+                          onClick={() => viewProfile(user._id)}
                           sx={{
                             borderRadius: "30px",
                             border: 2,
