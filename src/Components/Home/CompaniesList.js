@@ -45,6 +45,7 @@ function CompaniesList() {
               companies.slice(0, companyViewCount).map((company, index) => {
                 return (
                   <Box
+                    key={index}
                     sx={{
                       padding: "20px",
                       margin: "10px",

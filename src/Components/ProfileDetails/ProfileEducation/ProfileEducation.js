@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Autocomplete,
   Box,
+  Button,
   Card,
   CardMedia,
   Checkbox,
@@ -44,22 +45,24 @@ function ProfileEducation() {
   };
   const [formValues, setformValues] = useState(initialValues);
   const [educations, setEducations] = useState([]);
-  const [isProfile, setIsProfile] = useState(true);
+  const [isProfile, setIsProfile] = useState(false);
   const [open, setOpen] = useState(false);
   const [educationTitle, setEducationTitle] = useState("");
+  const [selectedEducation, setSelectedEducation] = useState({});
   const [years, setYears] = useState(["Year"]);
   const [descLen, setDescLen] = useState(0);
 
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
-  console.log(userId);
+  // console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchEducations = async () => {
+    setIsProfile(userId === localStorage.getItem("userID"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.education);
@@ -121,9 +124,9 @@ function ProfileEducation() {
     setformValues(initialValues);
   };
 
-  const editEducation = (id) => {
+  const editEducation = (id, name) => {
     setOpen(true);
-    console.log(id);
+    console.log(id, name);
     setEducationTitle("Edit Education");
     fetchEducation(id);
   };
@@ -136,21 +139,33 @@ function ProfileEducation() {
   };
 
   const fetchEducation = (id) => {
-    const selectedEducation = educations.filter(
-      (education) => (education._id = id)
-    );
-    console.log(selectedEducation[0]);
+    const se = educations.filter((education) => education._id === id);
+    setSelectedEducation({ ...se[0] });
+    console.log(selectedEducation);
     setformValues({
-      college: selectedEducation[0].college,
-      degree: selectedEducation[0].degree,
-      start_month: selectedEducation[0].startDate.split(",")[0],
-      end_month: selectedEducation[0].endDate.split(",")[0],
-      start_year: selectedEducation[0].startDate.split(",")[1],
-      end_year: selectedEducation[0].endDate.split(",")[1],
-      grade: selectedEducation[0].grade,
-      description: selectedEducation[0].description,
-      fieldOfStudy: selectedEducation[0].fieldOfStudy,
+      college: se[0].college,
+      degree: se[0].degree,
+      start_month: se[0].startDate.split(",")[0],
+      end_month: se[0].endDate.split(",")[0],
+      start_year: se[0].startDate.split(",")[1],
+      end_year: se[0].endDate.split(",")[1],
+      grade: se[0].grade,
+      description: se[0].description,
+      fieldOfStudy: se[0].fieldOfStudy,
     });
+  };
+
+  const handleDelete = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${userId}/education/${selectedEducation._id}`,
+      { method: "DELETE" }
+    );
+    const json = await response.json();
+    console.log(json);
+    if (response.status === 200) {
+      setOpen(false);
+      fetchEducations();
+    }
   };
 
   useEffect(() => {
@@ -247,7 +262,11 @@ function ProfileEducation() {
                 </Box>
                 {isProfile && location.pathname.includes("education") && (
                   <Box>
-                    <IconButton onClick={() => editEducation(education._id)}>
+                    <IconButton
+                      onClick={() =>
+                        editEducation(education._id, education.college)
+                      }
+                    >
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -490,6 +509,16 @@ function ProfileEducation() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
+          {educationTitle === "Edit Education" && (
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={handleDelete}
+            >
+              Delete Education
+            </Button>
+          )}
           <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>

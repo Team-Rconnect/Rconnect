@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  Button,
   Card,
   CardMedia,
   Checkbox,
@@ -46,23 +47,25 @@ function ProfileExperience() {
   };
   const [formValues, setformValues] = useState(initialValues);
   const [experiences, setExperiences] = useState([]);
-  const [isProfile, setIsProfile] = useState(true);
+  const [isProfile, setIsProfile] = useState(false);
   // const [isExperienceDetails, setIsExperienceDetails] = useState(false);
   const [open, setOpen] = useState(false);
   const [experienceTitle, setExperienceTitle] = useState("");
+  const [selectedExperience, setSelectedExperience] = useState({});
   const [years, setYears] = useState(["Year"]);
   const [descLen, setDescLen] = useState(0);
 
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
-  console.log(userId);
+  // console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
 
   const fetchExperiences = async () => {
+    setIsProfile(userId === localStorage.getItem("userID"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.experience);
@@ -112,9 +115,8 @@ function ProfileExperience() {
       );
       const json = await response.json();
       console.log(json);
-      if (json.status === 200) {
+      if (json.status === true) {
         e.preventDefault();
-        alert(json.message);
         setOpen(false);
       }
     }
@@ -140,22 +142,33 @@ function ProfileExperience() {
   };
 
   const fetchExperience = (id) => {
-    const selectedExperience = experiences.filter(
-      (project) => (project._id = id)
-    );
-    console.log(selectedExperience[0]);
+    const se = experiences.filter((project) => project._id === id);
+    setSelectedExperience({ ...se[0] });
     setformValues({
-      title: selectedExperience[0].title,
-      employementType: selectedExperience[0].employementType,
-      companyName: selectedExperience[0].companyName,
-      location: selectedExperience[0].location,
-      start_month: selectedExperience[0].startDate.split(",")[0],
-      end_month: selectedExperience[0].endDate.split(",")[0],
-      start_year: selectedExperience[0].startDate.split(",")[1],
-      end_year: selectedExperience[0].endDate.split(",")[1],
-      isWorking: selectedExperience[0].isWorking,
-      description: selectedExperience[0].description,
+      title: se[0].title,
+      employementType: se[0].employementType,
+      companyName: se[0].companyName,
+      location: se[0].location,
+      start_month: se[0].startDate.split(",")[0],
+      end_month: se[0].endDate.split(",")[0],
+      start_year: se[0].startDate.split(",")[1],
+      end_year: se[0].endDate.split(",")[1],
+      isWorking: se[0].isWorking,
+      description: se[0].description,
     });
+  };
+
+  const handleDelete = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${userId}/experience/${selectedExperience._id}`,
+      { method: "DELETE" }
+    );
+    const json = await response.json();
+    console.log(json);
+    if (response.status === 200) {
+      setOpen(false);
+      fetchExperiences();
+    }
   };
 
   useEffect(() => {
@@ -249,7 +262,7 @@ function ProfileExperience() {
                 </Box>
                 {isProfile && location.pathname.includes("experience") && (
                   <Box>
-                    <IconButton onClick={editExperience}>
+                    <IconButton onClick={() => editExperience(experience._id)}>
                       <ModeEditOutlinedIcon />
                     </IconButton>
                   </Box>
@@ -496,6 +509,16 @@ function ProfileExperience() {
           </Box>
         </DialogContent>
         <DialogActions sx={{ margin: "8px" }}>
+          {experienceTitle === "Edit Experience" && (
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={handleDelete}
+            >
+              Delete Experience
+            </Button>
+          )}
           <PrimaryButton text="Save" onClick={handleSave} />
         </DialogActions>
       </Dialog>
