@@ -24,6 +24,7 @@ import logo from "../../Assets/logowhitesm.png";
 import { bgSecondary, borderLight, primary } from "../../Common/Pallete";
 import { theme } from "../../Common/Constants";
 import AuthContext from "../../Context/AuthContext";
+import UsersContext from "../../Context/UsersContext";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -57,6 +58,8 @@ function Navbar(props) {
   const [userPresent, setUserPresent] = useState(false);
   const userIn = authCtx.isLoggedIn;
 
+  const { searchTerm, setSearchTerm } = useContext(UsersContext);
+
   // const userPresent = localStorage.getItem("isLoggedIn");
   const settings = ["Profile", "Groups", "Logout"];
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -70,6 +73,9 @@ function Navbar(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   const handleOption = (setting) => {
@@ -148,6 +154,8 @@ function Navbar(props) {
           >
             <TextField
               fullWidth
+              value={searchTerm}
+              onChange={handleSearch}
               InputProps={{
                 style: {
                   color: "#fff",

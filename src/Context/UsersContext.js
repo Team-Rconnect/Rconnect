@@ -1,9 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 
-const UsersContext = createContext({ users: null });
+const UsersContext = createContext();
 
 export const UsersContextProvider = (props) => {
   const [users, setusers] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const values = { users, searchTerm, setSearchTerm };
 
   const fetchUsers = async () => {
     const response = await fetch("http://localhost:5000/users");
@@ -24,11 +26,7 @@ export const UsersContextProvider = (props) => {
   }, []);
 
   return (
-    <UsersContext.Provider
-      value={{
-        users: users,
-      }}
-    >
+    <UsersContext.Provider value={values}>
       {props.children}
     </UsersContext.Provider>
   );
