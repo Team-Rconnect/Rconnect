@@ -65,7 +65,7 @@ function ProfileProjects() {
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchProjects = async () => {
-    setIsProfile(userId === localStorage.getItem("userID"));
+    setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.projects);
@@ -181,7 +181,7 @@ function ProfileProjects() {
   useEffect(() => {
     yearsFn();
     fetchProjects();
-  }, []);
+  }, [userId]);
 
   return (
     <div>

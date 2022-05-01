@@ -62,7 +62,7 @@ function ProfileEducation() {
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchEducations = async () => {
-    setIsProfile(userId === localStorage.getItem("userID"));
+    setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.education);
@@ -171,7 +171,7 @@ function ProfileEducation() {
   useEffect(() => {
     yearsFn();
     fetchEducations();
-  }, []);
+  }, [userId]);
 
   return (
     <div>

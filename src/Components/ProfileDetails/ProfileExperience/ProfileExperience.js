@@ -65,7 +65,7 @@ function ProfileExperience() {
   const bpSMd = theme.breakpoints.down("sm"); //max-width:599.95px
 
   const fetchExperiences = async () => {
-    setIsProfile(userId === localStorage.getItem("userID"));
+    setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.experience);
@@ -174,7 +174,7 @@ function ProfileExperience() {
   useEffect(() => {
     yearsFn();
     fetchExperiences();
-  }, []);
+  }, [userId]);
 
   return (
     <div>

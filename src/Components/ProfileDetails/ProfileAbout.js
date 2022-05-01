@@ -28,7 +28,12 @@ function ProfileAbout() {
   const userId = location.pathname.split("/")[2];
 
   const fetchAbout = async () => {
-    setIsProfile(userId === localStorage.getItem("userID"));
+    console.log(
+      userId,
+      localStorage.getItem("userId"),
+      userId === localStorage.getItem("userId")
+    );
+    setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.about);
@@ -54,7 +59,7 @@ function ProfileAbout() {
 
   useEffect(() => {
     fetchAbout();
-  }, []);
+  }, [userId]);
 
   return (
     <>
