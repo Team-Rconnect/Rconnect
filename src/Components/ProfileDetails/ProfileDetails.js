@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import "../../Common/ImagePick.css";
 import Cropper from "react-easy-crop";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Heading1 from "../../Common/Heading1";
 import Loading from "../../Common/Loading";
@@ -64,6 +64,24 @@ function ProfileDetails() {
   const [groups, setGroups] = useState([]);
   const [searchGroup, setSearchGroup] = useState("");
   const [checked, setChecked] = useState([]);
+
+  const chips = [
+    "#webdesign",
+    "#COA",
+    "programming",
+    "#competitiveprogramming",
+    "#AI",
+    "#ML",
+    "#appdesign",
+    "#networking",
+    "#reactjs",
+    "#flutter",
+    "#ML",
+    "#appdesign",
+    "#networking",
+    "#reactjs",
+    "#flutter",
+  ];
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -219,23 +237,7 @@ function ProfileDetails() {
               {/* {isProfile && <EditIconBtn onClick={editSkills} />} */}
             </Box>
             <Box sx={{ margin: "15px 0px" }}>
-              {[
-                "#webdesign",
-                "#COA",
-                "programming",
-                "#competitiveprogramming",
-                "#AI",
-                "#ML",
-                "#appdesign",
-                "#networking",
-                "#reactjs",
-                "#flutter",
-                "#ML",
-                "#appdesign",
-                "#networking",
-                "#reactjs",
-                "#flutter",
-              ].map((tag, index) => {
+              {chips.map((tag, index) => {
                 return (
                   <Chip
                     key={index}
