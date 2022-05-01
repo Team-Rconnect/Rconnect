@@ -47,11 +47,12 @@ function Profiles() {
     "#reactjs",
     "#flutter",
   ];
-  const { users, searchTerm } = useContext(UsersContext);
+  const { users, searchTerm, searchGender } = useContext(UsersContext);
   console.log(searchTerm, "search terermdsfa");
   console.log(
-    users && users.map((user) => user.firstName + user.lastName),
-    "userctx terermdsfa"
+    searchGender
+    // users && users.map((user) => user.firstName + user.lastName),
+    // "userctx terermdsfa"
   );
 
   const viewProfile = (username) => {
@@ -92,8 +93,12 @@ function Profiles() {
                     //   .length > 0
                     //   ? user
                     //   : null;
+                  } else if (searchTerm === "") {
+                    // console.log(user, "searchcterm empty  user filter");
+                    // return user;
                   }
-                  if (searchTerm === "") {
+                  if (user.gender === searchGender) {
+                    console.log(searchGender);
                     // console.log(user, "searchcterm empty  user filter");
                     return user;
                   } else if (
@@ -104,7 +109,7 @@ function Profiles() {
                       .includes(searchTerm.toLowerCase())
                   ) {
                     // console.log(user, "filter user");
-                    return user;
+                    // return user;
                   }
                 })
                 .map((user, index) => (

@@ -8,7 +8,7 @@ import {
   RadioGroup,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useContext, useState } from "react";
 import Heading2 from "../../Common/Heading2";
 import TextButton from "../../Common/TextButton";
 import Select from "react-select";
@@ -17,16 +17,20 @@ import makeAnimated from "react-select/animated";
 import { colourStyles } from "../../Common/Constants";
 import Subtitle3 from "../../Common/Subtitle3";
 import PrimaryButton from "../../Common/PrimaryButton";
+import UsersContext from "../../Context/UsersContext";
 
 function Filters() {
   const theme = useTheme();
   const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
   const animatedComponents = makeAnimated();
 
-  const [gender, setGender] = React.useState("both");
+  // const [gender, setGender] = useState("both");
+  const { searchGender, setSearchGender } = useContext(UsersContext);
 
   const handleGenderChange = (event) => {
-    setGender(event.target.value);
+    // setGender(event.target.value);
+    setSearchGender(event.target.value);
+    console.log(event.target.value);
   };
 
   const branches = [
@@ -226,21 +230,21 @@ function Filters() {
             row
             // aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            value={gender}
+            value={searchGender}
             onChange={handleGenderChange}
           >
             <FormControlLabel
-              value="female"
+              value="Female"
               control={<Radio size="small" />}
               label="Female"
             />
             <FormControlLabel
-              value="male"
+              value="Male"
               control={<Radio size="small" />}
               label="Male"
             />
             <FormControlLabel
-              value="both"
+              value="Both"
               control={<Radio size="small" />}
               label="Both"
             />
