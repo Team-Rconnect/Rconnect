@@ -8,7 +8,7 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Heading1 from "../../Common/Heading1";
 import Subtitle1 from "../../Common/Subtitle1";
 import TextButton from "../../Common/TextButton";
@@ -16,12 +16,30 @@ import Subtitle2 from "../../Common/Subtitle2";
 import PrimaryButton from "../../Common/PrimaryButton";
 import BootstrapDialogTitle from "../../Common/BootstrapDialogTitle";
 import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
+import { useLocation } from "react-router-dom";
 
 function ProfileAbout() {
-  const [isProfile, setIsProfile] = useState(true);
+  const [isProfile, setIsProfile] = useState(false);
   const [open, setOpen] = useState(false);
   const [about, setAbout] = useState("");
   const [aboutLen, setAboutLen] = useState(0);
+
+  const location = useLocation();
+  const userId = location.pathname.split("/")[2];
+
+  const fetchAbout = async () => {
+    console.log(
+      userId,
+      localStorage.getItem("userId"),
+      userId === localStorage.getItem("userId")
+    );
+    setIsProfile(userId === localStorage.getItem("userId"));
+    const response = await fetch(`http://localhost:3001/users/${userId}`);
+    const json = await response.json();
+    console.log(json.about);
+    setAbout(json.about);
+    setAboutLen(json.about.length);
+  };
 
   const handleChange = (event) => {
     setAbout(event.target.value);
@@ -35,9 +53,14 @@ function ProfileAbout() {
   };
 
   const editAbout = () => {
-    setAbout("");
+    // setAbout("");
     setOpen(true);
   };
+
+  useEffect(() => {
+    fetchAbout();
+  }, [userId]);
+
   return (
     <>
       <div>
@@ -57,22 +80,27 @@ function ProfileAbout() {
             )}
           </Box>
           <Box sx={{ height: "5px" }}></Box>
-          <Subtitle1
-            text={
-              "I'm more experienced in eCommerce web projects and mobile banking apps, but also like to work with creative projects, such as landing pages or unsual corporate websites"
-            }
-          />
-          <TextButton text={"SEE MORE"} />
+          <Subtitle1 text={about ? about : ""} />
+          {/* <TextButton text={"SEE MORE"} /> */}
         </Card>
       </div>
       <Dialog
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          fetchAbout();
+        }}
         scroll={"paper"}
         aria-labelledby="title"
         aria-describedby="description"
       >
-        <BootstrapDialogTitle id="title" onClose={() => setOpen(false)}>
+        <BootstrapDialogTitle
+          id="title"
+          onClose={() => {
+            setOpen(false);
+            fetchAbout();
+          }}
+        >
           Edit About
         </BootstrapDialogTitle>
         {/* <DialogTitle id="title">Edit About</DialogTitle> */}

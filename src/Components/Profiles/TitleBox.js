@@ -33,9 +33,9 @@ function TitleBox(props) {
           },
         }}
       >{`${props.user.name.first}  ${props.user.name.last}`}</Typography> */}
-      <Subtitle1 text={props.user.email || "- -"} />
+      <Subtitle1 text={props.user.gender || "- -"} />
       <Subtitle2
-        text={`${props.user.city || "- -"}, ${props.user.country || "- -"}`}
+        text={`${props.user.branch || "- -"}, ${props.user.year || "- -"}`}
       />
     </Box>
   );

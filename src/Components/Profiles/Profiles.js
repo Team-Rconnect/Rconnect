@@ -31,12 +31,7 @@ function Profiles() {
   // const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
   // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
 
-  const { users, searchTerm } = useContext(UsersContext);
-  console.log(searchTerm, "search terermdsfa");
-  console.log(
-    users && users.map((user) => user.firstName + user.lastName),
-    "userctx terermdsfa"
-  );
+  const { users, searchTerm, searchGender } = useContext(UsersContext);
 
   const viewProfile = (username) => {
     console.log(username);
@@ -83,10 +78,18 @@ function Profiles() {
                       ? user
                       : null;
                   }
-                  if (searchTerm === "") {
-                    // console.log(user, "searchcterm empty  user filter");
-                    return user;
-                  } else if (
+                  // else if (searchTerm === "") {
+                  //   // console.log(user, "searchcterm empty  user filter");
+                  //   return user;
+                  // }
+                  // if (user.gender === searchGender) {
+                  //   console.log(searchGender);
+                  //   // console.log(user, "searchcterm empty  user filter");
+                  //   // return user;
+                  // } else if (searchGender === "Both") {
+                  //   // return user;
+                  // }
+                  else if (
                     user.firstName !== undefined &&
                     user.lastName !== undefined &&
                     (user.firstName + " " + user.lastName)
@@ -119,7 +122,6 @@ function Profiles() {
                     <Box
                       sx={{
                         width: "100%",
-
                         display: "flex",
                         flexDirection: "column",
                       }}
@@ -137,8 +139,8 @@ function Profiles() {
                         <CardMedia
                           component="img"
                           sx={{
-                            width: 70,
-                            height: 70,
+                            width: 60,
+                            height: 60,
                             margin: "10px 0px 10px 20px",
                             borderRadius: "50%",
                             border: "2px solid " + primary,

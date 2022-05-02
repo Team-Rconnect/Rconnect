@@ -1,15 +1,10 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
-import Heading2 from "../../Common/Heading2";
-import SchoolIcon from "@mui/icons-material/School";
 import CountUp from "react-countup";
-import DomainIcon from "@mui/icons-material/Domain";
-import PersonIcon from "@mui/icons-material/Person";
 import HeadingLG from "../../Common/HeadingLG";
 import { placements } from "../../Common/Constants";
-import Heading1 from "../../Common/Heading1";
 import SubtitleLG from "../../Common/SubtitleLG.js";
-import { bgSecondary, bgTerinary, borderDark, borderLight, grey, primary } from "../../Common/Pallete";
+import { grey } from "../../Common/Pallete";
 
 function Counts() {
   return (
@@ -36,9 +31,10 @@ function Counts() {
         }}
       >
         {placements &&
-          placements.map((placement) => {
+          placements.map((placement, index) => {
             return (
               <Box
+                key={index}
                 sx={{
                   padding: "20px",
                   margin: "10px",
@@ -50,7 +46,7 @@ function Counts() {
                   borderRadius: "4px",
                   width: "250px",
                   height: "250px",
-                  border: "1px solid "+grey,
+                  border: "1px solid " + grey,
                   transition: "all 0.4s ease-in-out",
                   // boxShadow: "0 0 5px -2px #d1e3fa",
                   "&:hover": {

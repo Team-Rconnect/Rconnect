@@ -126,7 +126,7 @@ function ProfileDetails() {
   useEffect(() => {
     fetchUser(currentPath);
     fetchGroups();
-  }, []);
+  }, [currentPath]);
 
   //checkbox handling of addto
   const handleToggle = (value) => () => {

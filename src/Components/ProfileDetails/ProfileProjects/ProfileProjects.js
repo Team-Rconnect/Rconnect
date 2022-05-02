@@ -46,24 +46,26 @@ function ProfileProjects() {
     description: "",
   };
   const [formValues, setformValues] = useState(initialValues);
-  const [isProfile, setIsProfile] = useState(true);
+  const [isProfile, setIsProfile] = useState(false);
   const [projects, setProjects] = useState([]);
   const [projectsViewCount, setProjectsViewCount] = useState(3);
   const [open, setOpen] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
+  const [selectedProject, setSelectedProject] = useState({});
   const [years, setYears] = useState(["Year"]);
   const [descLen, setDescLen] = useState(0);
 
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
-  console.log(userId);
+  // console.log(userId);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const bpSMd = theme.breakpoints.down("sm");
 
   const fetchProjects = async () => {
+    setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.projects);
@@ -148,26 +150,38 @@ function ProfileProjects() {
   };
 
   const fetchProject = (id) => {
-    const selectedProject = projects.filter((project) => (project._id = id));
-    console.log(selectedProject[0]);
+    const sp = projects.filter((project) => project._id === id);
+    console.log(sp);
+    setSelectedProject({ ...sp[0] });
     setformValues({
-      projectName: selectedProject[0].projectName,
-      projectUrl: selectedProject[0].projectUrl,
-      start_month: selectedProject[0].startDate.split(",")[0],
-      end_month: selectedProject[0].endDate.split(",")[0],
-      start_year: selectedProject[0].startDate.split(",")[1],
-      end_year: selectedProject[0].endDate.split(",")[1],
-      isWorking: selectedProject[0].isWorking,
-      description: selectedProject[0].description,
+      projectName: sp[0].projectName,
+      projectUrl: sp[0].projectUrl,
+      start_month: sp[0].startDate.split(",")[0],
+      end_month: sp[0].endDate.split(",")[0],
+      start_year: sp[0].startDate.split(",")[1],
+      end_year: sp[0].endDate.split(",")[1],
+      isWorking: sp[0].isWorking,
+      description: sp[0].description,
     });
   };
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${userId}/projects/${selectedProject._id}`,
+      { method: "DELETE" }
+    );
+    const json = await response.json();
+    console.log(json);
+    if (response.status === 200) {
+      setOpen(false);
+      fetchProjects();
+    }
+  };
 
   useEffect(() => {
     yearsFn();
     fetchProjects();
-  }, []);
+  }, [userId]);
 
   return (
     <div>
@@ -254,7 +268,7 @@ function ProfileProjects() {
                   <Box sx={{ display: "flex", marginBottom: "10px" }}>
                     <TextButton text={"View project"} />
                   </Box>
-                  {index !== projectsViewCount - 1 && projects.length !== 3 && (
+                  {index !== projectsViewCount - 1 && projects.length !== 1 && (
                     <Divider />
                   )}
                 </Box>
