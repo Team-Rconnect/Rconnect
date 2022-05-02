@@ -15,6 +15,7 @@ import DetailsProjects from "./Components/ProfileDetails/ProfileProjects/Details
 import ImagePick from "./Common/ImagePick";
 import Groups from "./Components/Groups/Groups";
 import GroupDashboard from "./Components/Groups/GroupDashboard";
+import Register from "./Components/Register/Register";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -33,6 +34,7 @@ function App() {
         <Route path="/home" element={<Home />} />;
         <Route path="/users" element={<Profiles />} />;
         <Route path="/login" element={<Login />} />;
+        <Route path="/register" element={<Register />} />;
         <Route path="/users/:id" element={<ProfileDetails />} />;
         <Route
           path="/users/:id/details/experience"
