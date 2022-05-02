@@ -30,23 +30,7 @@ function Profiles() {
   // const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
   // const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
   // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
-  const chips = [
-    "#webdesign",
-    "#COA",
-    "#programming",
-    "#competitiveprogramming",
-    "#AI",
-    "#ML",
-    "#appdesign",
-    "#network",
-    "#reactjs",
-    "#flutter",
-    "#ML",
-    "#appdesign",
-    "#networking",
-    "#reactjs",
-    "#flutter",
-  ];
+
   const { users, searchTerm } = useContext(UsersContext);
   console.log(searchTerm, "search terermdsfa");
   console.log(
@@ -86,12 +70,18 @@ function Profiles() {
             {users &&
               users
                 .filter((user) => {
+                  console.log(
+                    user.skills,
+                    searchTerm,
+                    "user from sakfdjaslfdjlksj"
+                  );
                   if (searchTerm.startsWith("#")) {
-                    // var skills = user.skills;
-                    // return skills.filter((skill) => skill.includes("yash"))
-                    //   .length > 0
-                    //   ? user
-                    //   : null;
+                    var skills = user.skills;
+                    return skills.filter((skill) =>
+                      skill.toLowerCase().includes(searchTerm)
+                    ).length > 0
+                      ? user
+                      : null;
                   }
                   if (searchTerm === "") {
                     // console.log(user, "searchcterm empty  user filter");
@@ -128,6 +118,8 @@ function Profiles() {
                   >
                     <Box
                       sx={{
+                        width: "100%",
+
                         display: "flex",
                         flexDirection: "column",
                       }}
@@ -213,7 +205,7 @@ function Profiles() {
                         <TitleBox user={user} />
                       </Box>
                       <Box sx={{ margin: "10px 15px 15px 15px" }}>
-                        {chips.map((tag, index) => {
+                        {user.skills.map((tag, index) => {
                           return (
                             <Chip
                               key={index}
