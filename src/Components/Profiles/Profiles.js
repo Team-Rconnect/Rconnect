@@ -93,15 +93,19 @@ function Profiles() {
                     //   .length > 0
                     //   ? user
                     //   : null;
-                  } else if (searchTerm === "") {
-                    // console.log(user, "searchcterm empty  user filter");
-                    // return user;
                   }
-                  if (user.gender === searchGender) {
-                    console.log(searchGender);
-                    // console.log(user, "searchcterm empty  user filter");
-                    return user;
-                  } else if (
+                  // else if (searchTerm === "") {
+                  //   // console.log(user, "searchcterm empty  user filter");
+                  //   return user;
+                  // }
+                  // if (user.gender === searchGender) {
+                  //   console.log(searchGender);
+                  //   // console.log(user, "searchcterm empty  user filter");
+                  //   // return user;
+                  // } else if (searchGender === "Both") {
+                  //   // return user;
+                  // }
+                  else if (
                     user.firstName !== undefined &&
                     user.lastName !== undefined &&
                     (user.firstName + " " + user.lastName)
@@ -109,7 +113,7 @@ function Profiles() {
                       .includes(searchTerm.toLowerCase())
                   ) {
                     // console.log(user, "filter user");
-                    // return user;
+                    return user;
                   }
                 })
                 .map((user, index) => (
@@ -133,6 +137,7 @@ function Profiles() {
                   >
                     <Box
                       sx={{
+                        width: "100%",
                         display: "flex",
                         flexDirection: "column",
                       }}
@@ -150,8 +155,8 @@ function Profiles() {
                         <CardMedia
                           component="img"
                           sx={{
-                            width: 70,
-                            height: 70,
+                            width: 60,
+                            height: 60,
                             margin: "10px 0px 10px 20px",
                             borderRadius: "50%",
                             border: "2px solid " + primary,
@@ -218,7 +223,7 @@ function Profiles() {
                         <TitleBox user={user} />
                       </Box>
                       <Box sx={{ margin: "10px 15px 15px 15px" }}>
-                        {chips.map((tag, index) => {
+                        {user.skills.map((tag, index) => {
                           return (
                             <Chip
                               key={index}
