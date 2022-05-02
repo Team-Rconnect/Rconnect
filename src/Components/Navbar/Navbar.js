@@ -57,8 +57,9 @@ function Navbar(props) {
   const authCtx = useContext(AuthContext);
   const [userPresent, setUserPresent] = useState(false);
   const userIn = authCtx.isLoggedIn;
+  console.log(authCtx.loggedUser);
 
-  const { searchTerm, setSearchTerm } = useContext(UsersContext);
+  const { searchTerm, handleSearch } = useContext(UsersContext);
 
   // const userPresent = localStorage.getItem("isLoggedIn");
   const settings = ["Profile", "Groups", "Logout"];
@@ -74,9 +75,9 @@ function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  // const handleSearch = (event) => {
+  //   setSearchTerm(event.target.value);
+  // };
 
   const handleOption = (setting) => {
     if (setting === "Logout") {
@@ -155,7 +156,7 @@ function Navbar(props) {
             <TextField
               fullWidth
               value={searchTerm}
-              onChange={handleSearch}
+              onChange={(e) => handleSearch(e.target.value)}
               InputProps={{
                 style: {
                   color: "#fff",
@@ -200,7 +201,10 @@ function Navbar(props) {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar>
+                    {authCtx.loggedUser.firstName &&
+                      authCtx.loggedUser?.firstName[0].toUpperCase()}
+                  </Avatar>
                 </IconButton>
               </Tooltip>
               <Menu

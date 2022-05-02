@@ -48,12 +48,12 @@ function Profiles() {
     "#flutter",
   ];
   const { users, searchTerm, searchGender } = useContext(UsersContext);
-  console.log(searchTerm, "search terermdsfa");
-  console.log(
-    searchGender
-    // users && users.map((user) => user.firstName + user.lastName),
-    // "userctx terermdsfa"
-  );
+  // console.log(searchTerm, "search terermdsfa");
+  // console.log(
+  //   searchGender
+  //   // users && users.map((user) => user.firstName + user.lastName),
+  //   // "userctx terermdsfa"
+  // );
 
   const viewProfile = (username) => {
     console.log(username);
