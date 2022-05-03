@@ -127,170 +127,168 @@ export const theme = createTheme({
 
 export const Skills = [
   {
-    value: "#.NET Development".toLowerCase().replaceAll(" ", ""),
+    value: ".NET Development",
     label: ".NET Development",
   },
   {
-    value: "#Android App Development".toLowerCase().replaceAll(" ", ""),
+    value: "Android App Development",
     label: "Android App Development",
   },
   {
-    value: "#Angular.js Development".toLowerCase().replaceAll(" ", ""),
+    value: "Angular.js Development",
     label: "Angular.js Development",
   },
   {
-    value: "#Artificial Intelligence (AI)".toLowerCase().replaceAll(" ", ""),
+    value: "Artificial Intelligence (AI)",
     label: "Artificial Intelligence (AI)",
   },
   {
-    value: "#Backend Development".toLowerCase().replaceAll(" ", ""),
+    value: "Backend Development",
     label: "Backend Development",
   },
   {
-    value: "#Blockchain Development".toLowerCase().replaceAll(" ", ""),
+    value: "Blockchain Development",
     label: "Blockchain Development",
   },
   {
-    value: "#CAD Design".toLowerCase().replaceAll(" ", ""),
+    value: "CAD Design",
     label: "CAD Design",
   },
   {
-    value: "#Campus Ambassador".toLowerCase().replaceAll(" ", ""),
+    value: "Campus Ambassador",
     label: "Campus Ambassador",
   },
   {
-    value: "#Cloud Computing".toLowerCase().replaceAll(" ", ""),
+    value: "Cloud Computing",
     label: "Cloud Computing",
   },
   {
-    value: "#Computer Vision".toLowerCase().replaceAll(" ", ""),
+    value: "Computer Vision",
     label: "Computer Vision",
   },
   {
-    value: "#Content Writing".toLowerCase().replaceAll(" ", ""),
+    value: "Content Writing",
     label: "Content Writing",
   },
   {
-    value: "#Data Science".toLowerCase().replaceAll(" ", ""),
+    value: "Data Science",
     label: "Data Science",
   },
   {
-    value: "#Digital Marketing".toLowerCase().replaceAll(" ", ""),
+    value: "Digital Marketing",
     label: "Digital Marketing",
   },
   {
-    value: "#Embedded Systems".toLowerCase().replaceAll(" ", ""),
+    value: "Embedded Systems",
     label: "Embedded Systems",
   },
   {
-    value: "#Flutter Development".toLowerCase().replaceAll(" ", ""),
+    value: "Flutter Development",
     label: "Flutter Development",
   },
   {
-    value: "#Front End Development".toLowerCase().replaceAll(" ", ""),
+    value: "Front End Development",
     label: "Front End Development",
   },
   {
-    value: "#Full Stack Development".toLowerCase().replaceAll(" ", ""),
+    value: "Full Stack Development",
     label: "Full Stack Development",
   },
   {
-    value: "#Game Development".toLowerCase().replaceAll(" ", ""),
+    value: "Game Development",
     label: "Game Development",
   },
   {
-    value: "#Graphic Design".toLowerCase().replaceAll(" ", ""),
+    value: "Graphic Design",
     label: "Graphic Design",
   },
   {
-    value: "#Human Resources (HR)".toLowerCase().replaceAll(" ", ""),
+    value: "Human Resources (HR)",
     label: "Human Resources (HR)",
   },
   {
-    value: "#Industrial Design".toLowerCase().replaceAll(" ", ""),
+    value: "Industrial Design",
     label: "Industrial Design",
   },
   {
-    value: "#Internet of Things (IoT)".toLowerCase().replaceAll(" ", ""),
+    value: "Internet of Things (IoT)",
     label: "Internet of Things (IoT)",
   },
   {
-    value: "#Java Development".toLowerCase().replaceAll(" ", ""),
+    value: "Java Development",
     label: "Java Development",
   },
   {
-    value: "#Javascript Development".toLowerCase().replaceAll(" ", ""),
+    value: "Javascript Development",
     label: "Javascript Development",
   },
   {
-    value: "#Machine Learning".toLowerCase().replaceAll(" ", ""),
+    value: "Machine Learning",
     label: "Machine Learning",
   },
   {
-    value: "#Mechatronics".toLowerCase().replaceAll(" ", ""),
+    value: "Mechatronics",
     label: "Mechatronics",
   },
   {
-    value: "#Mobile App Development".toLowerCase().replaceAll(" ", ""),
+    value: "Mobile App Development",
     label: "Mobile App Development",
   },
   {
-    value: "#Node.js Development".toLowerCase().replaceAll(" ", ""),
+    value: "Node.js Development",
     label: "Node.js Development",
   },
   {
-    value: "#PHP Development".toLowerCase().replaceAll(" ", ""),
+    value: "PHP Development",
     label: "PHP Development",
   },
   {
-    value: "#Product Management".toLowerCase().replaceAll(" ", ""),
+    value: "Product Management",
     label: "Product Management",
   },
   {
-    value: "#Programming".toLowerCase().replaceAll(" ", ""),
+    value: "Programming",
     label: "Programming",
   },
   {
-    value: "#Python/Django Development".toLowerCase().replaceAll(" ", ""),
+    value: "Python/Django Development",
     label: "Python/Django Development",
   },
-  { value: "#Robotics".toLowerCase().replaceAll(" ", ""), label: "Robotics" },
+  { value: "Robotics", label: "Robotics" },
   {
-    value: "#Search Engine Optimization (SEO)"
-      .toLowerCase()
-      .replaceAll(" ", ""),
+    value: "Search Engine Optimization (SEO)",
     label: "Search Engine Optimization (SEO)",
   },
   {
-    value: "#Social Media Marketing".toLowerCase().replaceAll(" ", ""),
+    value: "Social Media Marketing",
     label: "Social Media Marketing",
   },
   {
-    value: "#Software Development".toLowerCase().replaceAll(" ", ""),
+    value: "Software Development",
     label: "Software Development",
   },
   {
-    value: "#Software Testing".toLowerCase().replaceAll(" ", ""),
+    value: "Software Testing",
     label: "Software Testing",
   },
   {
-    value: "#Statistics".toLowerCase().replaceAll(" ", ""),
+    value: "Statistics",
     label: "Statistics",
   },
   {
-    value: "#UI/UX Design".toLowerCase().replaceAll(" ", ""),
+    value: "UI/UX Design",
     label: "UI/UX Design",
   },
   {
-    value: "#Volunteering".toLowerCase().replaceAll(" ", ""),
+    value: "Volunteering",
     label: "Volunteering",
   },
   {
-    value: "#Web Development".toLowerCase().replaceAll(" ", ""),
+    value: "Web Development",
     label: "Web Development",
   },
   {
-    value: "#Wordpress Development".toLowerCase().replaceAll(" ", ""),
+    value: "Wordpress Development",
     label: "Wordpress Development",
   },
 ];

@@ -33,25 +33,37 @@ function ProfileSkills() {
     setIsProfile(userId === localStorage.getItem("userId"));
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
+    console.log(json.skills);
+    setSkills(json.skills);
     const skillarray = [];
-    json.skills.map((skill) => {
-      skillarray.push({ value: skill, label: skill });
-    });
-    // for (let index = 0; index < json.skills.length; index++) {
-    //   const jskill = { value: json.skills[index], label: json.skills[index] };
+    if (json.skills !== undefined) {
+      json.skills.map((skill) =>
+        skillarray.push({ value: skill, label: skill })
+      );
+    }
+    // for (let index = 0; index < skills.length; index++) {
+    //   const jskill = { value: skills[index], label: skills[index] };
     //   skillarray.push(jskill);
     // }
-    console.log(json.skills, skillarray);
-    setSkills(skillarray);
+    // setSkills(skillarray);
+    console.log(skills, skillarray);
   };
 
   const editSkills = () => {
     setOpen(true);
+    const skillarray = [];
+    // skills.map((skill) => skillarray.push({ value: skill, label: skill }));
+    // for (let index = 0; index < skills.length; index++) {
+    //   const jskill = { value: skills[index], label: skills[index] };
+    //   skillarray.push(jskill);
+    // }
+    // setSkills(skillarray);
+    console.log(skills, skillarray);
   };
 
   const handleSkills = (selectedOptions) => {
     const ss = selectedOptions.map((option) => {
-      return `#${option.value.toLowerCase().replaceAll(" ", "")}`;
+      return option.value;
     });
     console.log(ss);
     setSkillsList(ss);
@@ -80,6 +92,9 @@ function ProfileSkills() {
 
   useEffect(() => {
     fetchSkills();
+    return () => {
+      setSkills([]); // This worked for me
+    };
   }, [userId]);
 
   return (
@@ -156,7 +171,7 @@ function ProfileSkills() {
             options={Skills}
             placeholder={"e.g. IoT"}
             isMulti
-            defaultValue={skills}
+            defaultValue={[...skills]}
             menuPortalTarget={document.body}
             // menuPosition={"fixed"}
             onChange={handleSkills}

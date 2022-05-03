@@ -118,6 +118,7 @@ function ProfileExperience() {
       if (json.status === true) {
         e.preventDefault();
         setOpen(false);
+        fetchExperiences();
       }
     }
   };
