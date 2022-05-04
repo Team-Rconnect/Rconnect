@@ -347,13 +347,9 @@ function Login() {
                 Login
               </Button>
             </Box>
-            <Box sx={{ margin: "20px 0px 10px 0px" }}>
-              <Button
-                variant="contained"
-                fullWidth={true}
-                onClick={handleSignUp}
-              >
-                signUp
+            <Box>
+              <Button fullWidth={true} onClick={handleSignUp}>
+                Don't have an account?
               </Button>
             </Box>
           </Box>

@@ -368,7 +368,7 @@ function Register() {
                 fullWidth={true}
                 onClick={handleSignUp}
               >
-                signUp
+                Sign Up
               </Button>
             </Box>
           </Box>
