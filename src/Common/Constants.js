@@ -6,6 +6,7 @@ import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import PercentOutlinedIcon from "@mui/icons-material/PercentOutlined";
 export const colourStyles = {
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
   control: (styles) => ({ ...styles, backgroundColor: "white" }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = primary;
@@ -123,6 +124,176 @@ export const theme = createTheme({
     },
   },
 });
+
+export const Skills = [
+  {
+    value: "#.NET Development".toLowerCase().replaceAll(" ", ""),
+    label: ".NET Development",
+  },
+  {
+    value: "#Android App Development".toLowerCase().replaceAll(" ", ""),
+    label: "Android App Development",
+  },
+  {
+    value: "#Angular.js Development".toLowerCase().replaceAll(" ", ""),
+    label: "Angular.js Development",
+  },
+  {
+    value: "#Artificial Intelligence (AI)".toLowerCase().replaceAll(" ", ""),
+    label: "Artificial Intelligence (AI)",
+  },
+  {
+    value: "#Backend Development".toLowerCase().replaceAll(" ", ""),
+    label: "Backend Development",
+  },
+  {
+    value: "#Blockchain Development".toLowerCase().replaceAll(" ", ""),
+    label: "Blockchain Development",
+  },
+  {
+    value: "#CAD Design".toLowerCase().replaceAll(" ", ""),
+    label: "CAD Design",
+  },
+  {
+    value: "#Campus Ambassador".toLowerCase().replaceAll(" ", ""),
+    label: "Campus Ambassador",
+  },
+  {
+    value: "#Cloud Computing".toLowerCase().replaceAll(" ", ""),
+    label: "Cloud Computing",
+  },
+  {
+    value: "#Computer Vision".toLowerCase().replaceAll(" ", ""),
+    label: "Computer Vision",
+  },
+  {
+    value: "#Content Writing".toLowerCase().replaceAll(" ", ""),
+    label: "Content Writing",
+  },
+  {
+    value: "#Data Science".toLowerCase().replaceAll(" ", ""),
+    label: "Data Science",
+  },
+  {
+    value: "#Digital Marketing".toLowerCase().replaceAll(" ", ""),
+    label: "Digital Marketing",
+  },
+  {
+    value: "#Embedded Systems".toLowerCase().replaceAll(" ", ""),
+    label: "Embedded Systems",
+  },
+  {
+    value: "#Flutter Development".toLowerCase().replaceAll(" ", ""),
+    label: "Flutter Development",
+  },
+  {
+    value: "#Front End Development".toLowerCase().replaceAll(" ", ""),
+    label: "Front End Development",
+  },
+  {
+    value: "#Full Stack Development".toLowerCase().replaceAll(" ", ""),
+    label: "Full Stack Development",
+  },
+  {
+    value: "#Game Development".toLowerCase().replaceAll(" ", ""),
+    label: "Game Development",
+  },
+  {
+    value: "#Graphic Design".toLowerCase().replaceAll(" ", ""),
+    label: "Graphic Design",
+  },
+  {
+    value: "#Human Resources (HR)".toLowerCase().replaceAll(" ", ""),
+    label: "Human Resources (HR)",
+  },
+  {
+    value: "#Industrial Design".toLowerCase().replaceAll(" ", ""),
+    label: "Industrial Design",
+  },
+  {
+    value: "#Internet of Things (IoT)".toLowerCase().replaceAll(" ", ""),
+    label: "Internet of Things (IoT)",
+  },
+  {
+    value: "#Java Development".toLowerCase().replaceAll(" ", ""),
+    label: "Java Development",
+  },
+  {
+    value: "#Javascript Development".toLowerCase().replaceAll(" ", ""),
+    label: "Javascript Development",
+  },
+  {
+    value: "#Machine Learning".toLowerCase().replaceAll(" ", ""),
+    label: "Machine Learning",
+  },
+  {
+    value: "#Mechatronics".toLowerCase().replaceAll(" ", ""),
+    label: "Mechatronics",
+  },
+  {
+    value: "#Mobile App Development".toLowerCase().replaceAll(" ", ""),
+    label: "Mobile App Development",
+  },
+  {
+    value: "#Node.js Development".toLowerCase().replaceAll(" ", ""),
+    label: "Node.js Development",
+  },
+  {
+    value: "#PHP Development".toLowerCase().replaceAll(" ", ""),
+    label: "PHP Development",
+  },
+  {
+    value: "#Product Management".toLowerCase().replaceAll(" ", ""),
+    label: "Product Management",
+  },
+  {
+    value: "#Programming".toLowerCase().replaceAll(" ", ""),
+    label: "Programming",
+  },
+  {
+    value: "#Python/Django Development".toLowerCase().replaceAll(" ", ""),
+    label: "Python/Django Development",
+  },
+  { value: "#Robotics".toLowerCase().replaceAll(" ", ""), label: "Robotics" },
+  {
+    value: "#Search Engine Optimization (SEO)"
+      .toLowerCase()
+      .replaceAll(" ", ""),
+    label: "Search Engine Optimization (SEO)",
+  },
+  {
+    value: "#Social Media Marketing".toLowerCase().replaceAll(" ", ""),
+    label: "Social Media Marketing",
+  },
+  {
+    value: "#Software Development".toLowerCase().replaceAll(" ", ""),
+    label: "Software Development",
+  },
+  {
+    value: "#Software Testing".toLowerCase().replaceAll(" ", ""),
+    label: "Software Testing",
+  },
+  {
+    value: "#Statistics".toLowerCase().replaceAll(" ", ""),
+    label: "Statistics",
+  },
+  {
+    value: "#UI/UX Design".toLowerCase().replaceAll(" ", ""),
+    label: "UI/UX Design",
+  },
+  {
+    value: "#Volunteering".toLowerCase().replaceAll(" ", ""),
+    label: "Volunteering",
+  },
+  {
+    value: "#Web Development".toLowerCase().replaceAll(" ", ""),
+    label: "Web Development",
+  },
+  {
+    value: "#Wordpress Development".toLowerCase().replaceAll(" ", ""),
+    label: "Wordpress Development",
+  },
+];
 
 export const companies = [
   { id: 1, url: "https://pngimg.com/uploads/amazon/amazon_PNG5.png" },

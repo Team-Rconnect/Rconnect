@@ -36,6 +36,7 @@ import ProfileExperience from "./ProfileExperience/ProfileExperience";
 import ProfileEducation from "./ProfileEducation/ProfileEducation";
 import ProfileProjects from "./ProfileProjects/ProfileProjects";
 import { generateDownload } from "../../Common/cropImage";
+import ProfileSkills from "./ProfileSkills/ProfileSkills";
 
 function ProfileDetails() {
   const [user, setUser] = useState({});
@@ -225,41 +226,7 @@ function ProfileDetails() {
           {/* about */}
           <ProfileAbout />
           {/* skills */}
-          <Card sx={{ marginBottom: "15px", padding: "15px 20px" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Heading1 text={"Skills"} />
-              {/* {isProfile && <EditIconBtn onClick={editSkills} />} */}
-            </Box>
-            <Box sx={{ margin: "15px 0px" }}>
-              {chips.map((tag, index) => {
-                return (
-                  <Chip
-                    key={index}
-                    size="small"
-                    label={tag}
-                    sx={{
-                      margin: "5px",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      letterSpacing: 0.5,
-                      backgroundColor: "white",
-                      border: "1px solid " + borderDark,
-                      "&:hover": {
-                        backgroundColor: primary,
-                        color: "white",
-                      },
-                    }}
-                  />
-                );
-              })}
-            </Box>
-          </Card>
+          <ProfileSkills />
           {/* experience */}
           <ProfileExperience />
           {/* education */}

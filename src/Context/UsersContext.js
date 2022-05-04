@@ -6,18 +6,19 @@ export const UsersContextProvider = (props) => {
   const [users, setusers] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchGender, setSearchGender] = useState("Both");
+
+  const handleSearch = (searchT) => {
+    setSearchTerm(searchT);
+    // fetchUsers();
+  };
+
   const values = {
     users,
     searchTerm,
     setSearchTerm,
     searchGender,
     setSearchGender,
-  };
-
-  const fetchUsers = async () => {
-    const response = await fetch("http://localhost:5000/users");
-    const json = await response.json();
-    // setusers([...json]);
+    handleSearch,
   };
 
   const fetchUserss = async () => {

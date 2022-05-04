@@ -32,6 +32,15 @@ function Profiles() {
   // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
 
   const { users, searchTerm, searchGender } = useContext(UsersContext);
+<<<<<<< HEAD
+=======
+  // console.log(searchTerm, "search terermdsfa");
+  // console.log(
+  //   searchGender
+  //   // users && users.map((user) => user.firstName + user.lastName),
+  //   // "userctx terermdsfa"
+  // );
+>>>>>>> e2cade1635d956560c0c435e0867126f7fa6706c
 
   const viewProfile = (username) => {
     console.log(username);

@@ -9,7 +9,7 @@ function CarouselMatter() {
   const bpSMd = theme.breakpoints.down("sm");
 
   const handleClick = () => {
-    navigate("/users");
+    navigate("/users/search");
   };
   return (
     <Box

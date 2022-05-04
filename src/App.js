@@ -32,7 +32,7 @@ function App() {
           element={!authCtx.isLoggedIn ? <Navigate to="/" /> : <Home />}
         /> */}
         <Route path="/home" element={<Home />} />;
-        <Route path="/users" element={<Profiles />} />;
+        <Route path="/users/search" element={<Profiles />} />;
         <Route path="/login" element={<Login />} />;
         <Route path="/register" element={<Register />} />;
         <Route path="/users/:id" element={<ProfileDetails />} />;

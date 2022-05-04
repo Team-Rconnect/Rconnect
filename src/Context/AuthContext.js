@@ -7,6 +7,7 @@ const AuthContext = createContext({
   onLogout: () => {},
   onLogin: (email, password) => {},
   onRegister: (firstName, lastName, email, password) => {},
+  loggedUser: {},
 });
 
 export const AuthContextProvider = (props) => {
@@ -63,11 +64,20 @@ export const AuthContextProvider = (props) => {
 
     console.log(decoded._id, "decoded user");
 
-    // setloggedUser(loggedAccount[0]);
     localStorage.setItem("userId", decoded._id);
     localStorage.setItem("isLoggedIn", "true");
     setLoggedUserId(decoded._id);
     setisLoggedIn(true);
+  };
+
+  const fetchUser = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${localStorage.getItem("userId")}`
+    );
+    // console.log("json token", response);
+    const loggedAccount = await response.json();
+    setloggedUser(loggedAccount);
+    console.log(loggedAccount, "logged account");
   };
 
   useEffect(() => {
@@ -77,6 +87,7 @@ export const AuthContextProvider = (props) => {
     if (storedIsLoggedIn === true) {
       setisLoggedIn(storedIsLoggedIn);
       setLoggedUserId(storedUserId);
+      fetchUser();
       // fetchLogged(storedEmail);
     }
     fetchUsers();

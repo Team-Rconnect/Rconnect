@@ -94,7 +94,7 @@ function HomeNavbar() {
     >
       <AppBar position="sticky" elevation={navbar ? 3 : 0} color="transparent">
         <Toolbar
-          disableGutters="true"
+          disableGutters={true}
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -136,7 +136,10 @@ function HomeNavbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar>
+                    {authCtx.loggedUser.firstName &&
+                      authCtx.loggedUser?.firstName[0].toUpperCase()}
+                  </Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
