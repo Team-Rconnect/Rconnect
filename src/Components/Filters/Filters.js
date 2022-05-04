@@ -19,18 +19,80 @@ import Subtitle3 from "../../Common/Subtitle3";
 import PrimaryButton from "../../Common/PrimaryButton";
 import UsersContext from "../../Context/UsersContext";
 
-function Filters() {
+function Filters({ filterUsers }) {
   const theme = useTheme();
   const bpMDd = theme.breakpoints.down("md"); //max-width:899.95px
   const animatedComponents = makeAnimated();
 
   // const [gender, setGender] = useState("both");
-  const { searchGender, setSearchGender } = useContext(UsersContext);
+  const {
+    searchGender,
+    setSearchGender,
+    setSearchSkills,
+    searchBranches,
+    setSearchBranches,
+    setSearchYears,
+    branchesList,
+    setBranchesList,
+    yearsList,
+    setYearsList,
+    skillsList,
+    setSkillsList,
+  } = useContext(UsersContext);
+
+  const handleBranches = (selectedOptions) => {
+    const ss = selectedOptions.map((option) => {
+      return option.value;
+    });
+    setSearchBranches(ss);
+    const a = [];
+    const sb = ss.map((skill) => {
+      a.push({ value: skill, label: skill });
+    });
+    setBranchesList(a);
+    console.log(branchesList, ss, sb, a);
+  };
+
+  const handleYears = (selectedOptions) => {
+    const ss = selectedOptions.map((option) => {
+      return option.value;
+    });
+    setSearchYears(ss);
+    const a = [];
+    const sy = ss.map((skill) => {
+      a.push({ value: skill, label: skill });
+    });
+    setYearsList(a);
+    console.log(yearsList, ss, sy, a);
+  };
+
+  const handleSkills = (selectedOptions) => {
+    const ss = selectedOptions.map((option) => {
+      return option.value;
+    });
+    setSearchSkills(ss);
+    const a = [];
+    const ssk = ss.map((skill) => {
+      a.push({ value: skill, label: skill });
+    });
+    setSkillsList(a);
+    console.log(skillsList, ss, ssk, a);
+  };
 
   const handleGenderChange = (event) => {
     // setGender(event.target.value);
     setSearchGender(event.target.value);
     console.log(event.target.value);
+  };
+
+  const resetFilters = () => {
+    setSearchGender("Both");
+    setSearchBranches([]);
+    setSearchSkills([]);
+    setSearchYears([]);
+    setBranchesList([]);
+    setSkillsList([]);
+    setYearsList([]);
   };
 
   const branches = [
@@ -101,19 +163,19 @@ function Filters() {
 
   const years = [
     {
-      value: "1st Year",
+      value: "1st year",
       label: "1st Year",
     },
     {
-      value: "2nd Year",
+      value: "2nd year",
       label: "2nd Year",
     },
     {
-      value: "3rd Year",
+      value: "3rd year",
       label: "3rd Year",
     },
     {
-      value: "4th Year",
+      value: "4th year",
       label: "4th Year",
     },
   ];
@@ -160,7 +222,7 @@ function Filters() {
         }}
       >
         <Heading2 text={"Filters"} />
-        <TextButton text={"Reset Filter"} />
+        <TextButton text={"Reset Filter"} onClick={resetFilters} />
       </Box>
       <Divider sx={{ margin: "10px 0px" }} />
       {/* branches */}
@@ -173,6 +235,8 @@ function Filters() {
           options={branches}
           placeholder={"e.g. Computer science"}
           isMulti
+          value={branchesList && [...branchesList]}
+          onChange={handleBranches}
           styles={colourStyles}
         />
       </Box>
@@ -186,6 +250,8 @@ function Filters() {
           options={years}
           placeholder={"e.g. 4th Year"}
           isMulti
+          value={yearsList && [...yearsList]}
+          onChange={handleYears}
           styles={colourStyles}
         />
       </Box>
@@ -199,6 +265,8 @@ function Filters() {
           options={skills}
           placeholder={"e.g. IoT"}
           isMulti
+          value={skillsList && [...skillsList]}
+          onChange={handleSkills}
           styles={colourStyles}
         />
       </Box>
@@ -251,12 +319,12 @@ function Filters() {
           </RadioGroup>
         </FormControl>
       </Box>
-      <Divider sx={{ margin: "10px 0px" }} />
+      {/* <Divider sx={{ margin: "10px 0px" }} />
       <Box sx={{ margin: "20px 0px 10px 0px" }}>
         <Button variant="contained" fullWidth={true}>
           Filter Profiles
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

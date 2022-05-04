@@ -6,6 +6,12 @@ export const UsersContextProvider = (props) => {
   const [users, setusers] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchGender, setSearchGender] = useState("Both");
+  const [searchBranches, setSearchBranches] = useState([]);
+  const [searchYears, setSearchYears] = useState([]);
+  const [searchSkills, setSearchSkills] = useState([]);
+  const [branchesList, setBranchesList] = useState([]);
+  const [yearsList, setYearsList] = useState([]);
+  const [skillsList, setSkillsList] = useState([]);
 
   const handleSearch = (searchT) => {
     setSearchTerm(searchT);
@@ -19,6 +25,18 @@ export const UsersContextProvider = (props) => {
     searchGender,
     setSearchGender,
     handleSearch,
+    searchSkills,
+    setSearchSkills,
+    searchBranches,
+    setSearchBranches,
+    searchYears,
+    setSearchYears,
+    branchesList,
+    setBranchesList,
+    yearsList,
+    setYearsList,
+    skillsList,
+    setSkillsList,
   };
 
   const fetchUserss = async () => {

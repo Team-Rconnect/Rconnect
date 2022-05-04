@@ -28,6 +28,7 @@ function ProfileSkills() {
   const [open, setOpen] = useState(false);
   const animatedComponents = makeAnimated();
   const [skillsList, setSkillsList] = useState([]);
+  const [fetchSkillsList, setfetchSkillsList] = useState([]);
 
   const fetchSkills = async () => {
     setIsProfile(userId === localStorage.getItem("userId"));
@@ -51,14 +52,12 @@ function ProfileSkills() {
 
   const editSkills = () => {
     setOpen(true);
-    const skillarray = [];
-    // skills.map((skill) => skillarray.push({ value: skill, label: skill }));
-    // for (let index = 0; index < skills.length; index++) {
-    //   const jskill = { value: skills[index], label: skills[index] };
-    //   skillarray.push(jskill);
-    // }
-    // setSkills(skillarray);
-    console.log(skills, skillarray);
+    const a = [];
+    const ssk = skills.map((skill) => {
+      a.push({ value: skill, label: skill });
+    });
+    setfetchSkillsList(a);
+    console.log(fetchSkillsList, ssk, a);
   };
 
   const handleSkills = (selectedOptions) => {
@@ -67,6 +66,7 @@ function ProfileSkills() {
     });
     console.log(ss);
     setSkillsList(ss);
+    setfetchSkillsList(selectedOptions);
   };
 
   const handleSave = async (e) => {
@@ -171,7 +171,7 @@ function ProfileSkills() {
             options={Skills}
             placeholder={"e.g. IoT"}
             isMulti
-            defaultValue={[...skills]}
+            value={fetchSkillsList && [...fetchSkillsList]}
             menuPortalTarget={document.body}
             // menuPosition={"fixed"}
             onChange={handleSkills}

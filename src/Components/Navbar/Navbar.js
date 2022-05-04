@@ -57,8 +57,6 @@ function Navbar(props) {
   const authCtx = useContext(AuthContext);
   const [userPresent, setUserPresent] = useState(false);
   const userIn = authCtx.isLoggedIn;
-  console.log(authCtx.loggedUser);
-
   const { searchTerm, handleSearch } = useContext(UsersContext);
 
   // const userPresent = localStorage.getItem("isLoggedIn");

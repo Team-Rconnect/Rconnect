@@ -313,9 +313,12 @@ function ProfileExperience() {
             onChange={handleChanges}
           >
             <MenuItem value="Please select">Please select</MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value="Full-time">Full-time</MenuItem>
+            <MenuItem value="Part-time">Part-time</MenuItem>
+            <MenuItem value="Self-employed">Self-employed</MenuItem>
+            <MenuItem value="Freelance">Freelance</MenuItem>
+            <MenuItem value="Internship">Internship</MenuItem>
+            <MenuItem value="Trainee">Trainee</MenuItem>
           </Select>
           {/* company name */}
           <Box sx={{ margin: "15px 0px 5px 0px" }}>

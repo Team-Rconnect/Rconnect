@@ -21,6 +21,7 @@ import { useLocation } from "react-router-dom";
 function ProfileAbout() {
   const [isProfile, setIsProfile] = useState(false);
   const [open, setOpen] = useState(false);
+  const [getAbout, setGetAbout] = useState("");
   const [about, setAbout] = useState("");
   const [aboutLen, setAboutLen] = useState(0);
 
@@ -37,18 +38,36 @@ function ProfileAbout() {
     const response = await fetch(`http://localhost:3001/users/${userId}`);
     const json = await response.json();
     console.log(json.about);
+    setGetAbout(json.about);
     setAbout(json.about);
-    setAboutLen(json.about.length);
+    setAboutLen(json.about && json.about.length);
   };
 
   const handleChange = (event) => {
-    setAbout(event.target.value);
+    // setAbout(event.target.value);
+    setGetAbout(event.target.value);
     setAboutLen(event.target.value.length);
   };
 
-  const handleSave = () => {
+  const handleSave = async (e) => {
     if (aboutLen !== 0) {
       setOpen(false);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ about: getAbout }),
+      };
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/change`,
+        requestOptions
+      );
+      const json = await response.json();
+      console.log(json);
+      if (json.status === true) {
+        e.preventDefault();
+        setOpen(false);
+        fetchAbout();
+      }
     }
   };
 
@@ -113,7 +132,7 @@ function ProfileAbout() {
             fullWidth
             rows={6}
             inputProps={{ maxLength: 300 }}
-            value={about}
+            value={getAbout}
             onChange={handleChange}
             placeholder="Enter your about..."
           />
