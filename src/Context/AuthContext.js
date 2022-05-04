@@ -6,6 +6,7 @@ const AuthContext = createContext({
   isLoggedIn: false,
   onLogout: () => {},
   onLogin: (email, password) => {},
+  onRegister: (firstName, lastName, email, password) => {},
   loggedUser: {},
 });
 
@@ -20,6 +21,27 @@ export const AuthContextProvider = (props) => {
     const response = await fetch("http://localhost:5000/users");
     const json = await response.json();
     setusers([...json]);
+  };
+  const fetchRegister = async (firstName, lastName, email, password) => {
+    const response = await fetch(`http://localhost:3001/api/user/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        userName: email,
+        password: password,
+      }),
+    });
+    const loggedAccount = await response.json();
+    console.log(loggedAccount.user, "response for register");
+    localStorage.setItem("userId", loggedAccount.user);
+    localStorage.setItem("isLoggedIn", "true");
+    setLoggedUserId(loggedAccount.user);
+    setisLoggedIn(true);
   };
 
   const fetchLogged = async (email, password) => {
@@ -71,11 +93,11 @@ export const AuthContextProvider = (props) => {
     fetchUsers();
   }, []);
 
-  const loginHandler = (email, password) => {
+  const registerHandler = (firstName, lastName, email, password) => {
     // localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("email", email);
     setisLoggedIn(true);
-    fetchLogged(email, password);
+    fetchRegister(firstName, lastName, email, password);
   };
 
   const logoutHandler = () => {
@@ -86,6 +108,12 @@ export const AuthContextProvider = (props) => {
     setisLoggedIn(false);
   };
 
+  const loginHandler = (email, password) => {
+    localStorage.setItem("email", email);
+    setisLoggedIn(true);
+    fetchLogged(email, password);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -94,6 +122,7 @@ export const AuthContextProvider = (props) => {
         loggedUser,
         onLogin: loginHandler,
         onLogout: logoutHandler,
+        onRegister: registerHandler,
       }}
     >
       {props.children}

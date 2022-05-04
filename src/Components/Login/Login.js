@@ -66,6 +66,10 @@ function Login() {
       navigate(`/`);
     }
   };
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    navigate(`/register`);
+  };
   const handleForgot = (e) => {
     navigate("/Forgotpassword");
   };
@@ -341,6 +345,15 @@ function Login() {
                 onClick={handleSubmit}
               >
                 Login
+              </Button>
+            </Box>
+            <Box sx={{ margin: "20px 0px 10px 0px" }}>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                onClick={handleSignUp}
+              >
+                signUp
               </Button>
             </Box>
           </Box>

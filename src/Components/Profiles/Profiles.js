@@ -30,23 +30,7 @@ function Profiles() {
   // const bpXLd = theme.breakpoints.down("xl"); //max-width:1535.95px
   // const bpXLu = theme.breakpoints.up("xl"); //min-width:1536px
   // console.log(bpSMd, bpSMu, bpMDd, bpMDu, bpXLd, bpXLu);
-  const chips = [
-    "#webdesign",
-    "#COA",
-    "#programming",
-    "#competitiveprogramming",
-    "#AI",
-    "#ML",
-    "#appdesign",
-    "#network",
-    "#reactjs",
-    "#flutter",
-    "#ML",
-    "#appdesign",
-    "#networking",
-    "#reactjs",
-    "#flutter",
-  ];
+
   const {
     users,
     searchTerm,
@@ -57,12 +41,6 @@ function Profiles() {
   } = useContext(UsersContext);
   const [filtered, setFiltered] = useState([]);
 
-  // console.log(searchTerm, "search terermdsfa");
-  // console.log(
-  //   searchGender
-  //   // users && users.map((user) => user.firstName + user.lastName),
-  //   // "userctx terermdsfa"
-  // );
   useEffect(() => {
     const us =
       users &&
